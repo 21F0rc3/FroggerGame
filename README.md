@@ -1,3 +1,3 @@
 # FroggerGame
 ## Use Cases
-![Use Case](Diagramas/Use Case.png)
+![Use_Case](Diagramas/Use_Case.png)
