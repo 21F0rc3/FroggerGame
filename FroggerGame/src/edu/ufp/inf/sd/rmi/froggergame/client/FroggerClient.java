@@ -8,6 +8,7 @@ import java.rmi.RemoteException;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.registry.Registry;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -88,7 +89,30 @@ public class FroggerClient {
     private void playService() {
         try {
             //============ Call HelloWorld remote service ============
-            this.gameFactoryRI.register("Gabriel", "teste");
+            Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+
+            System.out.println("FroggerGame" +
+                    "\n [1]: Register" +
+                    "\n [2]: Login");
+
+            String option = myObj.nextLine();  // Read user input
+
+            switch (option) {
+                case "1": {
+                    this.gameFactoryRI.register("Gabriel", "teste");
+                    break;
+                }
+                case "2": {
+                    this.gameFactoryRI.login("Gabriel","teste");
+                    break;
+                }
+                default: {
+                    System.out.println(option + " is not a valid option.");
+                    break;
+                }
+            }
+
+            playService();
 
             Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR finish, bye. ;)");
         } catch (RemoteException ex) {
