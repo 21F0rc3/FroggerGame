@@ -2,54 +2,112 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="361a3826-7ed4-4914-90f1-07c72e5c20ac" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FroggerGame.iml" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/FroggerGame.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jig-1.7.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/lib/jig-1.7.5.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ogg-spi/jogg-0.0.7.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/lib/ogg-spi/jogg-0.0.7.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ogg-spi/jorbis-0.0.15.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/lib/ogg-spi/jorbis-0.0.15.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ogg-spi/tritonus_jorbis-0.3.6.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/lib/ogg-spi/tritonus_jorbis-0.3.6.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/spi/tritonus_share.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/lib/spi/tritonus_share.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/AudioEfx.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/AudioEfx.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/Car.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/CollisionObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/CollisionObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/CopCar.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/CopCar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/Crocodile.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/Crocodile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/Frogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/Frogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/FroggerCollisionDetection.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/FroggerCollisionDetection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/FroggerUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/FroggerUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/Goal.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/Goal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/GoalManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/GoalManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/HeatWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/HeatWave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/LongLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/LongLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/MovingEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/MovingEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/MovingEntityFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/MovingEntityFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/Particle.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/Particle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/ShortLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/ShortLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/Truck.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/Truck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/Turtles.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/Turtles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frogger/WindGust.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/frogger/WindGust.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/ambient_fx/car-pass.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/ambient_fx/car-pass.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/ambient_fx/frog.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/ambient_fx/frog.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/ambient_fx/long-horn.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/ambient_fx/long-horn.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/ambient_fx/siren.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/ambient_fx/siren.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/ambient_fx/splash.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/ambient_fx/splash.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/ambient_fx/water-splash.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/ambient_fx/water-splash.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/bg_music.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/bg_music.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/bonus.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/bonus.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/frog_die.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/frog_die.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/frogger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/frogger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/frogger_sprites.png" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/frogger_sprites.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/goal.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/goal.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/heat.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/heat.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/jump.wav" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/jump.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/level_goal.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/level_goal.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/match.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/match.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/resources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/resources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/wind.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/resources/wind.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/client/FroggerClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_1_runpython.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_1_runpython.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_2_runregistry.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_2_runregistry.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_3_runserver.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_3_runserver.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_4_runclient.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_4_runclient.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/setenv.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/setenv.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/startAll.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/securitypolicies/client.policy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/securitypolicies/clientAllPermition.policy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/securitypolicies/group.policy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/securitypolicies/rmid.policy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/securitypolicies/serverAllPermition.policy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/securitypolicies/setup.policy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/server/Database.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/server/FroggerServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/server/GameFactoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/server/GameFactoryRI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/server/GameSessionImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/server/GameSessionRI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/server/models/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/util/rmisetup/SetupContextRMI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/froggergame/util/threading/ThreadPool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Diagramas/.FroggerGame.vpp.lck" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/AudioEfx.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/Car.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/CollisionObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/CopCar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/Crocodile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/Frogger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/FroggerCollisionDetection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/FroggerUI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/Goal.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/GoalManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/HeatWave.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/LongLog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/MovingEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/MovingEntityFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/Particle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/ShortLog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/Truck.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/Turtles.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/frogger/WindGust.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/ambient_fx/car-pass.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/ambient_fx/car-pass.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/ambient_fx/frog.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/ambient_fx/frog.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/ambient_fx/long-horn.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/ambient_fx/long-horn.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/ambient_fx/siren.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/ambient_fx/siren.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/ambient_fx/splash.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/ambient_fx/splash.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/ambient_fx/water-splash.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/ambient_fx/water-splash.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/bg_music.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/bg_music.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/bonus.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/bonus.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/frog_die.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/frog_die.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/frogger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/frogger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/frogger_sprites.png" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/frogger_sprites.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/goal.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/goal.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/heat.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/heat.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/jump.wav" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/jump.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/level_goal.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/level_goal.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/match.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/match.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/resources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/resources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/out/production/FroggerGame/resources/wind.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/resources/wind.ogg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/AudioEfx.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/AudioEfx.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/CollisionObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/CollisionObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/CopCar.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/CopCar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/Crocodile.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/Crocodile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/Frogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/Frogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/FroggerCollisionDetection.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/FroggerCollisionDetection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/FroggerUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/FroggerUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/Goal.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/Goal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/GoalManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/GoalManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/HeatWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/HeatWave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/LongLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/LongLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/MovingEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/MovingEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/MovingEntityFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/MovingEntityFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/Particle.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/Particle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/ShortLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/ShortLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/Truck.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/Truck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/Turtles.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/Turtles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/frogger/WindGust.java" beforeDir="false" afterPath="$PROJECT_DIR$/FroggerGame/src/edu/ufp/inf/sd/rmi/frogger/WindGust.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/ambient_fx/car-pass.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/ambient_fx/frog.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/ambient_fx/long-horn.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/ambient_fx/siren.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/ambient_fx/splash.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/ambient_fx/water-splash.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/bg_music.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/bonus.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/frog_die.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/frogger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/frogger_sprites.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/goal.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/heat.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/jump.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/level_goal.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/match.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/resources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame/src/resources/wind.ogg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +158,7 @@
       <updated>1645700611329</updated>
       <workItem from="1645700613243" duration="427000" />
       <workItem from="1646744521879" duration="811000" />
+      <workItem from="1648554865551" duration="265000" />
     </task>
     <servers />
   </component>
