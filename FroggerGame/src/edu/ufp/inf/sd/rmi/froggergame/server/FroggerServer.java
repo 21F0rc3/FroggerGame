@@ -12,19 +12,6 @@ import java.util.function.BiConsumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * <p>
- * Title: Projecto SD</p>
- * <p>
- * Description: Projecto apoio aulas SD</p>
- * <p>
- * Copyright: Copyright (c) 2017</p>
- * <p>
- * Company: UFP </p>
- *
- * @author Rui S. Moreira
- * @version 3.0
- */
 public class FroggerServer {
 
     /**
@@ -38,7 +25,7 @@ public class FroggerServer {
 
     public static void main(String[] args) {
         if (args != null && args.length < 3) {
-            System.err.println("usage: java [options] edu.ufp.sd._01_helloworld.server.HelloWorldServer <rmi_registry_ip> <rmi_registry_port> <service_name>");
+            System.err.println("usage: java [options] edu.ufp.sd.froggergame.server.FroggerServer <rmi_registry_ip> <rmi_registry_port> <service_name>");
             System.exit(-1);
         } else {
             //1. ============ Create Servant ============

@@ -17,6 +17,7 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
+    // Array das sessões ativas
     public HashMap<String, GameSessionRI> sessions;
 
     public Database db;
@@ -27,6 +28,16 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
         db = new Database();
     }
 
+    /**
+     * Metodo responsavel por fazer o login
+     *
+     * @param username - Username do utilizador
+     * @param password - Password do utilizador
+     *
+     * @throws RemoteException
+     *
+     * @author Gabriel Fernandes    29/03/2022
+     */
     @Override
     public void login(String username, String password) throws RemoteException {
         User user = new User(username, password);
@@ -38,6 +49,16 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
         System.out.println(ANSI_PURPLE+"Nome de utilizador ou password errados."+ANSI_RESET);
     }
 
+    /**
+     * Metodo responsavel por registar um novo utilizador
+     *
+     * @param username - Username do novo utilizador
+     * @param password - Password do novo utilizador
+     *
+     * @throws RemoteException
+     *
+     * @author Gabriel Fernandes    29/03/2022
+     */
     @Override
     public void register(String username, String password) throws RemoteException {
         User user = new User(username, password);

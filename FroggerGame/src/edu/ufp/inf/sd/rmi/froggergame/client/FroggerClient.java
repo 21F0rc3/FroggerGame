@@ -12,19 +12,6 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * <p>
- * Title: Projecto SD</p>
- * <p>
- * Description: Projecto apoio aulas SD</p>
- * <p>
- * Copyright: Copyright (c) 2017</p>
- * <p>
- * Company: UFP </p>
- *
- * @author Rui S. Moreira
- * @version 3.0
- */
 public class FroggerClient {
 
     /**
@@ -38,7 +25,7 @@ public class FroggerClient {
 
     public static void main(String[] args) {
         if (args != null && args.length < 2) {
-            System.err.println("usage: java [options] edu.ufp.sd.inf.rmi._01_helloworld.server.HelloWorldClient <rmi_registry_ip> <rmi_registry_port> <service_name>");
+            System.err.println("usage: java [options] edu.ufp.sd.inf.rmi.froggergame.server.FroggerClient <rmi_registry_ip> <rmi_registry_port> <service_name>");
             System.exit(-1);
         } else {
             //1. ============ Setup client RMI context ============
@@ -74,7 +61,7 @@ public class FroggerClient {
                 String serviceUrl = contextRMI.getServicesUrl(0);
                 Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR lookup service @ {0}", serviceUrl);
 
-                //============ Get proxy MAIL_TO_ADDR HelloWorld service ============
+                //============ Get proxy MAIL_TO_ADDR FroggerGame service ============
                 gameFactoryRI = (GameFactoryRI) registry.lookup(serviceUrl);
             } else {
                 Logger.getLogger(this.getClass().getName()).log(Level.INFO, "registry not bound (check IPs). :(");
@@ -88,7 +75,7 @@ public class FroggerClient {
 
     private void playService() {
         try {
-            //============ Call HelloWorld remote service ============
+            //============ Call FroggerGame remote service ============
             Scanner myObj = new Scanner(System.in);  // Create a Scanner object
 
             System.out.println("FroggerGame" +
