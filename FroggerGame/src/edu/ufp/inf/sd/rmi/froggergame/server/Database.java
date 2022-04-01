@@ -92,7 +92,7 @@ public class Database {
      */
     private boolean existsUser(User user) {
         for(User u : users) {
-            if (Objects.equals(u.getUsername(), user.getUsername()) && Objects.equals(u.getPassword(), user.getPassword())) {
+            if (Objects.equals(u.getEmail(), user.getEmail()) && Objects.equals(u.getPassword(), user.getPassword())) {
                 return true;
             }
         }

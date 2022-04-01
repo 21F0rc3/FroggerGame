@@ -3,31 +3,31 @@ package edu.ufp.inf.sd.rmi.froggergame.server.models;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private String username;
+    private String email;
     private String password;
 
-    public User(String username, String password) {
-        this.username = username;
+    public User(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
     @Override
     public String toString() {
-        return "User{" + "Username=" + username + ", Password=" + password + '}';
+        return "User{" + "Email=" + email + ", Password=" + password + '}';
     }
 
     /**
-     * @return the username
+     * @return the email
      */
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
     /**
-     * @param username the username to set
+     * @param email the email to set
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**

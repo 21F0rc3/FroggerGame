@@ -31,7 +31,7 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
     /**
      * Metodo responsavel por fazer o login
      *
-     * @param username - Username do utilizador
+     * @param email - E-mail do utilizador
      * @param password - Password do utilizador
      *
      * @throws RemoteException
@@ -39,20 +39,21 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
      * @author Gabriel Fernandes    29/03/2022
      */
     @Override
-    public void login(String username, String password) throws RemoteException {
-        User user = new User(username, password);
+    public void login(String email, String password) throws RemoteException {
+        User user = new User(email, password);
 
         if(db.exists(user)) {
             System.out.println(ANSI_CYAN+"Estas logado!"+ANSI_RESET);
+            return;
         }
 
-        System.out.println(ANSI_PURPLE+"Nome de utilizador ou password errados."+ANSI_RESET);
+        System.out.println(ANSI_PURPLE+"Email ou password errados."+ANSI_RESET);
     }
 
     /**
      * Metodo responsavel por registar um novo utilizador
      *
-     * @param username - Username do novo utilizador
+     * @param email - E-mail do novo utilizador
      * @param password - Password do novo utilizador
      *
      * @throws RemoteException
@@ -60,8 +61,8 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
      * @author Gabriel Fernandes    29/03/2022
      */
     @Override
-    public void register(String username, String password) throws RemoteException {
-        User user = new User(username, password);
+    public void register(String email, String password) throws RemoteException {
+        User user = new User(email, password);
         db.create(user);
     }
 }
