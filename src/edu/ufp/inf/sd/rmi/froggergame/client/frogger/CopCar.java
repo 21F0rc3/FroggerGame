@@ -23,46 +23,20 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package edu.ufp.inf.sd.rmi.frogger;
+package edu.ufp.inf.sd.rmi.froggergame.client.frogger;
+
 import jig.engine.util.Vector2D;
-
-public class Goal extends MovingEntity {
+  
+public class CopCar extends MovingEntity {
 	
-	public boolean isReached = false;
-	public boolean isBonus = false;
-	
-	public Goal(int loc) {
-		super(Main.SPRITE_SHEET + "#goal");
-		position = new Vector2D(32*(1+2*loc), 32);
-		collisionObjects.add(new CollisionObject("colSmall", position));
-		sync(position);
-		setFrame(0);
-	}
-
-	public Goal(Vector2D pos) {
-		super(Main.SPRITE_SHEET + "#goal");
+	public CopCar (Vector2D pos, Vector2D v) {
+		super(Main.SPRITE_SHEET + "#copcar");
 		position = pos;
-		collisionObjects.add(new CollisionObject("colSmall", position));
-		sync(position);
-		setFrame(0);		
-	}
-	
-	public void reached() {
-		isReached = true;
-		setFrame(1);
-	}
-	
-	public void setBonus(boolean b) {
-		if (b) {
-			isBonus = true;
-			setFrame(2);
-		} else {
-			isBonus = false;
+		collisionObjects.add(new CollisionObject(position));
+		velocity = v;
+		if (v.getX() < 0)
+			setFrame(1);
+		else
 			setFrame(0);
-		}
-	}
-	
-	public void update(long deltaMs) {
-		;
 	}
 }

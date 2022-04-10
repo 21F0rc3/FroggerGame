@@ -23,8 +23,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package edu.ufp.inf.sd.rmi.frogger;
-
+package edu.ufp.inf.sd.rmi.froggergame.client.frogger;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.geom.AffineTransform;

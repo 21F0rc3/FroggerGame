@@ -23,7 +23,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package edu.ufp.inf.sd.rmi.frogger;
+package edu.ufp.inf.sd.rmi.froggergame.client.frogger;
 
 import java.util.Random;
 

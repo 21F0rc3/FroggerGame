@@ -23,34 +23,27 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package edu.ufp.inf.sd.rmi.frogger;
-import jig.engine.physics.vpe.VanillaSphere;
+package edu.ufp.inf.sd.rmi.froggergame.client.frogger;
 import jig.engine.util.Vector2D;
-
-
-public class CollisionObject extends VanillaSphere {
-
-	public CollisionObject(Vector2D pos) {
-		super("col");
-		setPosition(pos);
-	}
+  
+public class ShortLog extends MovingEntity {
 	
-	public CollisionObject(String name, Vector2D pos) {
-		super(name);
-		setPosition(pos);
-	}
+	public static int LENGTH = 32*3;
 	
-	/**
-	 * Depending on the collision sphere, we offset it's position so
-	 * that it appears in the middle of the object
-	 */
-	public void setPosition(Vector2D pos) {
-		double dX = 16 - getRadius();
-		double dY = -getRadius() +16;
-		position = new Vector2D(pos.getX()+dX, pos.getY()+dY);
+	public ShortLog (Vector2D pos, Vector2D v) {
+		super(Main.SPRITE_SHEET + "#shortlog");
+		position = pos;
+		Vector2D posSphere1 = position;
+		Vector2D posSphere2 = new Vector2D(position.getX()+32, position.getY());
+		Vector2D posSphere3 = new Vector2D(position.getX()+64, position.getY());
+		collisionObjects.add(new CollisionObject("colSmall", posSphere1));
+		collisionObjects.add(new CollisionObject("colSmall", posSphere2));
+		collisionObjects.add(new CollisionObject("colSmall", posSphere3));
+		velocity = v;
+		if (v.getX() < 0)
+			setFrame(1);
+		else
+			setFrame(0);
 	}
-	
-	public void update(long deltaMs) {
-		;
-	}
+
 }

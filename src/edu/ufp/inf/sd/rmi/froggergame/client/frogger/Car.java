@@ -23,14 +23,16 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package edu.ufp.inf.sd.rmi.frogger;
+package edu.ufp.inf.sd.rmi.froggergame.client.frogger;
 
 import jig.engine.util.Vector2D;
-  
-public class CopCar extends MovingEntity {
+ 
+public class Car extends MovingEntity {
+	public final static int TYPES  = 3;
+	public final static int LENGTH = 32*1;
 	
-	public CopCar (Vector2D pos, Vector2D v) {
-		super(Main.SPRITE_SHEET + "#copcar");
+	public Car (Vector2D pos, Vector2D v, int randId) {
+		super(Main.SPRITE_SHEET + "#car" + randId);
 		position = pos;
 		collisionObjects.add(new CollisionObject(position));
 		velocity = v;
