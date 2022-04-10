@@ -1,7 +1,6 @@
 package edu.ufp.inf.sd.rmi.froggergame.client;
 
 import edu.ufp.inf.sd.rmi.froggergame.server.GameFactoryRI;
-import edu.ufp.inf.sd.rmi.froggergame.server.models.User;
 import edu.ufp.inf.sd.rmi.froggergame.util.rmisetup.SetupContextRMI;
 
 import java.rmi.RemoteException;
@@ -74,36 +73,11 @@ public class FroggerClient {
     }
 
     private void playService() {
-        try {
-            //============ Call FroggerGame remote service ============
-            Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        //============ Call FroggerGame remote service ============
+        ClientInterface.init(gameFactoryRI);
 
-            System.out.println("FroggerGame" +
-                    "\n [1]: Register" +
-                    "\n [2]: Login");
+        playService();
 
-            String option = myObj.nextLine();  // Read user input
-
-            switch (option) {
-                case "1": {
-                    this.gameFactoryRI.register("Gabriel", "teste");
-                    break;
-                }
-                case "2": {
-                    this.gameFactoryRI.login("Gabriel","teste");
-                    break;
-                }
-                default: {
-                    System.out.println(option + " is not a valid option.");
-                    break;
-                }
-            }
-
-            playService();
-
-            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR finish, bye. ;)");
-        } catch (RemoteException ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        }
+        Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR finish, bye. ;)");
     }
 }
