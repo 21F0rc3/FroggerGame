@@ -4,5 +4,5 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface GameSessionRI extends Remote {
-    public void createGame() throws RemoteException;
+    public void createGame(String serverName, Integer difficulty) throws RemoteException;
 }

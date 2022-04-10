@@ -8,5 +8,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="io.jsonwebtoken.jjwt.api" level="project" />
+    <orderEntry type="library" name="io.jsonwebtoken.jjwt.gson" level="project" />
+    <orderEntry type="library" name="io.jsonwebtoken.jjwt.impl" level="project" />
   </component>
 </module>

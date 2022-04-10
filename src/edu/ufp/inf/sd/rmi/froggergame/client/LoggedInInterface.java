@@ -2,12 +2,13 @@ package edu.ufp.inf.sd.rmi.froggergame.client;
 
 import edu.ufp.inf.sd.rmi.froggergame.server.GameFactoryRI;
 import edu.ufp.inf.sd.rmi.froggergame.server.GameSessionImpl;
+import edu.ufp.inf.sd.rmi.froggergame.server.GameSessionRI;
 
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
 public class LoggedInInterface extends ClientInterface {
-    public LoggedInInterface(GameFactoryRI gameFactoryRI, GameSessionImpl gameSessionRI) {
+    public LoggedInInterface(GameFactoryRI gameFactoryRI, GameSessionRI gameSessionRI) {
         super(gameFactoryRI);
         this.gameSession = gameSessionRI;
     }

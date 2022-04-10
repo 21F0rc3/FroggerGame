@@ -1,9 +1,12 @@
 package edu.ufp.inf.sd.rmi.froggergame.server;
 
+
 import edu.ufp.inf.sd.rmi.froggergame.server.models.User;
 
+import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+
 import java.util.HashMap;
 
 public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryRI {
@@ -39,15 +42,20 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
      * @author Gabriel Fernandes    29/03/2022
      */
     @Override
-    public void login(String email, String password) throws RemoteException {
+    public GameSessionRI login(String email, String password) throws RemoteException {
         User user = new User(email, password);
 
         if(db.exists(user)) {
+            GameSessionRI session = new GameSessionImpl();
+
+            sessions.put(email, session);
+
             System.out.println(ANSI_CYAN+"Estas logado!"+ANSI_RESET);
-            return;
+            return session;
         }
 
         System.out.println(ANSI_PURPLE+"Email ou password errados."+ANSI_RESET);
+        return null;
     }
 
     /**

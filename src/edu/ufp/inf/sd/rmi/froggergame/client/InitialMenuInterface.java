@@ -3,6 +3,7 @@ package edu.ufp.inf.sd.rmi.froggergame.client;
 import edu.ufp.inf.sd.rmi.froggergame.server.GameFactoryImpl;
 import edu.ufp.inf.sd.rmi.froggergame.server.GameFactoryRI;
 import edu.ufp.inf.sd.rmi.froggergame.server.GameSessionImpl;
+import edu.ufp.inf.sd.rmi.froggergame.server.GameSessionRI;
 
 import java.rmi.RemoteException;
 import java.util.Scanner;
@@ -78,7 +79,7 @@ public class InitialMenuInterface extends ClientInterface {
         String password = myObj.nextLine();  // Read user input
 
         try {
-            GameSessionImpl session = this.gameFactoryRI.login(email, password);
+            GameSessionRI session = this.gameFactoryRI.login(email, password);
 
             if(session!=null) {
                 LoggedInInterface loggedInInterface = new LoggedInInterface(gameFactoryRI, session);
