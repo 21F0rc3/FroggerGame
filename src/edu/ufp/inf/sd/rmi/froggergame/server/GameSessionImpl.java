@@ -10,38 +10,42 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameSessionImpl extends UnicastRemoteObject implements GameSessionRI {
-    private User user;
-    private ArrayList<FroggerGameImpl> froggerGames;
+    // Lista com todos os jogos ativos
+    private ArrayList<FroggerGameRI> froggerGames;
 
-    public GameSessionImpl(User user) throws RemoteException {
+    public GameSessionImpl() throws RemoteException {
         super();
-        this.user = user;
         froggerGames = new ArrayList<>();
     }
 
     @Override
+    /**
+     * Cria um novo jogo FroggerGame e adiciona a lista de jogos ativos
+     *
+     * @param serverName - Nome do/da servidor/sala
+     * @param difficulty - Dificuldade inicial do jogo deste servidor
+     *
+     * @author Gabriel Fernandes 11/04/2022
+     */
     public void createGame(String serverName, Integer difficulty) throws RemoteException {
         /*if(!jwtUtil.validateToken(jwtToken, user)) {
             System.out.println(TerminalColors.ANSI_RED+"[ERROR]"+TerminalColors.ANSI_RESET+" Jwt token is not valid. Please authenticate again");
             return;
         }*/
 
-        System.out.println(TerminalColors.ANSI_GREEN+"[CREATED]"+TerminalColors.ANSI_RESET+" New FroggerGame name:"+serverName+" difficulty:"+difficulty+".");
-
         FroggerGameImpl froggerGame = new FroggerGameImpl(serverName, difficulty);
-
         froggerGames.add(froggerGame);
+
+        System.out.println(TerminalColors.ANSI_GREEN+"[CREATED]"+TerminalColors.ANSI_RESET+" New FroggerGame name:"+serverName+" difficulty:"+difficulty+".");
     }
 
     @Override
-    public void getActiveGames() throws RemoteException {
-        if(froggerGames.isEmpty()) {
-            System.out.println("Não existe nenhum servidor ativo");
-            return;
-        }
-
-        for(FroggerGameImpl froggerGame : froggerGames) {
-            System.out.println(TerminalColors.ANSI_BLACK + "[Servidor] " + TerminalColors.ANSI_RESET + froggerGame.serverName + " (Dificuldade: " + froggerGame.difficulty + ")");
-        }
+    /**
+     * Retorna a lista de servidores ativos
+     *
+     * @return Retorna o arraylist edu.ufp.inf.sd.rmi.froggergame.server.GameSessionImpl#froggerGames
+     */
+    public ArrayList<FroggerGameRI> getActiveGames() throws RemoteException {
+        return froggerGames;
     }
 }

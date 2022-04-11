@@ -12,15 +12,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 
 public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryRI {
-    // Array das sessões ativas
-    public HashMap<String, GameSessionRI> sessions;
-
-    public Database db;
+    private Database db;
     private JwtUtil jwtUtil;
 
     public GameFactoryImpl() throws RemoteException {
         super();
-        sessions = new HashMap<>();
         db = new Database();
     }
 
@@ -32,6 +28,8 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
      *
      * @throws RemoteException
      *
+     * @return GameSession por onde o utilizador pode ver ou criar novos jogos FroggerGame se ele exister, caso contrario retorna null
+     *
      * @author Gabriel Fernandes    29/03/2022
      */
     @Override
@@ -39,19 +37,10 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
         User user = new User(email, password);
 
         if(db.exists(user)) {
-            GameSessionRI session = new GameSessionImpl(user);
+            GameSessionRI session = new GameSessionImpl();
 
-            /**
-             * @// TODO: 11/04/2022 Eu não sei o que colocar aqui no hashmap de sessões como key, por enquanto está email
-             * @author Gabriel Fernandes
-             */
-            sessions.put(email, session);
-
-            System.out.println(TerminalColors.ANSI_CYAN+"Estas logado!"+ TerminalColors.ANSI_RESET);
             return session;
         }
-
-        System.out.println(TerminalColors.ANSI_PURPLE+"Email ou password errados."+TerminalColors.ANSI_RESET);
         return null;
     }
 
