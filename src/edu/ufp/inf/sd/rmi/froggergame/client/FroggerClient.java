@@ -1,13 +1,14 @@
 package edu.ufp.inf.sd.rmi.froggergame.client;
 
 import edu.ufp.inf.sd.rmi.froggergame.server.GameFactoryRI;
+import edu.ufp.inf.sd.rmi.froggergame.server.models.User;
+import edu.ufp.inf.sd.rmi.froggergame.util.JwtUtil;
 import edu.ufp.inf.sd.rmi.froggergame.util.rmisetup.SetupContextRMI;
 
 import java.rmi.RemoteException;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.registry.Registry;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -74,7 +75,8 @@ public class FroggerClient {
 
     private void playService() {
         //============ Call FroggerGame remote service ============
-        ClientInterface.init(gameFactoryRI);
+        ClientInterface clientInterface = new ClientInterface(gameFactoryRI);
+        clientInterface.init(gameFactoryRI);;
 
         playService();
 

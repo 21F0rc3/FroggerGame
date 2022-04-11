@@ -2,6 +2,7 @@ package edu.ufp.inf.sd.rmi.froggergame.server;
 
 
 import edu.ufp.inf.sd.rmi.froggergame.server.models.User;
+import edu.ufp.inf.sd.rmi.froggergame.util.JwtUtil;
 import edu.ufp.inf.sd.rmi.froggergame.util.TerminalColors;
 
 import java.io.UnsupportedEncodingException;
@@ -15,6 +16,7 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
     public HashMap<String, GameSessionRI> sessions;
 
     public Database db;
+    private JwtUtil jwtUtil;
 
     public GameFactoryImpl() throws RemoteException {
         super();
@@ -37,8 +39,12 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
         User user = new User(email, password);
 
         if(db.exists(user)) {
-            GameSessionRI session = new GameSessionImpl();
+            GameSessionRI session = new GameSessionImpl(user);
 
+            /**
+             * @// TODO: 11/04/2022 Eu não sei o que colocar aqui no hashmap de sessões como key, por enquanto está email
+             * @author Gabriel Fernandes
+             */
             sessions.put(email, session);
 
             System.out.println(TerminalColors.ANSI_CYAN+"Estas logado!"+ TerminalColors.ANSI_RESET);
