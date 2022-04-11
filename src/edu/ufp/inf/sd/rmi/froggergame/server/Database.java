@@ -2,21 +2,12 @@ package edu.ufp.inf.sd.rmi.froggergame.server;
 
 
 import edu.ufp.inf.sd.rmi.froggergame.server.models.User;
+import edu.ufp.inf.sd.rmi.froggergame.util.TerminalColors;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Database {
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
-
     /**
      * Array com todos os users registrados na database
      * PS.: Isto é so para testar o login não sei se vai ser assim que vamos implementar a base de dados, podemos usar ficheiros ou sql msm
@@ -43,7 +34,7 @@ public class Database {
                 break;
             }
             default: {
-                System.out.println(ANSI_RED+"[ERROR] "+ANSI_RESET+"Class "+object.getClass().getName()+" is not recognized in Database.create()!");
+                System.out.println(TerminalColors.ANSI_RED+"[ERROR] "+ TerminalColors.ANSI_RESET+"Class "+object.getClass().getName()+" is not recognized in Database.create()!");
             }
         }
     }
@@ -57,7 +48,7 @@ public class Database {
      */
     private void createUser(User user) {
         users.add(user);
-        System.out.println(ANSI_GREEN+"[CREATED] "+ANSI_RESET+"New User "+user.toString()+" has been added to Database.");
+        System.out.println(TerminalColors.ANSI_GREEN+"[CREATED] "+TerminalColors.ANSI_RESET+"New User "+user.toString()+" has been added to Database.");
     }
 
     /**
@@ -76,7 +67,7 @@ public class Database {
                 return existsUser((User)object);
             }
             default: {
-                System.out.println(ANSI_RED+"[ERROR] "+ANSI_RESET+"Class "+object.getClass().getName()+" is not recognized in Database.exists()!");
+                System.out.println(TerminalColors.ANSI_RED+"[ERROR] "+TerminalColors.ANSI_RESET+"Class "+object.getClass().getName()+" is not recognized in Database.exists()!");
                 return false;
             }
         }

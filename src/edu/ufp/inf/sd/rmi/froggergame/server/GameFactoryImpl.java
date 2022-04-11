@@ -2,6 +2,7 @@ package edu.ufp.inf.sd.rmi.froggergame.server;
 
 
 import edu.ufp.inf.sd.rmi.froggergame.server.models.User;
+import edu.ufp.inf.sd.rmi.froggergame.util.TerminalColors;
 
 import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
@@ -10,16 +11,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 
 public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryRI {
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
-
     // Array das sessões ativas
     public HashMap<String, GameSessionRI> sessions;
 
@@ -50,11 +41,11 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
 
             sessions.put(email, session);
 
-            System.out.println(ANSI_CYAN+"Estas logado!"+ANSI_RESET);
+            System.out.println(TerminalColors.ANSI_CYAN+"Estas logado!"+ TerminalColors.ANSI_RESET);
             return session;
         }
 
-        System.out.println(ANSI_PURPLE+"Email ou password errados."+ANSI_RESET);
+        System.out.println(TerminalColors.ANSI_PURPLE+"Email ou password errados."+TerminalColors.ANSI_RESET);
         return null;
     }
 
