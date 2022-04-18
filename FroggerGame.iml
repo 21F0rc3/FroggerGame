@@ -10,5 +10,6 @@
     <orderEntry type="library" exported="" name="ogg-spi" level="project" />
     <orderEntry type="library" exported="" name="spi" level="project" />
     <orderEntry type="library" exported="" name="jig-1.7.5" level="project" />
+    <orderEntry type="library" name="auth0.java.jwt" level="project" />
   </component>
 </module>

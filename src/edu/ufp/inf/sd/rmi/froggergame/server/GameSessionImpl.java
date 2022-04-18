@@ -1,19 +1,25 @@
 package edu.ufp.inf.sd.rmi.froggergame.server;
 
-import edu.ufp.inf.sd.rmi.froggergame.client.frogger.Frogger;
-import edu.ufp.inf.sd.rmi.froggergame.server.models.User;
 import edu.ufp.inf.sd.rmi.froggergame.util.TerminalColors;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class GameSessionImpl extends UnicastRemoteObject implements GameSessionRI {
+    private static GameSessionImpl instance;
+
+    public static GameSessionRI getInstance() throws RemoteException {
+        if(instance == null) {
+            instance = new GameSessionImpl();
+        }
+        return instance;
+    }
+
     // Lista com todos os jogos ativos
     private ArrayList<FroggerGameRI> froggerGames;
 
-    public GameSessionImpl() throws RemoteException {
+    private GameSessionImpl() throws RemoteException {
         super();
         froggerGames = new ArrayList<>();
     }
@@ -33,7 +39,7 @@ public class GameSessionImpl extends UnicastRemoteObject implements GameSessionR
             return;
         }*/
 
-        FroggerGameImpl froggerGame = new FroggerGameImpl(serverName, difficulty);
+        FroggerGameRI froggerGame = new FroggerGameImpl(serverName, difficulty);
         froggerGames.add(froggerGame);
 
         System.out.println(TerminalColors.ANSI_GREEN+"[CREATED]"+TerminalColors.ANSI_RESET+" New FroggerGame name:"+serverName+" difficulty:"+difficulty+".");

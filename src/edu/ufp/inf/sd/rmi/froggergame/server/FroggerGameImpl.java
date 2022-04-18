@@ -16,12 +16,20 @@ public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameR
         this.difficulty = difficulty;
     }
 
+
+
     @Override
     public void attachGame() throws RemoteException {
+
     }
 
     @Override
     public void setGameState() throws RemoteException {
 
+    }
+
+    @Override
+    public String getServerName() throws RemoteException {
+        return this.serverName;
     }
 }

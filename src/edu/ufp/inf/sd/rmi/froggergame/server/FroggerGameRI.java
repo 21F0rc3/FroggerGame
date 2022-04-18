@@ -7,4 +7,6 @@ public interface FroggerGameRI extends Remote {
     public void attachGame() throws RemoteException;
 
     public void setGameState() throws RemoteException;
+
+    public String getServerName() throws RemoteException;
 }

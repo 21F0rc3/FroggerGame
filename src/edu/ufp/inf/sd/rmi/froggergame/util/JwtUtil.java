@@ -1,5 +1,9 @@
 package edu.ufp.inf.sd.rmi.froggergame.util;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import edu.ufp.inf.sd.rmi.froggergame.server.models.User;
 
 import java.io.UnsupportedEncodingException;
@@ -7,9 +11,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JwtUtil {/*
+public class JwtUtil {
     private String SECRET_KEY = "secret";
-
 
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
@@ -49,5 +52,5 @@ public class JwtUtil {/*
             e.printStackTrace();
         }
         return null;
-    }*/
+    }
 }
