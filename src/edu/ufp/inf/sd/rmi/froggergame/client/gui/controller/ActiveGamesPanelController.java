@@ -10,6 +10,14 @@ import java.rmi.RemoteException;
 public class ActiveGamesPanelController {
     public GridPane gridPane;
 
+    /**
+     * Popula a o gridPane com o nome de cada um dos jogos ativos.
+     * Ele vai buscar a lista de jogos ativos do gameSessionRI(no servidor)
+     *
+     * @throws RemoteException
+     *
+     * @author Gabriel Fernandes 18/04/2022
+     */
     public void populate() throws RemoteException {
         System.out.println(GameSessionPanelController.gameSessionRI.getActiveGames().size());
 

@@ -24,6 +24,12 @@ public class AuthController {
     @FXML private TextField emailField;
     @FXML private TextField passwordField;
 
+    /**
+     * Responsavel por chamar a função que regista um novo usuario
+     * quando clicamos no botão de Register
+     *
+     * @author Gabriel Fernandes 18/04/2022
+     */
     public void registerHandler() {
         try {
             gameFactoryRI.register(emailField.getText(), passwordField.getText());
@@ -32,6 +38,15 @@ public class AuthController {
         }
     }
 
+    /**
+     * Responsavel por chamar a função que autentica o usuario
+     * quando clicamos no botão de Login
+     *
+     * Se a autenticaçaõ for um sucesso ele faz um switch de scenes
+     * para a pagina inicial onde tem o menu "GameSessionPanel"
+     *
+     * @author Gabriel Fernandes
+     */
     public void loginHandler() {
         try{
             if(gameFactoryRI.login(emailField.getText(), passwordField.getText()) != null) {

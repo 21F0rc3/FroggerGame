@@ -9,6 +9,14 @@ import java.util.ArrayList;
 public class GameSessionImpl extends UnicastRemoteObject implements GameSessionRI {
     private static GameSessionImpl instance;
 
+    /**
+     * Singleton
+     *
+     * @return intance de GameSessionImpl
+     * @throws RemoteException
+     *
+     * @author Gabriel Fernandes 18/04/2022
+     */
     public static GameSessionRI getInstance() throws RemoteException {
         if(instance == null) {
             instance = new GameSessionImpl();

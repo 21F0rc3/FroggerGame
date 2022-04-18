@@ -13,6 +13,15 @@ import java.io.IOException;
 public class GameSessionPanelController {
     public static GameSessionRI gameSessionRI;
 
+    /**
+     * Função responsavel por fazer um switch de cenas
+     * para a pagina CreateGameMenu onde é possivel criar
+     * um novo froggerGame
+     *
+     * @throws IOException
+     *
+     * @author Gabriel Fernandes 18/04/2022
+     */
     public void startNewGameHandler() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CreateGameMenu.fxml"));
         Parent parent = loader.load();
@@ -23,6 +32,15 @@ public class GameSessionPanelController {
         Index.context.show();
     }
 
+    /**
+     * Função responsavel por fazer um switch de cenas
+     * para a pagina ActiveGamePanel onde e possivel
+     * consultar os jogos ativos no momento
+     *
+     * @throws IOException
+     *
+     * @author Gabriel Fernandes 18/04/2022
+     */
     public void joinHandler() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ActiveGamesPanel.fxml"));
         Parent parent = loader.load();
