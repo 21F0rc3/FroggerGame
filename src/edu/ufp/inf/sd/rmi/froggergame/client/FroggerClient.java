@@ -1,8 +1,8 @@
 package edu.ufp.inf.sd.rmi.froggergame.client;
 
+import edu.ufp.inf.sd.rmi.froggergame.client.gui.Index;
+import edu.ufp.inf.sd.rmi.froggergame.client.gui.controller.AuthController;
 import edu.ufp.inf.sd.rmi.froggergame.server.GameFactoryRI;
-import edu.ufp.inf.sd.rmi.froggergame.server.models.User;
-import edu.ufp.inf.sd.rmi.froggergame.util.JwtUtil;
 import edu.ufp.inf.sd.rmi.froggergame.util.rmisetup.SetupContextRMI;
 
 import java.rmi.RemoteException;
@@ -75,10 +75,9 @@ public class FroggerClient {
 
     private void playService() {
         //============ Call FroggerGame remote service ============
-        ClientInterface clientInterface = new ClientInterface(gameFactoryRI);
-        clientInterface.init(gameFactoryRI);;
-
-        playService();
+        String[] args = {"0"};
+        AuthController.gameFactoryRI = gameFactoryRI;
+        Index.main(args);
 
         Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR finish, bye. ;)");
     }

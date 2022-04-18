@@ -38,9 +38,12 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
 
         if(db.exists(user)) {
             GameSessionRI session = new GameSessionImpl();
+            System.out.println(TerminalColors.ANSI_PURPLE+"Estas logado!"+TerminalColors.ANSI_RESET);
 
             return session;
         }
+
+        System.out.println(TerminalColors.ANSI_RED+"Credenciais erradas!"+TerminalColors.ANSI_RESET);
         return null;
     }
 
