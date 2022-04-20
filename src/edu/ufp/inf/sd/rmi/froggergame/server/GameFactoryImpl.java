@@ -5,11 +5,8 @@ import edu.ufp.inf.sd.rmi.froggergame.server.models.User;
 import edu.ufp.inf.sd.rmi.froggergame.util.JwtUtil;
 import edu.ufp.inf.sd.rmi.froggergame.util.TerminalColors;
 
-import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-
-import java.util.HashMap;
 
 public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryRI {
     private Database db;
