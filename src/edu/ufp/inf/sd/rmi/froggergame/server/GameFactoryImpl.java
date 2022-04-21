@@ -7,14 +7,35 @@ import edu.ufp.inf.sd.rmi.froggergame.util.TerminalColors;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryRI {
-    private Database db;
-    private JwtUtil jwtUtil;
+    private static GameFactoryImpl instance;
 
-    public GameFactoryImpl() throws RemoteException {
+    /**
+     * Singleton
+     *
+     * @return intance de GameSessionImpl
+     * @throws RemoteException
+     *
+     * @author Gabriel Fernandes 18/04/2022
+     */
+    public static GameFactoryImpl getInstance() throws RemoteException {
+        if(instance == null) {
+            instance = new GameFactoryImpl();
+        }
+        return instance;
+    }
+
+    // Lista com todos os jogos ativos
+    public ArrayList<FroggerGameRI> froggerGames;
+    private Database db;
+
+    private GameFactoryImpl() throws RemoteException {
         super();
+        instance = this;
         db = new Database();
+        froggerGames = new ArrayList<>();
     }
 
     /**
@@ -34,9 +55,16 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
         User user = new User(email, password);
 
         if(db.exists(user)) {
+            // Cria uma token
+            String token = JwtUtil.generateToken(user);
+            //System.out.println(token);
+
+            // Cria uma nova sessão e coloca a token
+            GameSessionImpl gameSession = new GameSessionImpl(token, user);
+
             System.out.println(TerminalColors.ANSI_PURPLE+"Estas logado!"+TerminalColors.ANSI_RESET);
 
-            return GameSessionImpl.getInstance();
+            return gameSession;
         }
         System.out.println(TerminalColors.ANSI_RED+"Credenciais erradas!"+TerminalColors.ANSI_RESET);
         return null;

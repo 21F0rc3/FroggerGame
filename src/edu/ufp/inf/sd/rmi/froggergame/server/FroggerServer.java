@@ -67,7 +67,7 @@ public class FroggerServer {
             //Bind service on rmiregistry and wait for calls
             if (registry != null) {
                 //============ Create Servant ============
-                gameFactoryRI= new GameFactoryImpl();
+                gameFactoryRI= GameFactoryImpl.getInstance();
 
                 //Get service url (including servicename)
                 String serviceUrl = contextRMI.getServicesUrl(0);

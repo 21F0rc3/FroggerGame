@@ -50,10 +50,6 @@ public class AuthController {
             if(gameFactoryRI.login(emailField.getText(), passwordField.getText()) != null) {
                 GameSessionPanelController.gameSessionRI = gameFactoryRI.login(emailField.getText(), passwordField.getText());
 
-                User user = new User(emailField.getText(), passwordField.getText());
-                JwtUtil jwtUtil = new JwtUtil();
-                System.out.println(jwtUtil.generateToken(user));
-
                 gameFactoryRI.login(emailField.getText(), passwordField.getText());
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameSessionPanel.fxml"));
