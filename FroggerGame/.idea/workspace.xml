@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="361a3826-7ed4-4914-90f1-07c72e5c20ac" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FroggerGame.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jig-1.7.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ogg-spi/jogg-0.0.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ogg-spi/jorbis-0.0.15.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ogg-spi/tritonus_jorbis-0.3.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/spi/tritonus_share.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/AudioEfx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/Car.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/CollisionObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/CopCar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/Crocodile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/Frogger.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/FroggerCollisionDetection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/FroggerUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/Goal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/GoalManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/HeatWave.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/LongLog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/MovingEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/MovingEntityFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/Particle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/ShortLog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/Truck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/Turtles.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/frogger/WindGust.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/client/FroggerClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_1_runpython.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_1_runpython.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_2_runregistry.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_2_runregistry.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_3_runserver.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_3_runserver.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_4_runclient.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/_4_runclient.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/runscripts/startAll.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/securitypolicies/client.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/securitypolicies/clientAllPermition.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/securitypolicies/group.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/securitypolicies/rmid.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/securitypolicies/serverAllPermition.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/securitypolicies/setup.policy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/server/Database.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/server/FroggerServer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/server/GameFactoryImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/server/GameFactoryRI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/server/GameSessionImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/server/GameSessionRI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/server/models/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/util/rmisetup/SetupContextRMI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/froggergame/util/threading/ThreadPool.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/ambient_fx/car-pass.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/ambient_fx/frog.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/ambient_fx/long-horn.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/ambient_fx/siren.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/ambient_fx/splash.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/ambient_fx/water-splash.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/bg_music.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/bonus.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/frog_die.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/frogger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/frogger_sprites.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/goal.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/heat.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/jump.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/level_goal.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/match.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/resources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/resources/wind.ogg" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="25YJfnnMMNPHWyNMbEI5voltrpP" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Gabri\OneDrive\Ambiente de Trabalho\FroggerGame\FroggerGame\src" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="361a3826-7ed4-4914-90f1-07c72e5c20ac" name="Changes" comment="" />
+      <created>1645700611329</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1645700611329</updated>
+      <workItem from="1645700613243" duration="427000" />
+      <workItem from="1646745344828" duration="666000" />
+      <workItem from="1646933032076" duration="58000" />
+      <workItem from="1648492186409" duration="1849000" />
+      <workItem from="1648494423762" duration="1028000" />
+      <workItem from="1648549182352" duration="5497000" />
+      <workItem from="1648554963284" duration="5344000" />
+      <workItem from="1648813248517" duration="975000" />
+      <workItem from="1648908969572" duration="1714000" />
+      <workItem from="1648910793019" duration="2285000" />
+      <workItem from="1649092824714" duration="1007000" />
+      <workItem from="1649093888121" duration="10000" />
+      <workItem from="1649094559649" duration="545000" />
+      <workItem from="1649095142450" duration="102000" />
+      <workItem from="1649098165703" duration="63000" />
+      <workItem from="1649098250297" duration="158000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

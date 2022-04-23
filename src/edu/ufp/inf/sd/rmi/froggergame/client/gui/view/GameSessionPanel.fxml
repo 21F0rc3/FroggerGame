@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #587B7F;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ufp.inf.sd.rmi.froggergame.client.gui.controller.GameSessionPanelController">
+   <children>
+      <Text fill="#d3d3d3" layoutX="232.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MENU">
+         <font>
+            <Font name="Georgia" size="44.0" />
+         </font>
+      </Text>
+      <VBox alignment="CENTER" layoutX="237.0" layoutY="128.0" prefHeight="200.0" prefWidth="122.0" spacing="30.0">
+         <children>
+            <Button mnemonicParsing="false" onMouseClicked="#startNewGameHandler" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: #53DD6C;" text="Start New Game" />
+            <Button mnemonicParsing="false" onMouseClicked="#joinHandler" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: #53DD6C;" text="Join" />
+            <Button mnemonicParsing="false" onMouseClicked="#logoutHandler" prefHeight="25.0" prefWidth="211.0" style="-fx-background-color: #53DD6C;" text="Log Out" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
