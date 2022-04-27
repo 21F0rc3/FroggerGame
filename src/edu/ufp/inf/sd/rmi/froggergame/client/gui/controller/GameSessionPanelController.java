@@ -1,6 +1,6 @@
 package edu.ufp.inf.sd.rmi.froggergame.client.gui.controller;
 
-import edu.ufp.inf.sd.rmi.froggergame.client.gui.Index;
+import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
 import edu.ufp.inf.sd.rmi.froggergame.server.GameSessionRI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +11,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class GameSessionPanelController {
-    public static GameSessionRI gameSessionRI;
-
     /**
      * Função responsavel por fazer um switch de cenas
      * para a pagina CreateGameMenu onde é possivel criar
@@ -28,8 +26,8 @@ public class GameSessionPanelController {
 
         Scene scene = new Scene(parent);
 
-        Index.context.setScene(scene);
-        Index.context.show();
+        GUI.context.setScene(scene);
+        GUI.context.show();
     }
 
     /**
@@ -49,8 +47,8 @@ public class GameSessionPanelController {
 
         ((ActiveGamesPanelController)loader.getController()).populate();
 
-        Index.context.setScene(scene);
-        Index.context.show();
+        GUI.context.setScene(scene);
+        GUI.context.show();
     }
 
     public void logoutHandler() {

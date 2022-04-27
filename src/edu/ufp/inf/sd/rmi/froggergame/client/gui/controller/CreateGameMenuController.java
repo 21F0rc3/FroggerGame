@@ -1,6 +1,6 @@
 package edu.ufp.inf.sd.rmi.froggergame.client.gui.controller;
 
-import edu.ufp.inf.sd.rmi.froggergame.client.gui.Index;
+import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,7 +23,7 @@ public class CreateGameMenuController {
      * @author Gabriel Fernandes 18/04/2022
      */
     public void createNewGameHandler() throws RemoteException {
-        GameSessionPanelController.gameSessionRI.createGame(nameField.getText(), Integer.parseInt(difficultyField.getText()));
+        GUI.interfacesMediator.getGameSessionRI().createGame(nameField.getText(), Integer.parseInt(difficultyField.getText()));
     }
 
     public void backHandler() throws IOException {
@@ -32,7 +32,7 @@ public class CreateGameMenuController {
 
         Scene scene = new Scene(parent);
 
-        Index.context.setScene(scene);
-        Index.context.show();
+        GUI.context.setScene(scene);
+        GUI.context.show();
     }
 }
