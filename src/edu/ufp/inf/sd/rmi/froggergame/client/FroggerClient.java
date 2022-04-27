@@ -1,5 +1,6 @@
 package edu.ufp.inf.sd.rmi.froggergame.client;
 
+import edu.ufp.inf.sd.rmi.froggergame.client.frogger.Main;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.InterfacesMediator;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.controller.AuthController;
@@ -24,7 +25,7 @@ public class FroggerClient {
      */
     private GameFactoryRI gameFactoryRI;
 
-    private ObserverImpl observer;
+    public ObserverImpl observer;
 
     public static void main(String[] args) {
         if (args != null && args.length < 2) {

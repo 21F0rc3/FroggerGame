@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class GameSessionImpl extends UnicastRemoteObject implements GameSessionRI {
+public class GameSessionImpl extends UnicastRemoteObject implements GameSessionRI, Component {
     private String jwt_token;
     private User user;
 
@@ -27,16 +27,18 @@ public class GameSessionImpl extends UnicastRemoteObject implements GameSessionR
      *
      * @author Gabriel Fernandes 11/04/2022
      */
-    public void createGame(String serverName, Integer difficulty) throws RemoteException {
+    public FroggerGameRI createGame(String serverName, Integer difficulty) throws RemoteException {
         // Valida a token
         if(!JwtUtil.validateToken(jwt_token, user)) {
-            return;
+            return null;
         }
 
         FroggerGameRI froggerGame = new FroggerGameImpl(serverName, difficulty);
         GameFactoryImpl.getInstance().froggerGames.add(froggerGame);
 
         System.out.println(TerminalColors.ANSI_GREEN+"[CREATED]"+TerminalColors.ANSI_RESET+" New FroggerGame name:"+serverName+" difficulty:"+difficulty+".");
+
+        return froggerGame;
     }
 
     @Override
@@ -52,5 +54,10 @@ public class GameSessionImpl extends UnicastRemoteObject implements GameSessionR
         }
 
         return GameFactoryImpl.getInstance().froggerGames;
+    }
+
+    @Override
+    public String getName() throws RemoteException {
+        return "GameSession";
     }
 }

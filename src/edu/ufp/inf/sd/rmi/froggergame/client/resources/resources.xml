@@ -2,7 +2,7 @@
 
     <spritesheet>
         <imagesrc>frogger_sprites.png</imagesrc>
-        <framesrc>content.edu.ufp.inf.sd.rmi.frogger.xml</framesrc>
+        <framesrc>frogger.xml</framesrc>
     </spritesheet>
 
     <audioclip>

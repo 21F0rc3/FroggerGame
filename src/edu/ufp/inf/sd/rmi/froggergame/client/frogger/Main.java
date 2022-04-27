@@ -41,7 +41,7 @@ public class Main extends StaticScreenGame {
 	static final int WORLD_HEIGHT = (14*32);
 	static final Vector2D FROGGER_START = new Vector2D(6*32,WORLD_HEIGHT-32);
 	
-	static final String RSC_PATH = "resources/";
+	static final String RSC_PATH = "edu/ufp/inf/sd/rmi/froggergame/client/resources/";
 	static final String SPRITE_SHEET = RSC_PATH + "frogger_sprites.png";
 	
     static final int FROGGER_LIVES      = 5;

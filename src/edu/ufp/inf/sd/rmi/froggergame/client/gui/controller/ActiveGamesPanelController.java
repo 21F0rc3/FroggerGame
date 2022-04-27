@@ -1,6 +1,7 @@
 package edu.ufp.inf.sd.rmi.froggergame.client.gui.controller;
 
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
+import edu.ufp.inf.sd.rmi.froggergame.server.Component;
 import edu.ufp.inf.sd.rmi.froggergame.server.FroggerGameImpl;
 import edu.ufp.inf.sd.rmi.froggergame.server.FroggerGameRI;
 import javafx.event.EventHandler;
@@ -18,6 +19,7 @@ import javafx.scene.shape.Box;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.nio.file.attribute.PosixFileAttributeView;
 import java.rmi.RemoteException;
@@ -73,12 +75,14 @@ public class ActiveGamesPanelController {
     }
 
     private void joinGame(FroggerGameRI game) throws IOException {
+        GUI.interfacesMediator.registerComponent((Component) game);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameLobby.fxml"));
         Parent parent = loader.load();
 
         Scene scene = new Scene(parent);
 
-        GameLobbyController controller = new GameLobbyController(game);
+        GameLobbyController controller = new GameLobbyController();
         loader.setController(controller);
 
         GUI.context.setScene(scene);

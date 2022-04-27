@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryRI {
+public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryRI, Component {
     private static GameFactoryImpl instance;
 
     /**
@@ -84,5 +84,10 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
     public void register(String email, String password) throws RemoteException {
         User user = new User(email, password);
         db.create(user);
+    }
+
+    @Override
+    public String getName() throws RemoteException {
+        return "GameFactory";
     }
 }

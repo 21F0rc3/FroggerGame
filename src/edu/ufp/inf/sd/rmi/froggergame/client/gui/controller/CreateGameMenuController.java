@@ -1,6 +1,7 @@
 package edu.ufp.inf.sd.rmi.froggergame.client.gui.controller;
 
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
+import edu.ufp.inf.sd.rmi.froggergame.server.Component;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,8 +23,19 @@ public class CreateGameMenuController {
      *
      * @author Gabriel Fernandes 18/04/2022
      */
-    public void createNewGameHandler() throws RemoteException {
-        GUI.interfacesMediator.getGameSessionRI().createGame(nameField.getText(), Integer.parseInt(difficultyField.getText()));
+    public void createNewGameHandler() throws IOException {
+        GUI.interfacesMediator.registerComponent((Component) GUI.interfacesMediator.getGameSessionRI().createGame(nameField.getText(), Integer.parseInt(difficultyField.getText())));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameLobby.fxml"));
+        Parent parent = loader.load();
+
+        ((GameLobbyController)loader.getController()).title.setText(GUI.interfacesMediator.getFroggerGameRI().getServerInfo()[0]);
+        ((GameLobbyController)loader.getController()).title.setText(GUI.interfacesMediator.getFroggerGameRI().getServerInfo()[1]);
+
+        Scene scene = new Scene(parent);
+
+        GUI.context.setScene(scene);
+        GUI.context.show();
     }
 
     public void backHandler() throws IOException {
