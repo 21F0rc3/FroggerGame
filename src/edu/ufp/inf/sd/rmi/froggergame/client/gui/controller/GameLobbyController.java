@@ -17,11 +17,7 @@ public class GameLobbyController {
     @FXML public Text playerCounter;
 
     public void attachHandler() throws RemoteException {
-
-            String args[] = new String[3];
-            Main.main(args);
-
-        //GUI.interfacesMediator.getFroggerGameRI().attachGame(GUI.froggerClient.observer);
+        GUI.interfacesMediator.getFroggerGameRI().attachGame(GUI.froggerClient.observer);
     }
 
     public void leaveHandler() throws IOException {

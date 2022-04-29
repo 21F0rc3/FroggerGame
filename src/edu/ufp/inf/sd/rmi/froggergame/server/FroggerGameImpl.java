@@ -1,6 +1,7 @@
 package edu.ufp.inf.sd.rmi.froggergame.server;
 
 import edu.ufp.inf.sd.rmi.froggergame.client.ObserverRI;
+import edu.ufp.inf.sd.rmi.froggergame.client.frogger.Main;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -19,14 +20,15 @@ public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameR
         this.serverName = serverName;
         this.difficulty = difficulty;
         this.players = new ArrayList<ObserverRI>();
+        this.gameState = new GameState();
     }
 
     @Override
     public void attachGame(ObserverRI player) throws RemoteException {
         players.add(player);
+        player.setGame(this);
 
-        /* Se o servidor tiver mais de dois jogadores "READY"
-        *  enão notifica que o jogo pode começar */
+        // Notifica outros jogadores que um novo jogador chegou
         updateGameState();
     }
 
@@ -38,7 +40,8 @@ public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameR
     @Override
     public void updateGameState() throws RemoteException {
         for(ObserverRI player : players) {
-            player.update();
+            player.hello();
+            player.update(this.gameState);
         }
     }
 
@@ -48,8 +51,9 @@ public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameR
     }
 
     @Override
-    public void setGameState() throws RemoteException {
-
+    public void setGameState(GameState gameState) throws RemoteException {
+        this.gameState = gameState;
+        updateGameState();
     }
 
     public String[] getServerInfo() throws RemoteException {

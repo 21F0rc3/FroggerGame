@@ -30,7 +30,7 @@ public class CreateGameMenuController {
         Parent parent = loader.load();
 
         ((GameLobbyController)loader.getController()).title.setText(GUI.interfacesMediator.getFroggerGameRI().getServerInfo()[0]);
-        ((GameLobbyController)loader.getController()).title.setText(GUI.interfacesMediator.getFroggerGameRI().getServerInfo()[1]);
+        ((GameLobbyController)loader.getController()).playerCounter.setText(GUI.interfacesMediator.getFroggerGameRI().getServerInfo()[2]);
 
         Scene scene = new Scene(parent);
 

@@ -2,6 +2,7 @@ package edu.ufp.inf.sd.rmi.froggergame.server;
 
 import edu.ufp.inf.sd.rmi.froggergame.client.ObserverRI;
 import edu.ufp.inf.sd.rmi.froggergame.client.frogger.Frogger;
+import edu.ufp.inf.sd.rmi.froggergame.client.frogger.Main;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -14,7 +15,7 @@ public interface FroggerGameRI extends Remote {
 
     public GameState getGameState() throws RemoteException;
 
-    public void setGameState() throws RemoteException;
+    public void setGameState(GameState gameState) throws RemoteException;
 
     public void updateGameState() throws RemoteException;
 
