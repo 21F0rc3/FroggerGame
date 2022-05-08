@@ -16,8 +16,6 @@ public class GameSessionPanelController {
      * para a pagina CreateGameMenu onde é possivel criar
      * um novo froggerGame
      *
-     * @throws IOException
-     *
      * @author Gabriel Fernandes 18/04/2022
      */
     public void startNewGameHandler() throws IOException {
@@ -34,8 +32,6 @@ public class GameSessionPanelController {
      * Função responsavel por fazer um switch de cenas
      * para a pagina ActiveGamePanel onde e possivel
      * consultar os jogos ativos no momento
-     *
-     * @throws IOException
      *
      * @author Gabriel Fernandes 18/04/2022
      */

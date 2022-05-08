@@ -1,9 +1,7 @@
 package edu.ufp.inf.sd.rmi.froggergame.client;
 
-import edu.ufp.inf.sd.rmi.froggergame.client.frogger.Main;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.InterfacesMediator;
-import edu.ufp.inf.sd.rmi.froggergame.client.gui.controller.AuthController;
 import edu.ufp.inf.sd.rmi.froggergame.server.GameFactoryRI;
 import edu.ufp.inf.sd.rmi.froggergame.util.rmisetup.SetupContextRMI;
 

@@ -10,6 +10,4 @@ public interface ObserverRI extends Remote {
     public void setGame(FroggerGameRI game) throws RemoteException;
 
     public void update(GameState gameState) throws RemoteException;
-
-    public void hello() throws RemoteException;
 }

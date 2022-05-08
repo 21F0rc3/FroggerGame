@@ -1,8 +1,6 @@
 package edu.ufp.inf.sd.rmi.froggergame.client.gui.controller;
 
-import edu.ufp.inf.sd.rmi.froggergame.client.frogger.Main;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
-import edu.ufp.inf.sd.rmi.froggergame.server.FroggerGameRI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,10 +14,22 @@ public class GameLobbyController {
     @FXML public Text title;
     @FXML public Text playerCounter;
 
+    /**
+     * Responsavel por fazer attach ao froggergame quando o cliente
+     * clica no botão de attach
+     *
+     * @author Gabriel Fernandes
+     */
     public void attachHandler() throws RemoteException {
         GUI.interfacesMediator.getFroggerGameRI().attachGame(GUI.froggerClient.observer);
     }
 
+    /**
+     * Responsavel por sair do lobby quando o cliente carrega no botão
+     * de leave
+     *
+     * @author Gabriel Fernandes 08/05/2022
+     */
     public void leaveHandler() throws IOException {
         GUI.interfacesMediator.getFroggerGameRI().dettachGame(GUI.froggerClient.observer);
 

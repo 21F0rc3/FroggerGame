@@ -19,8 +19,6 @@ public class CreateGameMenuController {
     /**
      * Resposavel por chamar a funçaõ que cria um novo FroggerGame
      *
-     * @throws RemoteException
-     *
      * @author Gabriel Fernandes 18/04/2022
      */
     public void createNewGameHandler() throws IOException {
@@ -38,6 +36,11 @@ public class CreateGameMenuController {
         GUI.context.show();
     }
 
+    /**
+     * Responsavel por voltar atras ao menu principal
+     *
+     * @author Gabriel Fernandes 08/05/2022
+     */
     public void backHandler() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameSessionPanel.fxml"));
         Parent parent = loader.load();

@@ -13,7 +13,7 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
     private static GameFactoryImpl instance;
 
     /**
-     * Singleton
+     * Padrão Singleton
      *
      * @return intance de GameSessionImpl
      * @throws RemoteException
@@ -86,6 +86,14 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
         db.create(user);
     }
 
+    /**
+     * Padrão Mediator
+     *
+     * Metodo que identifica o nome deste Component
+     * Utilizado no InterfacesMediator
+     *
+     * @author Gabriel Fernandes 08/05/2022
+     */
     @Override
     public String getName() throws RemoteException {
         return "GameFactory";

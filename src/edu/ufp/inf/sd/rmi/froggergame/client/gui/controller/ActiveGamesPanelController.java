@@ -31,8 +31,6 @@ public class ActiveGamesPanelController {
      * Popula a o gridPane com o nome de cada um dos jogos ativos.
      * Ele vai buscar a lista de jogos ativos do gameSessionRI(no servidor)
      *
-     * @throws RemoteException
-     *
      * @author Gabriel Fernandes 18/04/2022
      */
     public void populate() throws RemoteException {
@@ -74,6 +72,15 @@ public class ActiveGamesPanelController {
         vBox.getChildren().add(hBox);
     }
 
+    /**
+     * Entra num jogo
+     *
+     * Define o froggergame e abre uma nova scene que representa o lobby do jogo
+     *
+     * @param game Jogo que o cliente vai entrar
+     *
+     * @author Gabriel Fernandes
+     */
     private void joinGame(FroggerGameRI game) throws IOException {
         GUI.interfacesMediator.registerComponent((Component) game);
 
@@ -91,8 +98,6 @@ public class ActiveGamesPanelController {
 
     /**
      * Resposavel por voltar para atras quando clicamos no botão
-     *
-     * @throws IOException
      *
      * @author Gabriel Fernandes 26/04/2022
      */
