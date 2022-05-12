@@ -511,7 +511,9 @@ public class Main extends StaticScreenGame {
 							GameLevel = 1;
 							levelTimer = DEFAULT_LEVEL_TIME;
 						}
-						frogs.get(playerIndex).setPosition(FROGGER_START);
+						for(int i=0; i<4; i++) {
+							frogs.get(i).setPosition(FROGGER_START.translate(new Vector2D(i * 32, 0)));
+						}
 						GameState = GAME_PLAY;
 						audiofx.get(playerIndex).playGameMusic();
 						initializeLevel(GameLevel);
