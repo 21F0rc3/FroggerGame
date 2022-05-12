@@ -56,10 +56,10 @@ public class GameItemListController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameLobby.fxml"));
         Parent parent = loader.load();
 
-        Scene scene = new Scene(parent);
-
         ((GameLobbyController)loader.getController()).title.setText(GUI.interfacesMediator.getFroggerGameRI().getServerInfo()[0]);
         ((GameLobbyController)loader.getController()).playerCounter.setText(GUI.interfacesMediator.getFroggerGameRI().getServerInfo()[2]);
+
+        Scene scene = new Scene(parent);
 
         GUI.context.setScene(scene);
         GUI.context.show();

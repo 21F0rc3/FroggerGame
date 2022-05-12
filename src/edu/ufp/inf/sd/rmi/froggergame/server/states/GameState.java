@@ -33,4 +33,11 @@ public class GameState implements Serializable {
     public int getGameLevel() {
         return GameLevel;
     }
+
+    public String toString() {
+        return "GameState,"+
+                GameScore +","+
+                levelTimer+","+
+                GameLevel;
+    }
 }

@@ -3,6 +3,10 @@ package edu.ufp.inf.sd.rmi.froggergame.util;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import edu.ufp.inf.sd.rmi.froggergame.server.states.FrogMoveEvent;
+import edu.ufp.inf.sd.rmi.froggergame.server.states.GameState;
+import edu.ufp.inf.sd.rmi.froggergame.server.states.TrafficMoveEvent;
+import javafx.geometry.Pos;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -94,5 +98,43 @@ public class RabbitUtils {
         }
         Logger.getAnonymousLogger().log(Level.INFO, Thread.currentThread().getName() + "->joinStrings(): words = " + words.toString());
         return words.toString();
+    }
+
+    public static GameState recreateObject(String message) {
+        String[] token = message.split(",");
+
+        switch (token[0]) {
+            case "GameState": {
+                int GameState = Integer.parseInt(token[1]);
+                int levelTimer = Integer.parseInt(token[2]);
+                int GameLevel = Integer.parseInt(token[3]);
+
+                return new GameState(GameState, levelTimer, GameLevel);
+            }
+            case "FrogMoveEvent": {
+                int GameState = Integer.parseInt(token[1]);
+                int levelTimer = Integer.parseInt(token[2]);
+                int GameLevel = Integer.parseInt(token[3]);
+                Integer frogID = Integer.parseInt(token[4]);
+                String direction = token[5];
+
+                return new FrogMoveEvent(GameState, levelTimer, GameLevel, frogID, direction);
+            }
+            case "TrafficMoveEvent": {
+                int GameState = Integer.parseInt(token[1]);
+                int levelTimer = Integer.parseInt(token[2]);
+                int GameLevel = Integer.parseInt(token[3]);
+                String trafficType = token[4];
+                Posititon pos = new Posititon(Double.parseDouble(token[5]), Double.parseDouble(token[6]));
+                Posititon vel = new Posititon(Double.parseDouble(token[7]), Double.parseDouble(token[8]));
+                String spriteName = token[9];
+                long deltaMs = Long.parseLong(token[10]);
+
+                return new TrafficMoveEvent(GameState, levelTimer, GameLevel, trafficType, pos, vel, spriteName, deltaMs);
+            }
+            default: {
+                return null;
+            }
+        }
     }
 }

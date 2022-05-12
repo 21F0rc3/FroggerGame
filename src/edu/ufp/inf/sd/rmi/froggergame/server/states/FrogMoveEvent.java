@@ -22,4 +22,13 @@ public class FrogMoveEvent extends GameState implements Serializable {
             e.printStackTrace();
         }
     }
+
+    public String toString() {
+        return "FrogMoveEvent,"+
+                getGameScore() +","+
+                getLevelTimer()+"," +
+                getGameLevel()+","+
+                frogID+","+
+                direction+",";
+    }
 }

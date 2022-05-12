@@ -26,15 +26,23 @@
 package edu.ufp.inf.sd.rmi.froggergame.client.frogger;
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
+import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import com.rabbitmq.client.*;
+import edu.ufp.inf.sd.rmi.froggergame.client.MQListener;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.FrogMoveEvent;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.GameState;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.TrafficMoveEvent;
 import edu.ufp.inf.sd.rmi.froggergame.util.Posititon;
+import edu.ufp.inf.sd.rmi.froggergame.util.RabbitUtils;
 import edu.ufp.inf.sd.rmi.froggergame.util.TerminalColors;
 import jig.engine.ImageResource;
 import jig.engine.PaintableCanvas;
@@ -47,6 +55,16 @@ import jig.engine.physics.AbstractBodyLayer;
 import jig.engine.util.Vector2D;
 
 public class Main extends StaticScreenGame {
+	/**
+	 * Define qual tecnologia utiliza para fazer a sincronização entre as instancias
+	 *
+	 * RabbitMQ - Utiliza o Publish/Subscribe do RabbitMQ
+	 * RMI - Utiliza o Observer do RMI
+	 */
+	static String SYNC_METHOD = "RMI";
+	static String host = "localhost";
+	static int port = 5672;
+
 	static final int WORLD_WIDTH = (13 * 32);
 	static final int WORLD_HEIGHT = (14 * 32);
 	static final Vector2D FROGGER_START = new Vector2D(6 * 32, WORLD_HEIGHT - 32);
@@ -155,6 +173,45 @@ public class Main extends StaticScreenGame {
 
 		playerIndex = index;
 
+		if(SYNC_METHOD == "RabbitMQ") {
+			Runnable runnable = () -> {
+				try {
+					String exchangeName = GUI.interfacesMediator.getFroggerGameRI().getServerInfo()[0];
+
+					Connection connection=RabbitUtils.newConnection2Server(host,port,"guest","guest");
+					Channel channel=RabbitUtils.createChannel2Server(connection);
+
+					channel.exchangeDeclare(exchangeName, BuiltinExchangeType.FANOUT);
+
+					String queueName=channel.queueDeclare().getQueue();
+
+					String routingKey="";
+					channel.queueBind(queueName, exchangeName, routingKey);
+
+					Logger.getAnonymousLogger().log(Level.INFO, Thread.currentThread().getName() +": Will create Deliver Callback...");
+					System.out.println("[*] Waiting for messages. To exit press CTRL+C");
+
+					DeliverCallback deliverCallback=(consumerTag, delivery) -> {
+						String message = new String(delivery.getBody(), "UTF-8");
+						System.out.println("[x] Consumer Tag [" + consumerTag + "] - Received '" + message + "'");
+
+						GameState gameState = RabbitUtils.recreateObject(message);
+						gameState.execute(GUI.froggerClient.observer);
+					};
+					CancelCallback cancelCallback=(consumerTag) -> {
+						System.out.println("[x] Consumer Tag [" + consumerTag + "] - Cancel Callback invoked!");
+					};
+					channel.basicConsume(queueName, true, deliverCallback, cancelCallback);
+				} catch (Exception e) {
+					//Logger.getLogger(Recv.class.getName()).log(Level.INFO, e.toString());
+					e.printStackTrace();
+				}
+			};
+
+			Thread thread = new Thread(runnable);
+			thread.start();
+		}
+
 		initializeLevel(1);
 	}
 
@@ -239,7 +296,7 @@ public class Main extends StaticScreenGame {
 		try {
 			MovingEntity m;
 			// HeatWave
-			if ((m = hwave.genParticles(frogs.get(playerIndex).getCenterPosition())) != null) createTrafficEvent("", m, deltaMs);
+			if ((m = hwave.genParticles(frogs.get(playerIndex).getCenterPosition())) != null) createTrafficEvent(m, deltaMs);
 
 			movingObjectsLayer.update(deltaMs);
 			particleLayer.update(deltaMs);
@@ -262,46 +319,45 @@ public class Main extends StaticScreenGame {
 	private void generateTraffic(long deltaMs) {
 		MovingEntity m;
 		/* Road traffic updates */
-		if ((m = roadLine1.buildVehicle()) != null) createTrafficEvent("roadLine1", m, deltaMs);
+		if ((m = roadLine1.buildVehicle()) != null) createTrafficEvent(m, deltaMs);
 
-		if ((m = roadLine2.buildVehicle()) != null) createTrafficEvent("roadLine2", m, deltaMs);
+		if ((m = roadLine2.buildVehicle()) != null) createTrafficEvent(m, deltaMs);
 
-		if ((m = roadLine3.buildVehicle()) != null) createTrafficEvent("roadLine3", m, deltaMs);
+		if ((m = roadLine3.buildVehicle()) != null) createTrafficEvent(m, deltaMs);
 
-		if ((m = roadLine4.buildVehicle()) != null) createTrafficEvent("roadLine4", m, deltaMs);
+		if ((m = roadLine4.buildVehicle()) != null) createTrafficEvent(m, deltaMs);
 
-		if ((m = roadLine5.buildVehicle()) != null) createTrafficEvent("roadLine5", m, deltaMs);
+		if ((m = roadLine5.buildVehicle()) != null) createTrafficEvent(m, deltaMs);
 
 
 		/* River traffic updates */
-		if ((m = riverLine1.buildShortLogWithTurtles(40)) != null) createTrafficEvent("riverLine1", m, deltaMs);
+		if ((m = riverLine1.buildShortLogWithTurtles(40)) != null) createTrafficEvent(m, deltaMs);
 
-		if ((m = riverLine2.buildLongLogWithCrocodile(30)) != null) createTrafficEvent("riverLine2", m, deltaMs);
+		if ((m = riverLine2.buildLongLogWithCrocodile(30)) != null) createTrafficEvent(m, deltaMs);
 
-		if ((m = riverLine3.buildShortLogWithTurtles(50)) != null) createTrafficEvent("riverLine3", m, deltaMs);
+		if ((m = riverLine3.buildShortLogWithTurtles(50)) != null) createTrafficEvent(m, deltaMs);
 
-		if ((m = riverLine4.buildLongLogWithCrocodile(20)) != null) createTrafficEvent("riverLine4", m, deltaMs);
+		if ((m = riverLine4.buildLongLogWithCrocodile(20)) != null) createTrafficEvent(m, deltaMs);
 
-		if ((m = riverLine5.buildShortLogWithTurtles(10)) != null) createTrafficEvent("riverLine5", m, deltaMs);
+		if ((m = riverLine5.buildShortLogWithTurtles(10)) != null) createTrafficEvent(m, deltaMs);
 
 		// Do Wind
-		if ((m = wind.genParticles(GameLevel)) != null) createTrafficEvent("", m, deltaMs);
+		if ((m = wind.genParticles(GameLevel)) != null) createTrafficEvent(m, deltaMs);
 	}
 
 	/**
 	 * Cria um evento TrafficMoveEvent que indica um novo item de trafego criado
 	 *
-	 * @param place 	Sitio em que ele foi criado, por exemplo roadLine1 (É inutil)
 	 * @param m 		Entidade que foi criada
 	 * @param deltaMs 	Tempo delta
 	 *
 	 * @author Gabriel Fernandes 12/05/2022
 	 */
-	private void createTrafficEvent(String place, MovingEntity m, long deltaMs) {
+	private void createTrafficEvent(MovingEntity m, long deltaMs) {
 		Posititon pos = new Posititon(m.getPosition().getX(), m.getPosition().getY());
 		Posititon vel = new Posititon(m.getVelocity().getX(), m.getVelocity().getY());
 
-		GameState gameState = new TrafficMoveEvent(GameScore, levelTimer, GameLevel, place, m.getClass().getSimpleName(), pos, vel, m.getName(), deltaMs);
+		GameState gameState = new TrafficMoveEvent(GameScore, levelTimer, GameLevel, m.getClass().getSimpleName(), pos, vel, m.getName(), deltaMs);
 
 		// Envia o novo evento
 		sendGameState(gameState);
@@ -333,11 +389,35 @@ public class Main extends StaticScreenGame {
 	 * @author Gabriel Fernandes 12/05/2022
 	 */
 	private void sendGameState(GameState state) {
-		// Envia o novo evento
-		try {
-			GUI.interfacesMediator.getFroggerGameRI().setGameState(state);
-		} catch (RemoteException e) {
-			e.printStackTrace();
+		if(SYNC_METHOD == "RMI") {
+			// Envia o novo evento
+			try {
+				GUI.interfacesMediator.getFroggerGameRI().setGameState(state);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
+		/**
+		 * Envia uma mensagem
+		 */
+		if(SYNC_METHOD == "RabbitMQ") {
+			try {
+				// O exchange sera o nome do proprio servidor
+				String exchangeName = GUI.interfacesMediator.getFroggerGameRI().getServerInfo()[0];
+
+				Connection connection= RabbitUtils.newConnection2Server(host, port, "guest", "guest");
+				Channel channel=RabbitUtils.createChannel2Server(connection);
+
+				System.out.println(" [x] Declare exchange: '" + exchangeName + "' of type " + BuiltinExchangeType.FANOUT.toString());
+
+				channel.exchangeDeclare(exchangeName, BuiltinExchangeType.FANOUT);
+
+				String routingKey = "";
+				channel.basicPublish(exchangeName, routingKey, null, state.toString().getBytes("UTF-8"));
+				System.out.println(" [x] Sent:");
+			} catch (IOException | TimeoutException e) {
+					Logger.getLogger(Main.class.getName()).log(Level.INFO, e.toString());
+            }
 		}
 	}
 
@@ -421,9 +501,16 @@ public class Main extends StaticScreenGame {
 				default:
 					try {
 						GameLives = FROGGER_LIVES;
-						GameScore = GUI.interfacesMediator.getFroggerGameRI().getGameState().getGameScore();
-						GameLevel = GUI.interfacesMediator.getFroggerGameRI().getGameState().getGameLevel();
-						levelTimer = GUI.interfacesMediator.getFroggerGameRI().getGameState().getLevelTimer();
+						if(SYNC_METHOD == "RMI") {
+							GameScore = GUI.interfacesMediator.getFroggerGameRI().getGameState().getGameScore();
+							GameLevel = GUI.interfacesMediator.getFroggerGameRI().getGameState().getGameLevel();
+							levelTimer = GUI.interfacesMediator.getFroggerGameRI().getGameState().getLevelTimer();
+						}
+						if(SYNC_METHOD == "RabbitMQ") {
+							GameScore = 0;
+							GameLevel = 1;
+							levelTimer = DEFAULT_LEVEL_TIME;
+						}
 						frogs.get(playerIndex).setPosition(FROGGER_START);
 						GameState = GAME_PLAY;
 						audiofx.get(playerIndex).playGameMusic();

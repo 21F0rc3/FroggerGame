@@ -28,6 +28,6 @@ public class Posititon implements Serializable {
     }
 
     public String toString() {
-        return "Position: X="+x+"   "+"Y="+y;
+        return x+","+y;
     }
 }

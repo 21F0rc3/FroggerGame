@@ -1,20 +1,23 @@
 package edu.ufp.inf.sd.rmi.froggergame.server.states;
 
+import com.fasterxml.jackson.core.JsonEncoding;
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import edu.ufp.inf.sd.rmi.froggergame.client.ObserverRI;
 import edu.ufp.inf.sd.rmi.froggergame.util.Posititon;
+import jdk.nashorn.internal.parser.JSONParser;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
 
 public class TrafficMoveEvent extends GameState implements Serializable {
-    private String place;
     private String trafficType;
     private Posititon pos;
     private Posititon vel;
     private String spriteName;
     private long deltaMs;
 
-    public TrafficMoveEvent(int GameScore, int levelTimer, int GameLevel, String place, String trafficType, Posititon pos, Posititon vel, String spriteName, long deltaMs) {
+    public TrafficMoveEvent(int GameScore, int levelTimer, int GameLevel, String trafficType, Posititon pos, Posititon vel, String spriteName, long deltaMs) {
         super(GameScore, levelTimer, GameLevel);
         this.trafficType = trafficType;
         this.pos = pos;
@@ -29,10 +32,6 @@ public class TrafficMoveEvent extends GameState implements Serializable {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getPlace() {
-        return place;
     }
 
     public String getTrafficType() {
@@ -53,5 +52,17 @@ public class TrafficMoveEvent extends GameState implements Serializable {
 
     public String getSpriteName() {
         return this.spriteName;
+    }
+
+    public String toString() {
+        return "TrafficMoveEvent,"+
+                getGameScore()+","+
+                getLevelTimer()+"," +
+                getGameLevel()+","+
+                trafficType+","+
+                pos.toString()+","+
+                vel.toString()+","+
+                spriteName+","+
+                +deltaMs;
     }
 }
