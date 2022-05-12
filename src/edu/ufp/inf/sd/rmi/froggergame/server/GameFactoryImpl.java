@@ -9,11 +9,11 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryRI {
+public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryRI, Component {
     private static GameFactoryImpl instance;
 
     /**
-     * Singleton
+     * Padrão Singleton
      *
      * @return intance de GameSessionImpl
      * @throws RemoteException
@@ -84,5 +84,18 @@ public class GameFactoryImpl extends UnicastRemoteObject implements GameFactoryR
     public void register(String email, String password) throws RemoteException {
         User user = new User(email, password);
         db.create(user);
+    }
+
+    /**
+     * Padrão Mediator
+     *
+     * Metodo que identifica o nome deste Component
+     * Utilizado no InterfacesMediator
+     *
+     * @author Gabriel Fernandes 08/05/2022
+     */
+    @Override
+    public String getName() throws RemoteException {
+        return "GameFactory";
     }
 }

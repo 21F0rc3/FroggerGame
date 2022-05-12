@@ -1,9 +1,25 @@
 <resources>
 
     <spritesheet>
-        <imagesrc>frogger_sprites.png</imagesrc>
-        <framesrc>content.edu.ufp.inf.sd.rmi.frogger.xml</framesrc>
+        <imagesrc>frogger_sprites1.png</imagesrc>
+        <framesrc>frogger.xml</framesrc>
     </spritesheet>
+
+    <spritesheet>
+        <imagesrc>frogger_sprites2.png</imagesrc>
+        <framesrc>frogger.xml</framesrc>
+    </spritesheet>
+
+    <spritesheet>
+        <imagesrc>frogger_sprites3.png</imagesrc>
+        <framesrc>frogger.xml</framesrc>
+    </spritesheet>
+
+    <spritesheet>
+        <imagesrc>frogger_sprites4.png</imagesrc>
+        <framesrc>frogger.xml</framesrc>
+    </spritesheet>
+
 
     <audioclip>
     	<src>jump.wav</src></audioclip><audioclip>

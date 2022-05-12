@@ -1,0 +1,57 @@
+.primary-color {
+    -fx-background-color: #92374D;
+}
+
+.secondary-color {
+    -fx-background-color: #8C5383;
+}
+
+.ractangle {
+    -fx-fill:#8C5383;
+    -fx-arc-height: 40;
+}
+
+.title {
+    -fx-font-family: Georgia;
+    -fx-font-size: 44;
+    -fx-fill: lightgray;
+}
+
+.subtitle {
+    -fx-font-family: Georgia;
+    -fx-font-size: 32;
+    -fx-fill: lightgray;
+}
+
+.textPrimary {
+    -fx-font-family: Georgia;
+    -fx-font-size: 12;
+    -fx-fill: white;
+}
+
+.gameName {
+    -fx-font-family: Georgia;
+    -fx-font-size: 16;
+    -fx-fill: lightgray;
+}
+
+.listItem {
+    -fx-background-color: #4A5899;
+}
+
+.textField {
+    -fx-border-color:  transparent transparent #F7FFF7 transparent;
+    -fx-background-color:  transparent;
+    -fx-text-fill: white;
+}
+
+.button-primary, .joinButton {
+    -fx-background-color:  #559CAD;
+}
+
+.button-secondary {
+    -fx-background-color: transparent;
+    -fx-font-family: Georgia;
+    -fx-font-size: 16;
+    -fx-text-fill: lightgray;
+}

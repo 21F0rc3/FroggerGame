@@ -1,7 +1,7 @@
 package edu.ufp.inf.sd.rmi.froggergame.client;
 
-import edu.ufp.inf.sd.rmi.froggergame.client.gui.Index;
-import edu.ufp.inf.sd.rmi.froggergame.client.gui.controller.AuthController;
+import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
+import edu.ufp.inf.sd.rmi.froggergame.client.gui.InterfacesMediator;
 import edu.ufp.inf.sd.rmi.froggergame.server.GameFactoryRI;
 import edu.ufp.inf.sd.rmi.froggergame.util.rmisetup.SetupContextRMI;
 
@@ -23,32 +23,58 @@ public class FroggerClient {
      */
     private GameFactoryRI gameFactoryRI;
 
+    public ObserverImpl observer;
+
     public static void main(String[] args) {
         if (args != null && args.length < 2) {
             System.err.println("usage: java [options] edu.ufp.sd.inf.rmi.froggergame.server.FroggerClient <rmi_registry_ip> <rmi_registry_port> <service_name>");
             System.exit(-1);
         } else {
-            //1. ============ Setup client RMI context ============
-            FroggerClient hwc=new FroggerClient(args);
-            //2. ============ Lookup service ============
-            hwc.lookupService();
-            //3. ============ Play with service ============
-            hwc.playService();
+            new FroggerClient(args);
         }
     }
 
     public FroggerClient(String args[]) {
+        //1. Init the RMI context (load security manager, lookup subject, etc.)
+        initContext(args);
+        //2. Create observer (which attaches himself to subject)
+        initObserver(args);
+        //3. Init the GUI components
+        initComponents();
+    }
+
+    private void initContext(String args[]) {
         try {
             //List ans set args
             SetupContextRMI.printArgs(this.getClass().getName(), args);
             String registryIP = args[0];
             String registryPort = args[1];
             String serviceName = args[2];
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going to setup RMI context...");
             //Create a context for RMI setup
             contextRMI = new SetupContextRMI(this.getClass(), registryIP, registryPort, new String[]{serviceName});
+            this.gameFactoryRI = (GameFactoryRI)lookupService();
         } catch (RemoteException e) {
             Logger.getLogger(FroggerClient.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+
+    private void initObserver(String args[]) {
+        try {
+            observer=new ObserverImpl();
+        } catch (Exception e) {
+            Logger.getLogger(FroggerClient.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    private void initComponents() {
+        String[] args = {"0"};
+        GUI.froggerClient = this;
+        GUI.interfacesMediator = new InterfacesMediator(gameFactoryRI);
+        GUI.main(args);
+
+        Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR finish, bye. ;)");
+
     }
 
     private Remote lookupService() {
@@ -71,14 +97,5 @@ public class FroggerClient {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return gameFactoryRI;
-    }
-
-    private void playService() {
-        //============ Call FroggerGame remote service ============
-        String[] args = {"0"};
-        AuthController.gameFactoryRI = gameFactoryRI;
-        Index.main(args);
-
-        Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR finish, bye. ;)");
     }
 }
