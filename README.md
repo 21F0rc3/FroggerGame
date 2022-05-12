@@ -17,13 +17,23 @@ O Frogger é um jogo arcade criado pela SEGA na década de 80. O jogador control
 
 ## Menu de Autenticação
 
-![image](https://user-images.githubusercontent.com/57480698/167309619-16ed51c7-77b9-472f-a7fd-0b38cd2f34a3.png)
+![image](https://user-images.githubusercontent.com/57480698/168113398-e63bda55-9949-4ca7-a976-1737e5fb068a.png)
 
 ## Menu Inicial
 
-![image](https://user-images.githubusercontent.com/57480698/167309639-483f3388-cf33-44dc-86e1-0b4f9a9d6a97.png)
+![image](https://user-images.githubusercontent.com/57480698/168113471-d54c9ff7-488f-430a-86d1-60640f33c6dd.png)
 
 ## Criar um novo jogo
 
-![image](https://user-images.githubusercontent.com/57480698/167309664-e4ef0b9c-9d97-4258-98a1-d7eeaee67c05.png)
+![image](https://user-images.githubusercontent.com/57480698/168113573-57a83e43-53e8-46a1-be8a-25c945f35611.png)
+
+## Lista de servidores
+
+![image](https://user-images.githubusercontent.com/57480698/168114867-4a6b7585-5680-4c1d-92f4-1d32d29d17f0.png)
+
+
+## Game Lobby
+
+![image](https://user-images.githubusercontent.com/57480698/168113689-dd3fc7a3-e57b-4ae7-bafc-d62ea71de66f.png)
+
 
