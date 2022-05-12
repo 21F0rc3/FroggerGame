@@ -1,6 +1,9 @@
 package edu.ufp.inf.sd.rmi.froggergame.server;
 
 import edu.ufp.inf.sd.rmi.froggergame.client.ObserverRI;
+import edu.ufp.inf.sd.rmi.froggergame.server.states.GameState;
+import edu.ufp.inf.sd.rmi.froggergame.util.Posititon;
+import jig.engine.util.Vector2D;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

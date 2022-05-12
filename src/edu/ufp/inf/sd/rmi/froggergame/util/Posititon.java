@@ -1,19 +1,21 @@
 package edu.ufp.inf.sd.rmi.froggergame.util;
 
-public class Posititon {
-    private Double x;
-    private Double y;
+import java.io.Serializable;
 
-    public Posititon(Double X, Double Y) {
-        this.x = x;
-        this.y = y;
+public class Posititon implements Serializable {
+    private double x;
+    private double y;
+
+    public Posititon(double X, double Y) {
+        x = X;
+        y = Y;
     }
 
     public Double getX() {
         return x;
     }
 
-    public void setX(Double x) {
+    public void setX(double x) {
         this.x = x;
     }
 
@@ -21,7 +23,11 @@ public class Posititon {
         return y;
     }
 
-    public void setY(Double y) {
+    public void setY(double y) {
         this.y = y;
+    }
+
+    public String toString() {
+        return "Position: X="+x+"   "+"Y="+y;
     }
 }

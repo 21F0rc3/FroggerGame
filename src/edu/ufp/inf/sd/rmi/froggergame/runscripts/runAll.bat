@@ -5,3 +5,5 @@ timeout 4
 start _3_runserver.bat
 timeout 4
 start _4_runclient.bat
+timeout 4
+start _4_runclient.bat
