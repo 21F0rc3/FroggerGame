@@ -35,6 +35,7 @@ import edu.ufp.inf.sd.rmi.froggergame.server.states.FrogMoveEvent;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.GameState;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.TrafficMoveEvent;
 import edu.ufp.inf.sd.rmi.froggergame.util.Posititon;
+import edu.ufp.inf.sd.rmi.froggergame.util.TerminalColors;
 import jig.engine.ImageResource;
 import jig.engine.PaintableCanvas;
 import jig.engine.RenderingContext;
@@ -247,6 +248,17 @@ public class Main extends StaticScreenGame {
 		}
 	}
 
+	/**
+	 * Importante para a sincronização das instancias
+	 *
+	 * Cria trafico, ao ser criado trafico e criado um evento que e enviado para o servidor
+	 * a indicar um novo item de trafico. Por sua vez, o servidor notifica todos os jogadores para criarem
+	 * um novo item de X tipo na Y posição
+	 *
+	 * @param deltaMs Tempo delta
+	 *
+	 * @author Gabriel Fernandes 12/05/2022
+	 */
 	private void generateTraffic(long deltaMs) {
 		MovingEntity m;
 		/* Road traffic updates */
@@ -276,6 +288,15 @@ public class Main extends StaticScreenGame {
 		if ((m = wind.genParticles(GameLevel)) != null) createTrafficEvent("", m, deltaMs);
 	}
 
+	/**
+	 * Cria um evento TrafficMoveEvent que indica um novo item de trafego criado
+	 *
+	 * @param place 	Sitio em que ele foi criado, por exemplo roadLine1 (É inutil)
+	 * @param m 		Entidade que foi criada
+	 * @param deltaMs 	Tempo delta
+	 *
+	 * @author Gabriel Fernandes 12/05/2022
+	 */
 	private void createTrafficEvent(String place, MovingEntity m, long deltaMs) {
 		Posititon pos = new Posititon(m.getPosition().getX(), m.getPosition().getY());
 		Posititon vel = new Posititon(m.getVelocity().getX(), m.getVelocity().getY());
@@ -286,6 +307,15 @@ public class Main extends StaticScreenGame {
 		sendGameState(gameState);
 	}
 
+	/**
+	 * Cria um evento FrogMoveEvent que indica uma ação de movimento de uma frog
+	 * numa direção especificada
+	 *
+	 * @param playerIndex 	ID da frog que efetua o movimento
+	 * @param direction 	Direção em que a frog move-se
+	 *
+	 * @author Gabriel Fernandes 12/05/2022
+	 */
 	private void createFrogMoveEvent(Integer playerIndex, String direction) {
 		GameState gameState = new FrogMoveEvent(GameScore, levelTimer, GameLevel, playerIndex, direction);
 
@@ -293,6 +323,15 @@ public class Main extends StaticScreenGame {
 		sendGameState(gameState);
 	}
 
+	/**
+	 * Envia um novo gamestate para o servidor
+	 * que ira atualizar e enviar a atualização a todos os
+	 * jogadores
+	 *
+	 * @param state Estado com uma atualização de evento
+	 *
+	 * @author Gabriel Fernandes 12/05/2022
+	 */
 	private void sendGameState(GameState state) {
 		// Envia o novo evento
 		try {
@@ -414,6 +453,16 @@ public class Main extends StaticScreenGame {
 		return this.playerIndex;
 	}
 
+	/**
+	 * Importante para a sincronização das instancias
+	 *
+	 * Atualiza os timers das diferentes instancias
+	 * Momentaneamente cada uma recebera updates do servidor para estarem todas de acordo com o tempo
+	 *
+	 * @param deltaMs Tempo delta
+	 *
+	 * @author Gabriel Fernandes 12/05/2022
+	 */
 	private void updateLevelTimer(long deltaMs) {
 		// Level timer stuff
 		deltaTime += deltaMs;
@@ -491,27 +540,54 @@ public class Main extends StaticScreenGame {
 		}
 	}
 
+	/**
+	 * Importante para a sincronização dos jogos
+	 *
+	 * Move o frog especificado na direcção especificada
+	 *
+	 * @param idx ID do frog que vai efeturar o movimento
+	 * @param direction Direção em que o frog se vai mover
+	 *
+	 * @author Gabriel Fernandes 12/05/2022
+	 */
 	public void move(Integer idx, String direction) {
 		switch (direction) {
 			case "DOWN": {
 				frogs.get(idx).moveDown();
-				return;
+				break;
 			}
 			case "UP": {
 				frogs.get(idx).moveUp();
-				return;
+				break;
 			}
 			case "RIGHT": {
 				frogs.get(idx).moveRight();
-				return;
+				break;
 			}
 			case "LEFT": {
 				frogs.get(idx).moveLeft();
-				return;
+				break;
+			}
+			default: {
+				System.out.println(TerminalColors.ANSI_RED+"[ERROR] "+TerminalColors.ANSI_RESET+"Main.move(): "+direction+" não é uma direção definida.");
+				break;
 			}
 		}
 	}
 
+	/**
+	 * Importante para a sincronização dos jogos
+	 *
+	 * Cria um novo item de trafico
+	 *
+	 * @param buildVehicle Tipo de trafico vamos criar
+	 * @param pos Posição do trafico
+	 * @param vel Velocidade do trafico(eu acho que isto esta mais relacionado com a direção)
+	 * @param spriteType O sprite do item. Por exemplo, existem 3 tipos de carros, então ele cria consoante o tipo
+	 * @param deltaMs Tempo delta
+	 *
+	 * @author Gabriel Fernandes 12/05/2022
+	 */
 	public void movingTraffic(String buildVehicle, Posititon pos, Posititon vel, String spriteType, long deltaMs) {
 		// O host não precisa de atualizar porque foi ele que gerou o trafego
         MovingEntity m;
@@ -560,9 +636,11 @@ public class Main extends StaticScreenGame {
 				particleLayer.add(m);
 				break;
 			}
+			default: {
+				System.out.println(TerminalColors.ANSI_RED+"[ERROR] "+TerminalColors.ANSI_RESET+"Main.movingTraffic(): "+buildVehicle+" não é um tipo de trafico conhecido.");
+				break;
+			}
         }
-
-		return;
 	}
 	
 	/**
@@ -612,7 +690,11 @@ public class Main extends StaticScreenGame {
 		case GAME_INSTRUCTIONS:
 		case GAME_INTRO:
 			backgroundLayer.render(rc);
-			movingObjectsLayer.render(rc);
+			try {
+				movingObjectsLayer.render(rc);
+			}catch (ConcurrentModificationException e) {
+				System.out.println(e.toString());;
+			}
 			ui.render(rc);
 			break;		
 		}
