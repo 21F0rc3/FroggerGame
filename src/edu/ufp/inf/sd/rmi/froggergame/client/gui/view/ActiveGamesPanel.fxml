@@ -5,12 +5,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #587B7F;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ufp.inf.sd.rmi.froggergame.client.gui.controller.ActiveGamesPanelController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="primary-color" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ufp.inf.sd.rmi.froggergame.client.gui.controller.ActiveGamesPanelController">
    <children>
-      <Button layoutX="31.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#backHandler" style="-fx-background-color: transparent;" text="&lt; Back" textFill="#f7fff7" />
+      <Button layoutX="31.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#backHandler" styleClass="button-secondary" text="&lt; Back" textFill="#f7fff7" />
       <ScrollPane layoutX="21.0" layoutY="55.0" style="-fx-background-color: #1e2019;">
          <content>
-            <VBox fx:id="vBox" prefHeight="320.0" prefWidth="561.0" style="-fx-background-color: #1e2019;" />
+            <VBox fx:id="vBox" prefHeight="320.0" prefWidth="561.0" styleClass="secondary-color" />
          </content>
       </ScrollPane>
    </children>

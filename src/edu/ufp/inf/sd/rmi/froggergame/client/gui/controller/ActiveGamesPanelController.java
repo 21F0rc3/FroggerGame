@@ -37,7 +37,11 @@ public class ActiveGamesPanelController {
         System.out.println(GUI.interfacesMediator.getGameSessionRI().getActiveGames().size());
 
         for(FroggerGameRI froggerGameRI : GUI.interfacesMediator.getGameSessionRI().getActiveGames()) {
-            addGameItemToList(froggerGameRI);
+            try {
+                addGameItemToList(froggerGameRI);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -51,49 +55,15 @@ public class ActiveGamesPanelController {
      *
      * @author Gabriel Fernandes 26/04/2022
      */
-    private void addGameItemToList(FroggerGameRI game) throws RemoteException {
-        Text text = new Text();
-        text.setText(game.getServerInfo()[0]);
-
-        Button button = new Button();
-        button.setText("Join");
-        button.setOnMouseClicked(event -> {
-            try {
-                joinGame(game);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        HBox hBox = new HBox();
-        hBox.getChildren().add(text);
-        hBox.getChildren().add(button);
-
-        vBox.getChildren().add(hBox);
-    }
-
-    /**
-     * Entra num jogo
-     *
-     * Define o froggergame e abre uma nova scene que representa o lobby do jogo
-     *
-     * @param game Jogo que o cliente vai entrar
-     *
-     * @author Gabriel Fernandes
-     */
-    private void joinGame(FroggerGameRI game) throws IOException {
-        GUI.interfacesMediator.registerComponent((Component) game);
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameLobby.fxml"));
+    private void addGameItemToList(FroggerGameRI game) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameItemList.fxml"));
         Parent parent = loader.load();
 
-        Scene scene = new Scene(parent);
+        ((GameItemListController)loader.getController()).setGameName(new Text(game.getServerInfo()[0]));
 
-        GameLobbyController controller = new GameLobbyController();
-        loader.setController(controller);
+        ((GameItemListController)loader.getController()).setFroggerGameRI(game);
 
-        GUI.context.setScene(scene);
-        GUI.context.show();
+        vBox.getChildren().add(parent);
     }
 
     /**

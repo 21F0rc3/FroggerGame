@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ import java.rmi.RemoteException;
 
 public class AuthController {
     @FXML private TextField emailField;
-    @FXML private TextField passwordField;
+    @FXML private PasswordField passwordField;
 
     /**
      * Responsavel por chamar a função que regista um novo usuario
