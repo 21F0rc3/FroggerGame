@@ -41,4 +41,15 @@ public class Car extends MovingEntity {
 		else
 			setFrame(0);
 	}
+
+	public Car (Vector2D pos, Vector2D v, String sprite) {
+		super(sprite);
+		position = pos;
+		collisionObjects.add(new CollisionObject(position));
+		velocity = v;
+		if (v.getX() < 0)
+			setFrame(1);
+		else
+			setFrame(0);
+	}
 }

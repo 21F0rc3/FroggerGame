@@ -145,12 +145,12 @@ public class Main extends StaticScreenGame {
 		}
 
 		ui = new FroggerUI(this);
-		//wind = new WindGust();
-		//hwave = new HeatWave();
+		wind = new WindGust();
+		hwave = new HeatWave();
 		goalmanager = new GoalManager();
 
 		movingObjectsLayer = new AbstractBodyLayer.IterativeUpdate<MovingEntity>();
-		//particleLayer = new AbstractBodyLayer.IterativeUpdate<MovingEntity>();
+		particleLayer = new AbstractBodyLayer.IterativeUpdate<MovingEntity>();
 
 		playerIndex = index;
 
@@ -236,7 +236,12 @@ public class Main extends StaticScreenGame {
 		}
 
 		try {
+			MovingEntity m;
+			// HeatWave
+			if ((m = hwave.genParticles(frogs.get(playerIndex).getCenterPosition())) != null) createTrafficEvent("", m, deltaMs);
+
 			movingObjectsLayer.update(deltaMs);
+			particleLayer.update(deltaMs);
 		}catch (ConcurrentModificationException e) {
 			System.out.println(e.toString());;
 		}
@@ -266,13 +271,16 @@ public class Main extends StaticScreenGame {
 		if ((m = riverLine4.buildLongLogWithCrocodile(20)) != null) createTrafficEvent("riverLine4", m, deltaMs);
 
 		if ((m = riverLine5.buildShortLogWithTurtles(10)) != null) createTrafficEvent("riverLine5", m, deltaMs);
+
+		// Do Wind
+		if ((m = wind.genParticles(GameLevel)) != null) createTrafficEvent("", m, deltaMs);
 	}
 
 	private void createTrafficEvent(String place, MovingEntity m, long deltaMs) {
 		Posititon pos = new Posititon(m.getPosition().getX(), m.getPosition().getY());
 		Posititon vel = new Posititon(m.getVelocity().getX(), m.getVelocity().getY());
 
-		GameState gameState = new TrafficMoveEvent(GameScore, levelTimer, GameLevel, place, m.getClass().getSimpleName(), pos, vel, deltaMs);
+		GameState gameState = new TrafficMoveEvent(GameScore, levelTimer, GameLevel, place, m.getClass().getSimpleName(), pos, vel, m.getName(), deltaMs);
 
 		// Envia o novo evento
 		sendGameState(gameState);
@@ -422,8 +430,8 @@ public class Main extends StaticScreenGame {
 		switch (GameState) {
 			case GAME_PLAY:
 				froggerKeyboardHandler();
-				//wind.update(deltaMs);
-				//hwave.update(deltaMs);
+				wind.update(deltaMs);
+				hwave.update(deltaMs);
 
 				for (int i = 0; i < 4; i++) {
 					frogs.get(i).update(deltaMs);
@@ -438,20 +446,22 @@ public class Main extends StaticScreenGame {
 				cycleTraffic(deltaMs);
 
 
-				// Wind gusts work only when Frogger is on the river
-			/*if (frogsCol.get(playerIndex).isInRiver())
-				wind.start(GameLevel);
-			wind.perform(frogs.get(playerIndex), GameLevel, deltaMs);
-			*/
-				// Do the heat wave only when Frogger is on hot pavement
-			/*if (frogsCol.get(playerIndex).isOnRoad())
-				hwave.start(frogs.get(playerIndex), GameLevel);
-			hwave.perform(frogs.get(playerIndex), deltaMs, GameLevel);
-			*/
-	/*
-			if (!frogs.get(playerIndex).isAlive)
-				particleLayer.clear();
-*/
+				for(int i=0; i<4; i++) {
+					// Wind gusts work only when Frogger is on the river
+					if (frogsCol.get(i).isInRiver())
+						wind.start(GameLevel);
+						wind.perform(frogs.get(i), GameLevel, deltaMs);
+
+						// Do the heat wave only when Frogger is on hot pavement
+						if (frogsCol.get(i).isOnRoad())
+							hwave.start(frogs.get(i), GameLevel);
+							hwave.perform(frogs.get(i), deltaMs, GameLevel);
+				}
+
+
+				if (!frogs.get(playerIndex).isAlive)
+					particleLayer.clear();
+
 				goalmanager.update(deltaMs);
 
 				if (goalmanager.getUnreached().size() == 0) {
@@ -502,7 +512,7 @@ public class Main extends StaticScreenGame {
 		}
 	}
 
-	public void movingTraffic(String buildVehicle, Posititon pos, Posititon vel, long deltaMs) {
+	public void movingTraffic(String buildVehicle, Posititon pos, Posititon vel, String spriteType, long deltaMs) {
 		// O host não precisa de atualizar porque foi ele que gerou o trafego
         MovingEntity m;
 
@@ -511,7 +521,7 @@ public class Main extends StaticScreenGame {
 
         switch (buildVehicle) {
             case "Car": {
-				m = new Car(posi, veli, 0);
+				m = new Car(posi, veli, spriteType);
 				movingObjectsLayer.add(m);
              	break;
             }
@@ -543,6 +553,11 @@ public class Main extends StaticScreenGame {
 			case "Crocodile": {
 				m = new Crocodile(posi, veli);
 				movingObjectsLayer.add(m);
+				break;
+			}
+			case "Particle": {
+				m = new Particle(spriteType, posi, veli);
+				particleLayer.add(m);
 				break;
 			}
         }
@@ -589,7 +604,7 @@ public class Main extends StaticScreenGame {
 				}
 			}
 
-			//particleLayer.render(rc);
+			particleLayer.render(rc);
 			ui.render(rc);
 			break;
 			

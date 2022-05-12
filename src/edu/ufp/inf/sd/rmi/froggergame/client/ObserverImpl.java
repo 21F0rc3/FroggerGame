@@ -88,7 +88,7 @@ public class ObserverImpl extends UnicastRemoteObject implements ObserverRI {
     public void movingTraffic(TrafficMoveEvent event) throws RemoteException {
         // If muito importante !! Acredito que ele comeca a fazer updates antes do jogo comecar então
         // a instancia ainda não esta definida no inicio
-        if(gameInstance != null) gameInstance.movingTraffic(event.getTrafficType(), event.getPos(), event.getVel(), event.getDeltaMs());
+        if(gameInstance != null) gameInstance.movingTraffic(event.getTrafficType(), event.getPos(), event.getVel(), event.getSpriteName(), event.getDeltaMs());
     }
 
     /**

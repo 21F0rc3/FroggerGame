@@ -45,10 +45,12 @@ public abstract class MovingEntity extends Body {
 	
 	// List that holds collision spheres
 	protected List<CollisionObject> collisionObjects;
-	
+
+	private String name;
 	
 	public MovingEntity (String name) {
 		super(name);
+		this.name = name;
 		collisionObjects = new LinkedList<CollisionObject>();
 	}
 
@@ -87,5 +89,9 @@ public abstract class MovingEntity extends Body {
 	    		position.getX()+velocity.getX()*deltaMs,
 	    		position.getY()+velocity.getY()*deltaMs);
 	    sync(position);
+	}
+
+	public String getName() {
+		return this.name;
 	}
 }

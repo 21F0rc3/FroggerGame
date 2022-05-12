@@ -11,13 +11,15 @@ public class TrafficMoveEvent extends GameState implements Serializable {
     private String trafficType;
     private Posititon pos;
     private Posititon vel;
+    private String spriteName;
     private long deltaMs;
 
-    public TrafficMoveEvent(int GameScore, int levelTimer, int GameLevel, String place, String trafficType, Posititon pos, Posititon vel, long deltaMs) {
+    public TrafficMoveEvent(int GameScore, int levelTimer, int GameLevel, String place, String trafficType, Posititon pos, Posititon vel, String spriteName, long deltaMs) {
         super(GameScore, levelTimer, GameLevel);
         this.trafficType = trafficType;
         this.pos = pos;
         this.vel = vel;
+        this.spriteName = spriteName;
         this.deltaMs = deltaMs;
     }
 
@@ -47,5 +49,9 @@ public class TrafficMoveEvent extends GameState implements Serializable {
 
     public long getDeltaMs() {
         return deltaMs;
+    }
+
+    public String getSpriteName() {
+        return this.spriteName;
     }
 }
