@@ -59,7 +59,7 @@ public class ActiveGamesPanelController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameItemList.fxml"));
         Parent parent = loader.load();
 
-        ((GameItemListController)loader.getController()).setGameName(new Text(game.getServerInfo()[0]));
+        ((GameItemListController)loader.getController()).setGameName(game.getServerInfo()[0]);
 
         ((GameItemListController)loader.getController()).setFroggerGameRI(game);
 

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="50.0" prefWidth="560.0" styleClass="listItem" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ufp.inf.sd.rmi.froggergame.client.gui.controller.GameItemListController">
    <children>
-      <Text fx:id="gameName" layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="gameName" text="Text" wrappingWidth="22.13671875" />
-      <Button fx:id="joinGame" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="508.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#joinGame" styleClass="joinButton" text="Join" />
+      <Text fx:id="gameName" layoutX="14.0" layoutY="32.0" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="gameName" text="Text" wrappingWidth="104.13671875" />
+      <Button fx:id="joinGame" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="508.0" layoutY="13.0" mnemonicParsing="false" styleClass="joinButton" text="Join" />
    </children>
 </AnchorPane>

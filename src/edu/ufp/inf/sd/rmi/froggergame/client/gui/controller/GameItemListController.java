@@ -22,8 +22,8 @@ public class GameItemListController {
         return gameName;
     }
 
-    public void setGameName(Text gameName) {
-        this.gameName = gameName;
+    public void setGameName(String name) {
+        gameName.setText(name);
     }
 
     public Button getJoinGame() {
