@@ -28,6 +28,7 @@ package edu.ufp.inf.sd.rmi.froggergame.client.frogger;
 import java.awt.event.KeyEvent;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.FrogMoveEvent;
@@ -104,6 +105,8 @@ public class Main extends StaticScreenGame {
 	private boolean listenInput = true;
 
 	private Integer playerIndex;
+
+	private int deltaTime = 0;
 
 	/**
 	 * Initialize game objects
@@ -228,11 +231,15 @@ public class Main extends StaticScreenGame {
 		riverLine4.update(deltaMs);
 		riverLine5.update(deltaMs);
 
-		if(playerIndex == 0) { // Apenas o host da partida cria trafego
+		if (playerIndex == 0) { // Apenas o host da partida cria trafego
 			generateTraffic(deltaMs);
 		}
 
-		movingObjectsLayer.update(deltaMs);
+		try {
+			movingObjectsLayer.update(deltaMs);
+		}catch (ConcurrentModificationException e) {
+			System.out.println(e.toString());;
+		}
 	}
 
 	private void generateTraffic(long deltaMs) {
@@ -265,7 +272,14 @@ public class Main extends StaticScreenGame {
 		Posititon pos = new Posititon(m.getPosition().getX(), m.getPosition().getY());
 		Posititon vel = new Posititon(m.getVelocity().getX(), m.getVelocity().getY());
 
-		GameState gameState = new TrafficMoveEvent(place, m.getClass().getSimpleName(), pos, vel, deltaMs);
+		GameState gameState = new TrafficMoveEvent(GameScore, levelTimer, GameLevel, place, m.getClass().getSimpleName(), pos, vel, deltaMs);
+
+		// Envia o novo evento
+		sendGameState(gameState);
+	}
+
+	private void createFrogMoveEvent(Integer playerIndex, String direction) {
+		GameState gameState = new FrogMoveEvent(GameScore, levelTimer, GameLevel, playerIndex, direction);
 
 		// Envia o novo evento
 		sendGameState(gameState);
@@ -314,22 +328,13 @@ public class Main extends StaticScreenGame {
 			keyReleased = true;
 
 		if (listenInput) {
-			if (downPressed) {
-				GameState gameState = new FrogMoveEvent(playerIndex, "DOWN");
-				sendGameState(gameState);
-			}
-			if (upPressed) {
-				GameState gameState = new FrogMoveEvent(playerIndex, "UP");
-				sendGameState(gameState);
-			}
-			if (leftPressed) {
-				GameState gameState = new FrogMoveEvent(playerIndex, "LEFT");
-				sendGameState(gameState);
-			}
-			if (rightPressed) {
-				GameState gameState = new FrogMoveEvent(playerIndex, "RIGHT");
-				sendGameState(gameState);
-			}
+			if (downPressed) createFrogMoveEvent(playerIndex, "DOWN");
+
+			if (upPressed) createFrogMoveEvent(playerIndex, "UP");
+
+			if (leftPressed) createFrogMoveEvent(playerIndex, "LEFT");
+
+			if (rightPressed) createFrogMoveEvent(playerIndex, "RIGHT");
 
 			if (keyPressed)
 				listenInput = false;
@@ -367,14 +372,18 @@ public class Main extends StaticScreenGame {
 					space_has_been_released = false;
 					break;
 				default:
-					GameLives = FROGGER_LIVES;
-					GameScore = 0;
-					GameLevel = STARTING_LEVEL;
-					levelTimer = DEFAULT_LEVEL_TIME;
-					frogs.get(playerIndex).setPosition(FROGGER_START);
-					GameState = GAME_PLAY;
-					audiofx.get(playerIndex).playGameMusic();
-					initializeLevel(GameLevel);
+					try {
+						GameLives = FROGGER_LIVES;
+						GameScore = GUI.interfacesMediator.getFroggerGameRI().getGameState().getGameScore();
+						GameLevel = GUI.interfacesMediator.getFroggerGameRI().getGameState().getGameLevel();
+						levelTimer = GUI.interfacesMediator.getFroggerGameRI().getGameState().getLevelTimer();
+						frogs.get(playerIndex).setPosition(FROGGER_START);
+						GameState = GAME_PLAY;
+						audiofx.get(playerIndex).playGameMusic();
+						initializeLevel(GameLevel);
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
 			}
 		}
 		if (keyboard.isPressed(KeyEvent.VK_H))
@@ -393,6 +402,18 @@ public class Main extends StaticScreenGame {
 		}
 	}
 
+	public Integer getPlayerIndex() {
+		return this.playerIndex;
+	}
+
+	private void updateLevelTimer(long deltaMs) {
+		// Level timer stuff
+		deltaTime += deltaMs;
+		if (deltaTime > 1000) {
+			deltaTime = 0;
+			levelTimer--;
+		}
+	}
 
 	/**
 	 * w00t
@@ -407,13 +428,14 @@ public class Main extends StaticScreenGame {
 				for (int i = 0; i < 4; i++) {
 					frogs.get(i).update(deltaMs);
 					audiofx.get(i).update(deltaMs);
-					//frogsCol.get(i).testCollision(movingObjectsLayer);
+					frogsCol.get(i).testCollision(movingObjectsLayer);
 				}
+
+				updateLevelTimer(deltaMs);
 
 				ui.update(deltaMs);
 
 				cycleTraffic(deltaMs);
-				//	frogsCol.get(0).testCollision(movingObjectsLayer);
 
 
 				// Wind gusts work only when Frogger is on the river
@@ -524,7 +546,6 @@ public class Main extends StaticScreenGame {
 				break;
 			}
         }
-//		movingObjectsLayer.update(deltaMs);
 
 		return;
 	}
@@ -548,7 +569,11 @@ public class Main extends StaticScreenGame {
 			}
 
 			if (anyAlive) {
-				movingObjectsLayer.render(rc);
+				try {
+					movingObjectsLayer.render(rc);
+				}catch (ConcurrentModificationException e) {
+					System.out.println(e.toString());;
+				}
 				for(Frogger frog : frogs) {
 					//frog.collisionObjects.get(0).render(rc);
 					frog.render(rc);
@@ -557,7 +582,11 @@ public class Main extends StaticScreenGame {
 				for(Frogger frog : frogs) {
 					frog.render(rc);
 				}
-				movingObjectsLayer.render(rc);
+				try {
+					movingObjectsLayer.render(rc);
+				}catch (ConcurrentModificationException e) {
+					System.out.println(e.toString());;
+				}
 			}
 
 			//particleLayer.render(rc);

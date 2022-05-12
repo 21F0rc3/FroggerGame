@@ -85,7 +85,7 @@ public class Frogger extends MovingEntity {
 		currentFrame = 0;
 		followObject = null;
 		position = Main.FROGGER_START;
-		game.levelTimer = Main.DEFAULT_LEVEL_TIME;
+		//game.levelTimer = Main.DEFAULT_LEVEL_TIME;
 	}
 	
 	/**
@@ -235,7 +235,6 @@ public class Frogger extends MovingEntity {
 	
 	/**
 	 * Effect of Heat Wave on Frogger
-	 * @param randDuration
 	 */
 	public void randomJump(final int rDir) {
 		switch(rDir) {
@@ -270,7 +269,7 @@ public class Frogger extends MovingEntity {
 		}
 		
 		timeOfDeath = getTime();
-		game.levelTimer = Main.DEFAULT_LEVEL_TIME;
+		//game.levelTimer = Main.DEFAULT_LEVEL_TIME;
 	}
 	
 	/**
@@ -304,13 +303,6 @@ public class Frogger extends MovingEntity {
 		updateAnimation();	
 		updateFollow(deltaMs);
 		setFrame(currentFrame);
-		
-		// Level timer stuff
-		deltaTime += deltaMs;
-		if (deltaTime > 1000) {
-			deltaTime = 0;
-			game.levelTimer--;
-		}
 		
 		if (game.levelTimer <= 0)
 			die();

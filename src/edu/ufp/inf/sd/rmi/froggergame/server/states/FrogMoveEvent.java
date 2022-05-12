@@ -9,8 +9,8 @@ public class FrogMoveEvent extends GameState implements Serializable {
     private Integer frogID;
     private String direction;
 
-    public FrogMoveEvent(Integer frogID, String direction) {
-        super();
+    public FrogMoveEvent(int GameScore, int levelTimer, int GameLevel, Integer frogID, String direction) {
+        super(GameScore, levelTimer, GameLevel);
         this.frogID = frogID;
         this.direction = direction;
     }

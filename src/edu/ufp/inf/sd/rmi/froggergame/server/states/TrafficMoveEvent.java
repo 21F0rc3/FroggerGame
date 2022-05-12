@@ -13,8 +13,8 @@ public class TrafficMoveEvent extends GameState implements Serializable {
     private Posititon vel;
     private long deltaMs;
 
-    public TrafficMoveEvent(String place, String trafficType, Posititon pos, Posititon vel, long deltaMs) {
-        super();
+    public TrafficMoveEvent(int GameScore, int levelTimer, int GameLevel, String place, String trafficType, Posititon pos, Posititon vel, long deltaMs) {
+        super(GameScore, levelTimer, GameLevel);
         this.trafficType = trafficType;
         this.pos = pos;
         this.vel = vel;

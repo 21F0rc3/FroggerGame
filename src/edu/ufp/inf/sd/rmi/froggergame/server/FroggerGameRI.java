@@ -19,4 +19,6 @@ public interface FroggerGameRI extends Remote {
     public void updateGameState() throws RemoteException;
 
     public String[] getServerInfo() throws RemoteException;
+
+    public GameState getGameState() throws RemoteException;
 }

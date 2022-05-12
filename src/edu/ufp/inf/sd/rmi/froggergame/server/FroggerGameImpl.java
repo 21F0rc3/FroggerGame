@@ -115,6 +115,11 @@ public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameR
         return info;
     }
 
+    @Override
+    public GameState getGameState() {
+        return this.gameState;
+    }
+
     /**
      * Padrão Mediator
      *
