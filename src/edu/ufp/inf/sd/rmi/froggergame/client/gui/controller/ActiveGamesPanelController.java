@@ -1,5 +1,6 @@
 package edu.ufp.inf.sd.rmi.froggergame.client.gui.controller;
 
+import edu.ufp.inf.sd.rmi.froggergame.client.Mediator;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
 import edu.ufp.inf.sd.rmi.froggergame.server.Component;
 import edu.ufp.inf.sd.rmi.froggergame.server.FroggerGameImpl;
@@ -19,6 +20,7 @@ import javafx.scene.shape.Box;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+import javax.print.attribute.standard.Media;
 import javax.swing.*;
 import java.io.IOException;
 import java.nio.file.attribute.PosixFileAttributeView;
@@ -34,9 +36,9 @@ public class ActiveGamesPanelController {
      * @author Gabriel Fernandes 18/04/2022
      */
     public void populate() throws RemoteException {
-        System.out.println(GUI.interfacesMediator.getGameSessionRI().getActiveGames().size());
+        System.out.println(Mediator.getInstance().getGameSessionRI().getActiveGames().size());
 
-        for(FroggerGameRI froggerGameRI : GUI.interfacesMediator.getGameSessionRI().getActiveGames()) {
+        for(FroggerGameRI froggerGameRI : Mediator.getInstance().getGameSessionRI().getActiveGames()) {
             try {
                 addGameItemToList(froggerGameRI);
             } catch (IOException e) {

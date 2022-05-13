@@ -27,7 +27,6 @@ package edu.ufp.inf.sd.rmi.froggergame.client.frogger;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
@@ -36,7 +35,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.rabbitmq.client.*;
-import edu.ufp.inf.sd.rmi.froggergame.client.MQListener;
+import edu.ufp.inf.sd.rmi.froggergame.client.Mediator;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.FrogMoveEvent;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.GameState;
@@ -55,16 +54,6 @@ import jig.engine.physics.AbstractBodyLayer;
 import jig.engine.util.Vector2D;
 
 public class Main extends StaticScreenGame {
-	/**
-	 * Define qual tecnologia utiliza para fazer a sincronização entre as instancias
-	 *
-	 * RabbitMQ - Utiliza o Publish/Subscribe do RabbitMQ
-	 * RMI - Utiliza o Observer do RMI
-	 */
-	static String SYNC_METHOD = "RMI";
-	static String host = "localhost";
-	static int port = 5672;
-
 	static final int WORLD_WIDTH = (13 * 32);
 	static final int WORLD_HEIGHT = (14 * 32);
 	static final Vector2D FROGGER_START = new Vector2D(6 * 32, WORLD_HEIGHT - 32);
@@ -173,50 +162,7 @@ public class Main extends StaticScreenGame {
 
 		playerIndex = index;
 
-		if(SYNC_METHOD == "RabbitMQ") {
-			Runnable runnable = () -> {
-				try {
-					String exchangeName = GUI.interfacesMediator.getFroggerGameRI().getServerInfo()[0];
-
-					Connection connection=RabbitUtils.newConnection2Server(host,port,"guest","guest");
-					Channel channel=RabbitUtils.createChannel2Server(connection);
-
-					channel.exchangeDeclare(exchangeName, BuiltinExchangeType.FANOUT);
-
-					String queueName=channel.queueDeclare().getQueue();
-
-					String routingKey="";
-					channel.queueBind(queueName, exchangeName, routingKey);
-
-					Logger.getAnonymousLogger().log(Level.INFO, Thread.currentThread().getName() +": Will create Deliver Callback...");
-					System.out.println("[*] Waiting for messages. To exit press CTRL+C");
-
-					DeliverCallback deliverCallback=(consumerTag, delivery) -> {
-						String message = new String(delivery.getBody(), "UTF-8");
-						System.out.println("[x] Consumer Tag [" + consumerTag + "] - Received '" + message + "'");
-
-						GameState gameState = RabbitUtils.recreateObject(message);
-						gameState.execute(GUI.froggerClient.observer);
-					};
-					CancelCallback cancelCallback=(consumerTag) -> {
-						System.out.println("[x] Consumer Tag [" + consumerTag + "] - Cancel Callback invoked!");
-					};
-					channel.basicConsume(queueName, true, deliverCallback, cancelCallback);
-				} catch (Exception e) {
-					//Logger.getLogger(Recv.class.getName()).log(Level.INFO, e.toString());
-					e.printStackTrace();
-				}
-			};
-
-			Thread thread = new Thread(runnable);
-			thread.start();
-		}
-
 		initializeLevel(1);
-	}
-
-	public void setPlayerIndex(Integer idx) {
-		this.playerIndex = idx;
 	}
 
 	public void initializeLevel(int level) {
@@ -389,36 +335,7 @@ public class Main extends StaticScreenGame {
 	 * @author Gabriel Fernandes 12/05/2022
 	 */
 	private void sendGameState(GameState state) {
-		if(SYNC_METHOD == "RMI") {
-			// Envia o novo evento
-			try {
-				GUI.interfacesMediator.getFroggerGameRI().setGameState(state);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-		}
-		/**
-		 * Envia uma mensagem
-		 */
-		if(SYNC_METHOD == "RabbitMQ") {
-			try {
-				// O exchange sera o nome do proprio servidor
-				String exchangeName = GUI.interfacesMediator.getFroggerGameRI().getServerInfo()[0];
-
-				Connection connection= RabbitUtils.newConnection2Server(host, port, "guest", "guest");
-				Channel channel=RabbitUtils.createChannel2Server(connection);
-
-				System.out.println(" [x] Declare exchange: '" + exchangeName + "' of type " + BuiltinExchangeType.FANOUT.toString());
-
-				channel.exchangeDeclare(exchangeName, BuiltinExchangeType.FANOUT);
-
-				String routingKey = "";
-				channel.basicPublish(exchangeName, routingKey, null, state.toString().getBytes("UTF-8"));
-				System.out.println(" [x] Sent:");
-			} catch (IOException | TimeoutException e) {
-					Logger.getLogger(Main.class.getName()).log(Level.INFO, e.toString());
-            }
-		}
+		Mediator.getInstance().getGameStateHandler().sendGameState(state);
 	}
 
 	/**
@@ -501,16 +418,10 @@ public class Main extends StaticScreenGame {
 				default:
 					try {
 						GameLives = FROGGER_LIVES;
-						if(SYNC_METHOD == "RMI") {
-							GameScore = GUI.interfacesMediator.getFroggerGameRI().getGameState().getGameScore();
-							GameLevel = GUI.interfacesMediator.getFroggerGameRI().getGameState().getGameLevel();
-							levelTimer = GUI.interfacesMediator.getFroggerGameRI().getGameState().getLevelTimer();
-						}
-						if(SYNC_METHOD == "RabbitMQ") {
-							GameScore = 0;
-							GameLevel = 1;
-							levelTimer = DEFAULT_LEVEL_TIME;
-						}
+						GameScore = Mediator.getInstance().getFroggerGameRI().getGameState().getGameScore();
+						GameLevel = Mediator.getInstance().getFroggerGameRI().getGameState().getGameLevel();
+						levelTimer = Mediator.getInstance().getFroggerGameRI().getGameState().getLevelTimer();
+
 						for(int i=0; i<4; i++) {
 							frogs.get(i).setPosition(FROGGER_START.translate(new Vector2D(i * 32, 0)));
 						}

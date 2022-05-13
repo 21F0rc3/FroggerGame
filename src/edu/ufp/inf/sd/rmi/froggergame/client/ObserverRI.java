@@ -13,10 +13,4 @@ public interface ObserverRI extends Remote {
     public void setGame(FroggerGameRI game) throws RemoteException;
 
     public void update(GameState gameState) throws RemoteException;
-
-    public void move(Integer playerIndex, String direction) throws RemoteException;
-
-    public void movingTraffic(TrafficMoveEvent event) throws RemoteException;
-
-    public void setFrogIndex(Integer index) throws RemoteException;
 }

@@ -1,5 +1,8 @@
 package edu.ufp.inf.sd.rmi.froggergame.client.gui.controller;
 
+import edu.ufp.inf.sd.rmi.froggergame.client.FroggerClient;
+import edu.ufp.inf.sd.rmi.froggergame.client.GameStateHandler;
+import edu.ufp.inf.sd.rmi.froggergame.client.Mediator;
 import edu.ufp.inf.sd.rmi.froggergame.client.frogger.Main;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
 import javafx.fxml.FXML;
@@ -22,7 +25,16 @@ public class GameLobbyController {
      * @author Gabriel Fernandes
      */
     public void attachHandler() throws RemoteException {
-        GUI.interfacesMediator.getFroggerGameRI().attachGame(GUI.froggerClient.observer);
+        // Prepara a instancia do jogo
+        GameStateHandler game = new GameStateHandler();
+        Mediator.getInstance().registerComponent(game);
+
+        if(FroggerClient.SYNC_METHOD == "RabbitMQ") { // Começa um ouvinte no servidor
+            FroggerClient.initRabbitMQListener();
+        }
+
+        // Efetua o attach
+        Mediator.getInstance().getFroggerGameRI().attachGame(Mediator.getInstance().getObserverRI());
     }
 
     /**
@@ -32,7 +44,7 @@ public class GameLobbyController {
      * @author Gabriel Fernandes 08/05/2022
      */
     public void leaveHandler() throws IOException {
-        GUI.interfacesMediator.getFroggerGameRI().dettachGame(GUI.froggerClient.observer);
+        Mediator.getInstance().getFroggerGameRI().dettachGame(Mediator.getInstance().getObserverRI());
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ActiveGamesPanel.fxml"));
         Parent parent = loader.load();

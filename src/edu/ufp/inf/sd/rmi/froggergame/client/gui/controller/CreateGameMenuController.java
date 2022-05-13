@@ -1,5 +1,6 @@
 package edu.ufp.inf.sd.rmi.froggergame.client.gui.controller;
 
+import edu.ufp.inf.sd.rmi.froggergame.client.Mediator;
 import edu.ufp.inf.sd.rmi.froggergame.client.frogger.Main;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
 import edu.ufp.inf.sd.rmi.froggergame.server.Component;
@@ -23,13 +24,13 @@ public class CreateGameMenuController {
      * @author Gabriel Fernandes 18/04/2022
      */
     public void createNewGameHandler() throws IOException {
-        GUI.interfacesMediator.registerComponent((Component) GUI.interfacesMediator.getGameSessionRI().createGame(nameField.getText(), Integer.parseInt(difficultyField.getText())));
+        Mediator.getInstance().registerComponent((Component) Mediator.getInstance().getGameSessionRI().createGame(nameField.getText(), Integer.parseInt(difficultyField.getText())));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameLobby.fxml"));
         Parent parent = loader.load();
 
-        ((GameLobbyController)loader.getController()).title.setText(GUI.interfacesMediator.getFroggerGameRI().getServerInfo()[0]);
-        ((GameLobbyController)loader.getController()).playerCounter.setText(GUI.interfacesMediator.getFroggerGameRI().getServerInfo()[2]);
+        ((GameLobbyController)loader.getController()).title.setText(Mediator.getInstance().getFroggerGameRI().getServerInfo()[0]);
+        ((GameLobbyController)loader.getController()).playerCounter.setText(Mediator.getInstance().getFroggerGameRI().getServerInfo()[2]);
 
         Scene scene = new Scene(parent);
 

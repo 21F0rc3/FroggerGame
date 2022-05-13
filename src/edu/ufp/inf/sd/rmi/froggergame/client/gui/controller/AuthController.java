@@ -1,5 +1,6 @@
 package edu.ufp.inf.sd.rmi.froggergame.client.gui.controller;
 
+import edu.ufp.inf.sd.rmi.froggergame.client.Mediator;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
 import edu.ufp.inf.sd.rmi.froggergame.server.Component;
 import edu.ufp.inf.sd.rmi.froggergame.server.GameFactoryRI;
@@ -31,7 +32,7 @@ public class AuthController {
      */
     public void registerHandler() {
         try {
-            GUI.interfacesMediator.getGameFactoryRI().register(emailField.getText(), passwordField.getText());
+            Mediator.getInstance().getGameFactoryRI().register(emailField.getText(), passwordField.getText());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -48,11 +49,11 @@ public class AuthController {
      */
     public void loginHandler() {
         try{
-            if(GUI.interfacesMediator.getGameFactoryRI().login(emailField.getText(), passwordField.getText()) != null) {
+            if(Mediator.getInstance().getGameFactoryRI().login(emailField.getText(), passwordField.getText()) != null) {
                 // Guarda a interface de GameSession nos mediator de interfaces
-                GUI.interfacesMediator.registerComponent((Component) (GUI.interfacesMediator.getGameFactoryRI().login(emailField.getText(), passwordField.getText())));
+                Mediator.getInstance().registerComponent((Component) (Mediator.getInstance().getGameFactoryRI().login(emailField.getText(), passwordField.getText())));
 
-                GUI.interfacesMediator.getGameFactoryRI().login(emailField.getText(), passwordField.getText());
+                Mediator.getInstance().getGameFactoryRI().login(emailField.getText(), passwordField.getText());
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameSessionPanel.fxml"));
                 Parent parent = loader.load();

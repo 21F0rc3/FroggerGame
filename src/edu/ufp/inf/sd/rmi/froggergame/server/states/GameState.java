@@ -18,8 +18,7 @@ public class GameState implements Serializable {
         this.GameLevel = GameLevel;
     }
 
-    public void execute(ObserverRI observerRI) {
-
+    public void execute() {
     }
 
     public int getGameScore() {

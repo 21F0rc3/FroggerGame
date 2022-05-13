@@ -1,4 +1,4 @@
-package edu.ufp.inf.sd.rmi.froggergame.client.gui;
+package edu.ufp.inf.sd.rmi.froggergame.client;
 
 import edu.ufp.inf.sd.rmi.froggergame.server.*;
 
@@ -12,13 +12,24 @@ import java.rmi.RemoteException;
  *
  * @author Gabriel Fernandes 08/05/2022
  */
-public class InterfacesMediator {
+public class Mediator {
     private GameFactoryRI gameFactoryRI;
     private GameSessionRI gameSessionRI;
     private FroggerGameRI froggerGameRI;
+    //private FroggerClient froggerClient;
+    private GameStateHandler gameStateHandler;
+    private ObserverRI observerRI;
 
-    public InterfacesMediator(GameFactoryRI gameFactoryRI) {
-        this.gameFactoryRI = gameFactoryRI;
+    /**
+     * Singleton
+     */
+    private static Mediator instance;
+
+    public static Mediator getInstance() {
+        if(instance == null) {
+            instance = new Mediator();
+        }
+        return instance;
     }
 
     /**
@@ -42,7 +53,19 @@ public class InterfacesMediator {
                 this.froggerGameRI = (FroggerGameRI)component;
                 break;
             }
+            case "ObserverRI": {
+                this.observerRI = (ObserverRI)component;
+                break;
+            }
+            case "GameStateHandler": {
+                this.gameStateHandler = (GameStateHandler)component;
+                break;
+            }
         }
+    }
+
+    public void setGameFactoryRI(GameFactoryRI gameFactoryRI) {
+        this.gameFactoryRI = gameFactoryRI;
     }
 
     public GameFactoryRI getGameFactoryRI() {
@@ -55,5 +78,13 @@ public class InterfacesMediator {
 
     public FroggerGameRI getFroggerGameRI() {
         return froggerGameRI;
+    }
+
+    public GameStateHandler getGameStateHandler() {
+        return gameStateHandler;
+    }
+
+    public ObserverRI getObserverRI() {
+        return observerRI;
     }
 }

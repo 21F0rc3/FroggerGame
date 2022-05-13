@@ -3,6 +3,7 @@ package edu.ufp.inf.sd.rmi.froggergame.server.states;
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import edu.ufp.inf.sd.rmi.froggergame.client.Mediator;
 import edu.ufp.inf.sd.rmi.froggergame.client.ObserverRI;
 import edu.ufp.inf.sd.rmi.froggergame.util.Posititon;
 import jdk.nashorn.internal.parser.JSONParser;
@@ -26,12 +27,8 @@ public class TrafficMoveEvent extends GameState implements Serializable {
         this.deltaMs = deltaMs;
     }
 
-    public void execute(ObserverRI observerRI) {
-        try {
-            observerRI.movingTraffic(this);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+    public void execute() {
+        Mediator.getInstance().getGameStateHandler().movingTraffic(this);
     }
 
     public String getTrafficType() {

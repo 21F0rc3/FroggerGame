@@ -1,10 +1,15 @@
 package edu.ufp.inf.sd.rmi.froggergame.client;
 
+import com.rabbitmq.client.*;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
-import edu.ufp.inf.sd.rmi.froggergame.client.gui.InterfacesMediator;
+import edu.ufp.inf.sd.rmi.froggergame.server.Component;
+import edu.ufp.inf.sd.rmi.froggergame.server.GameFactoryImpl;
 import edu.ufp.inf.sd.rmi.froggergame.server.GameFactoryRI;
+import edu.ufp.inf.sd.rmi.froggergame.server.states.GameState;
+import edu.ufp.inf.sd.rmi.froggergame.util.RabbitUtils;
 import edu.ufp.inf.sd.rmi.froggergame.util.rmisetup.SetupContextRMI;
 
+import javax.print.attribute.standard.Media;
 import java.rmi.RemoteException;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
@@ -13,6 +18,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FroggerClient {
+    /**
+     * Define qual tecnologia utiliza para fazer a sincronização entre as instancias
+     *
+     * RabbitMQ - Utiliza o Publish/Subscribe do RabbitMQ
+     * RMI - Utiliza o Observer do RMI
+     */
+    public static String SYNC_METHOD = "RMI";
+    static String HOST = "localhost";
+    static int PORT = 5672;
 
     /**
      * Context for connecting a RMI client MAIL_TO_ADDR a RMI Servant
@@ -21,9 +35,7 @@ public class FroggerClient {
     /**
      * Remote interface that will hold the Servant proxy
      */
-    private GameFactoryRI gameFactoryRI;
-
-    public ObserverImpl observer;
+    public GameFactoryRI gameFactoryRI;
 
     public static void main(String[] args) {
         if (args != null && args.length < 2) {
@@ -40,7 +52,7 @@ public class FroggerClient {
         //2. Create observer (which attaches himself to subject)
         initObserver(args);
         //3. Init the GUI components
-        initComponents();
+        initGUI();
     }
 
     private void initContext(String args[]) {
@@ -61,20 +73,58 @@ public class FroggerClient {
 
     private void initObserver(String args[]) {
         try {
-            observer=new ObserverImpl();
+            ObserverImpl observer=new ObserverImpl();
+            Mediator.getInstance().registerComponent(observer);
         } catch (Exception e) {
             Logger.getLogger(FroggerClient.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
-    private void initComponents() {
+    private void initGUI() {
+        Mediator.getInstance().setGameFactoryRI(gameFactoryRI);
+
         String[] args = {"0"};
-        GUI.froggerClient = this;
-        GUI.interfacesMediator = new InterfacesMediator(gameFactoryRI);
         GUI.main(args);
-
         Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR finish, bye. ;)");
+    }
 
+    public static void initRabbitMQListener() {
+        Runnable runnable = () -> {
+            try {
+                String exchangeName = Mediator.getInstance().getFroggerGameRI().getServerInfo()[0];
+
+                Connection connection = RabbitUtils.newConnection2Server(HOST, PORT, "guest", "guest");
+                Channel channel = RabbitUtils.createChannel2Server(connection);
+
+                channel.exchangeDeclare(exchangeName, BuiltinExchangeType.FANOUT);
+
+                String queueName = channel.queueDeclare().getQueue();
+
+                String routingKey = "";
+                channel.queueBind(queueName, exchangeName, routingKey);
+
+                Logger.getAnonymousLogger().log(Level.INFO, Thread.currentThread().getName() + ": Will create Deliver Callback...");
+                System.out.println("[*] Waiting for messages. To exit press CTRL+C");
+
+                DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                    String message = new String(delivery.getBody(), "UTF-8");
+                    System.out.println("[x] Consumer Tag [" + consumerTag + "] - Received '" + message + "'");
+
+                    GameState gameState = RabbitUtils.recreateObject(message);
+                    gameState.execute();
+                };
+                CancelCallback cancelCallback = (consumerTag) -> {
+                    System.out.println("[x] Consumer Tag [" + consumerTag + "] - Cancel Callback invoked!");
+                };
+                channel.basicConsume(queueName, true, deliverCallback, cancelCallback);
+            } catch (Exception e) {
+                //Logger.getLogger(Recv.class.getName()).log(Level.INFO, e.toString());
+                e.printStackTrace();
+            }
+        };
+
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 
     private Remote lookupService() {
