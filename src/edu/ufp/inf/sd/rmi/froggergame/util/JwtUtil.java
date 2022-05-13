@@ -5,7 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import edu.ufp.inf.sd.rmi.froggergame.server.models.User;
+import edu.ufp.inf.sd.rmi.froggergame.server.data.models.User;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;

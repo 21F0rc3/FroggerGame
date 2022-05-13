@@ -1,12 +1,8 @@
 package edu.ufp.inf.sd.rmi.froggergame.server.states;
 
-import edu.ufp.inf.sd.rmi.froggergame.client.Mediator;
-import edu.ufp.inf.sd.rmi.froggergame.client.ObserverRI;
-import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
+import edu.ufp.inf.sd.rmi.froggergame.client.ClientMediator;
 
-import javax.print.attribute.standard.Media;
 import java.io.Serializable;
-import java.rmi.RemoteException;
 
 public class FrogMoveEvent extends GameState implements Serializable {
     private Integer frogID;
@@ -19,7 +15,7 @@ public class FrogMoveEvent extends GameState implements Serializable {
     }
 
     public void execute() {
-        Mediator.getInstance().getGameStateHandler().move(this);
+        ClientMediator.getInstance().getGameStateHandler().move(this);
     }
 
     public Integer getFrogID() {

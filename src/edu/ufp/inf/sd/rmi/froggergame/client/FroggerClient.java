@@ -2,14 +2,12 @@ package edu.ufp.inf.sd.rmi.froggergame.client;
 
 import com.rabbitmq.client.*;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
-import edu.ufp.inf.sd.rmi.froggergame.server.Component;
-import edu.ufp.inf.sd.rmi.froggergame.server.GameFactoryImpl;
-import edu.ufp.inf.sd.rmi.froggergame.server.GameFactoryRI;
+import edu.ufp.inf.sd.rmi.froggergame.server.interfaces.Component;
+import edu.ufp.inf.sd.rmi.froggergame.server.interfaces.GameFactoryRI;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.GameState;
 import edu.ufp.inf.sd.rmi.froggergame.util.RabbitUtils;
 import edu.ufp.inf.sd.rmi.froggergame.util.rmisetup.SetupContextRMI;
 
-import javax.print.attribute.standard.Media;
 import java.rmi.RemoteException;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
@@ -17,7 +15,7 @@ import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class FroggerClient {
+public class FroggerClient implements Component {
     /**
      * Define qual tecnologia utiliza para fazer a sincronização entre as instancias
      *
@@ -74,24 +72,28 @@ public class FroggerClient {
     private void initObserver(String args[]) {
         try {
             ObserverImpl observer=new ObserverImpl();
-            Mediator.getInstance().registerComponent(observer);
+            ClientMediator.getInstance().registerComponent(observer);
         } catch (Exception e) {
             Logger.getLogger(FroggerClient.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
     private void initGUI() {
-        Mediator.getInstance().setGameFactoryRI(gameFactoryRI);
+        try {
+            ClientMediator.getInstance().registerComponent(this);
+            String[] args = {"0"};
+            GUI.main(args);
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR finish, bye. ;)");
 
-        String[] args = {"0"};
-        GUI.main(args);
-        Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR finish, bye. ;)");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void initRabbitMQListener() {
         Runnable runnable = () -> {
             try {
-                String exchangeName = Mediator.getInstance().getFroggerGameRI().getServerInfo()[0];
+                String exchangeName = ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[0];
 
                 Connection connection = RabbitUtils.newConnection2Server(HOST, PORT, "guest", "guest");
                 Channel channel = RabbitUtils.createChannel2Server(connection);
@@ -147,5 +149,24 @@ public class FroggerClient {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
         return gameFactoryRI;
+    }
+
+    public void getConnectionToServer() {
+        //============ Get proxy MAIL_TO_ADDR FroggerGame service ============
+        try {
+            gameFactoryRI = (GameFactoryRI) contextRMI.getRegistry().lookup(contextRMI.getServicesUrl(0));
+            ClientMediator.getInstance().registerComponent((Component) gameFactoryRI);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        }catch (NullPointerException e) {
+            System.out.println("DEU MERDA");
+        }
+    }
+
+    @Override
+    public String getName() throws RemoteException {
+        return "FroggerClient";
     }
 }

@@ -1,6 +1,6 @@
 package edu.ufp.inf.sd.rmi.froggergame.client;
 
-import edu.ufp.inf.sd.rmi.froggergame.server.FroggerGameRI;
+import edu.ufp.inf.sd.rmi.froggergame.server.interfaces.FroggerGameRI;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.GameState;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.TrafficMoveEvent;
 import edu.ufp.inf.sd.rmi.froggergame.util.Posititon;

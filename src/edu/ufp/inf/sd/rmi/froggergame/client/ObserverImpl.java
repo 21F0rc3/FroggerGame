@@ -1,7 +1,7 @@
 package edu.ufp.inf.sd.rmi.froggergame.client;
 
-import edu.ufp.inf.sd.rmi.froggergame.server.Component;
-import edu.ufp.inf.sd.rmi.froggergame.server.FroggerGameRI;
+import edu.ufp.inf.sd.rmi.froggergame.server.interfaces.Component;
+import edu.ufp.inf.sd.rmi.froggergame.server.interfaces.FroggerGameRI;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.GameState;
 
 import java.rmi.RemoteException;
@@ -44,7 +44,7 @@ public class ObserverImpl extends UnicastRemoteObject implements ObserverRI, Com
             /* Se o servidor tiver mais de dois jogadores "READY"
              *  enão o jogo começa */
              if (Integer.parseInt(this.game.getServerInfo()[2]) >= 2) {
-                 Mediator.getInstance().getGameStateHandler().start();
+                 ClientMediator.getInstance().getGameStateHandler().start();
                  gameStarted = true;
              }
         }
@@ -57,7 +57,7 @@ public class ObserverImpl extends UnicastRemoteObject implements ObserverRI, Com
     }
 
     public void setGameStateHandler(GameStateHandler game) throws RemoteException {
-        Mediator.getInstance().registerComponent(game);
+        ClientMediator.getInstance().registerComponent(game);
     }
 
     @Override

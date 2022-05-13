@@ -1,12 +1,9 @@
 package edu.ufp.inf.sd.rmi.froggergame.client.gui.controller;
 
-import edu.ufp.inf.sd.rmi.froggergame.client.Mediator;
+import edu.ufp.inf.sd.rmi.froggergame.client.ClientMediator;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
-import edu.ufp.inf.sd.rmi.froggergame.server.Component;
-import edu.ufp.inf.sd.rmi.froggergame.server.GameFactoryRI;
-import edu.ufp.inf.sd.rmi.froggergame.server.GameSessionImpl;
-import edu.ufp.inf.sd.rmi.froggergame.server.models.User;
-import edu.ufp.inf.sd.rmi.froggergame.util.JwtUtil;
+import edu.ufp.inf.sd.rmi.froggergame.server.interfaces.Component;
+import edu.ufp.inf.sd.rmi.froggergame.server.interfaces.GameSessionRI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -32,7 +29,7 @@ public class AuthController {
      */
     public void registerHandler() {
         try {
-            Mediator.getInstance().getGameFactoryRI().register(emailField.getText(), passwordField.getText());
+            ClientMediator.getInstance().getGameFactoryRI().register(emailField.getText(), passwordField.getText());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -49,11 +46,10 @@ public class AuthController {
      */
     public void loginHandler() {
         try{
-            if(Mediator.getInstance().getGameFactoryRI().login(emailField.getText(), passwordField.getText()) != null) {
+            GameSessionRI gameSession;
+            if((gameSession = ClientMediator.getInstance().getGameFactoryRI().login(emailField.getText(), passwordField.getText())) != null) {
                 // Guarda a interface de GameSession nos mediator de interfaces
-                Mediator.getInstance().registerComponent((Component) (Mediator.getInstance().getGameFactoryRI().login(emailField.getText(), passwordField.getText())));
-
-                Mediator.getInstance().getGameFactoryRI().login(emailField.getText(), passwordField.getText());
+                ClientMediator.getInstance().registerComponent((Component) gameSession);
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameSessionPanel.fxml"));
                 Parent parent = loader.load();

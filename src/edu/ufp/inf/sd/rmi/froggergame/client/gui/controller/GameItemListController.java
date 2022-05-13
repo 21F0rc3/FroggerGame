@@ -1,9 +1,9 @@
 package edu.ufp.inf.sd.rmi.froggergame.client.gui.controller;
 
-import edu.ufp.inf.sd.rmi.froggergame.client.Mediator;
+import edu.ufp.inf.sd.rmi.froggergame.client.ClientMediator;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
-import edu.ufp.inf.sd.rmi.froggergame.server.Component;
-import edu.ufp.inf.sd.rmi.froggergame.server.FroggerGameRI;
+import edu.ufp.inf.sd.rmi.froggergame.server.interfaces.Component;
+import edu.ufp.inf.sd.rmi.froggergame.server.interfaces.FroggerGameRI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -52,13 +52,13 @@ public class GameItemListController {
      * @author Gabriel Fernandes
      */
     public void joinGame() throws IOException {
-        Mediator.getInstance().registerComponent((Component) froggerGameRI);
+        ClientMediator.getInstance().registerComponent((Component) froggerGameRI);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameLobby.fxml"));
         Parent parent = loader.load();
 
-        ((GameLobbyController)loader.getController()).title.setText(Mediator.getInstance().getFroggerGameRI().getServerInfo()[0]);
-        ((GameLobbyController)loader.getController()).playerCounter.setText(Mediator.getInstance().getFroggerGameRI().getServerInfo()[2]);
+        ((GameLobbyController)loader.getController()).title.setText(ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[0]);
+        ((GameLobbyController)loader.getController()).playerCounter.setText(ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[2]);
 
         Scene scene = new Scene(parent);
 

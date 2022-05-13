@@ -1,29 +1,14 @@
 package edu.ufp.inf.sd.rmi.froggergame.client.gui.controller;
 
-import edu.ufp.inf.sd.rmi.froggergame.client.Mediator;
+import edu.ufp.inf.sd.rmi.froggergame.client.ClientMediator;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
-import edu.ufp.inf.sd.rmi.froggergame.server.Component;
-import edu.ufp.inf.sd.rmi.froggergame.server.FroggerGameImpl;
-import edu.ufp.inf.sd.rmi.froggergame.server.FroggerGameRI;
-import javafx.event.EventHandler;
+import edu.ufp.inf.sd.rmi.froggergame.server.interfaces.FroggerGameRI;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Box;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
-import javax.print.attribute.standard.Media;
-import javax.swing.*;
 import java.io.IOException;
-import java.nio.file.attribute.PosixFileAttributeView;
 import java.rmi.RemoteException;
 
 public class ActiveGamesPanelController {
@@ -36,9 +21,9 @@ public class ActiveGamesPanelController {
      * @author Gabriel Fernandes 18/04/2022
      */
     public void populate() throws RemoteException {
-        System.out.println(Mediator.getInstance().getGameSessionRI().getActiveGames().size());
+        System.out.println(ClientMediator.getInstance().getGameSessionRI().getActiveGames().size());
 
-        for(FroggerGameRI froggerGameRI : Mediator.getInstance().getGameSessionRI().getActiveGames()) {
+        for(FroggerGameRI froggerGameRI : ClientMediator.getInstance().getGameSessionRI().getActiveGames()) {
             try {
                 addGameItemToList(froggerGameRI);
             } catch (IOException e) {

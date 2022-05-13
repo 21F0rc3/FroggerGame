@@ -3,8 +3,8 @@ package edu.ufp.inf.sd.rmi.froggergame.client;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import edu.ufp.inf.sd.rmi.froggergame.client.frogger.Main;
-import edu.ufp.inf.sd.rmi.froggergame.server.Component;
+import edu.ufp.inf.sd.rmi.froggergame.client.game.frogger.Main;
+import edu.ufp.inf.sd.rmi.froggergame.server.interfaces.Component;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.FrogMoveEvent;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.GameState;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.TrafficMoveEvent;
@@ -30,17 +30,17 @@ public class GameStateHandler implements Component {
 
     public GameStateHandler() {
         try {
-            playerIndex = Integer.parseInt(Mediator.getInstance().getFroggerGameRI().getServerInfo()[2]);
+            playerIndex = Integer.parseInt(ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[2]);
+
+            Runnable runnable = () -> {
+                gameInstance = new Main(playerIndex);
+                gameInstance.run();
+            };
+
+            thread = new Thread(runnable);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-
-        Runnable runnable = () -> {
-                gameInstance = new Main(playerIndex);
-                gameInstance.run();
-        };
-
-        thread = new Thread(runnable);
     }
 
     /**
@@ -95,7 +95,7 @@ public class GameStateHandler implements Component {
     private void sendGameStateMQ(GameState state) {
         try {
             // O exchange sera o nome do proprio servidor
-            String exchangeName = Mediator.getInstance().getFroggerGameRI().getServerInfo()[0];
+            String exchangeName = ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[0];
 
             Connection connection= RabbitUtils.newConnection2Server(FroggerClient.HOST, FroggerClient.PORT, "guest", "guest");
             Channel channel=RabbitUtils.createChannel2Server(connection);
@@ -114,7 +114,7 @@ public class GameStateHandler implements Component {
 
     private void sendGameStateRMI(GameState state) {
         try {
-            Mediator.getInstance().getFroggerGameRI().setGameState(state);
+            ClientMediator.getInstance().getFroggerGameRI().setGameState(state);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

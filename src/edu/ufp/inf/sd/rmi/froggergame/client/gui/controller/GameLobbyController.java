@@ -2,9 +2,9 @@ package edu.ufp.inf.sd.rmi.froggergame.client.gui.controller;
 
 import edu.ufp.inf.sd.rmi.froggergame.client.FroggerClient;
 import edu.ufp.inf.sd.rmi.froggergame.client.GameStateHandler;
-import edu.ufp.inf.sd.rmi.froggergame.client.Mediator;
-import edu.ufp.inf.sd.rmi.froggergame.client.frogger.Main;
+import edu.ufp.inf.sd.rmi.froggergame.client.ClientMediator;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
+import edu.ufp.inf.sd.rmi.froggergame.server.interfaces.Component;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,14 +27,15 @@ public class GameLobbyController {
     public void attachHandler() throws RemoteException {
         // Prepara a instancia do jogo
         GameStateHandler game = new GameStateHandler();
-        Mediator.getInstance().registerComponent(game);
+        ClientMediator.getInstance().registerComponent(game);
 
         if(FroggerClient.SYNC_METHOD == "RabbitMQ") { // Começa um ouvinte no servidor
             FroggerClient.initRabbitMQListener();
         }
 
         // Efetua o attach
-        Mediator.getInstance().getFroggerGameRI().attachGame(Mediator.getInstance().getObserverRI());
+        System.out.println(ClientMediator.getInstance().getObserverRI() == null ? "OBSERVER NULL" : "OBSERVER NOT NULL");
+        ClientMediator.getInstance().getFroggerGameRI().attachGame(ClientMediator.getInstance().getObserverRI());
     }
 
     /**
@@ -44,7 +45,7 @@ public class GameLobbyController {
      * @author Gabriel Fernandes 08/05/2022
      */
     public void leaveHandler() throws IOException {
-        Mediator.getInstance().getFroggerGameRI().dettachGame(Mediator.getInstance().getObserverRI());
+        ClientMediator.getInstance().getFroggerGameRI().dettachGame(ClientMediator.getInstance().getObserverRI());
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ActiveGamesPanel.fxml"));
         Parent parent = loader.load();
