@@ -24,6 +24,7 @@
  */
 
 package edu.ufp.inf.sd.rmi.froggergame.client.game.frogger;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import jig.engine.physics.AbstractBodyLayer;
@@ -46,41 +47,44 @@ public class FroggerCollisionDetection  {
 	}
 	
 	public void testCollision(AbstractBodyLayer<MovingEntity> l) {
+		try {
+			if (!frog.isAlive)
+				return;
 
-		if (!frog.isAlive)
-			return;
-		
-		Vector2D frogPos = frogSphere.getCenterPosition();
-		double dist2;
-		
-		if (isOutOfBounds()) {
-			frog.die();
-			return;
-		}
-		
-		for (MovingEntity i : l) {
-			if (!i.isActive())
-				continue;
-			
-			List<CollisionObject> collisionObjects = i.getCollisionObjects();
+			Vector2D frogPos = frogSphere.getCenterPosition();
+			double dist2;
 
-			for (CollisionObject objectSphere : collisionObjects) {
-				dist2 = (frogSphere.getRadius() + objectSphere.getRadius()) 
-				      * (frogSphere.getRadius() + objectSphere.getRadius());
+			if (isOutOfBounds()) {
+				frog.die();
+				return;
+			}
 
-				if (frogPos.distance2(objectSphere.getCenterPosition()) < dist2) {
-					collide(i, objectSphere);
-					return;
+			for (MovingEntity i : l) {
+				if (!i.isActive())
+					continue;
+
+				List<CollisionObject> collisionObjects = i.getCollisionObjects();
+
+				for (CollisionObject objectSphere : collisionObjects) {
+					dist2 = (frogSphere.getRadius() + objectSphere.getRadius())
+							* (frogSphere.getRadius() + objectSphere.getRadius());
+
+					if (frogPos.distance2(objectSphere.getCenterPosition()) < dist2) {
+						collide(i, objectSphere);
+						return;
+					}
 				}
 			}
+
+			if (isInRiver()) {
+				frog.die();
+				return;
+			}
+
+			//frog.allignXPositionToGrid();
+		}catch (ConcurrentModificationException e) {
+			System.out.println(e.toString());
 		}
-		
-		if (isInRiver()) {
-			frog.die();
-			return;
-		}
-		
-		//frog.allignXPositionToGrid();
 	}
 	
 	/**
@@ -129,8 +133,9 @@ public class FroggerCollisionDetection  {
 		}
 		
 		if (m instanceof Crocodile) {
-			if (s == ((Crocodile) m).head)
+			if (s == ((Crocodile) m).head) {
 				frog.die();
+			}
 			else
 				frog.follow(m);
 		}
@@ -141,8 +146,9 @@ public class FroggerCollisionDetection  {
 		}
 		
 		if (m instanceof Turtles) {
-			if(((Turtles) m).isUnderwater == true)
+			if(((Turtles) m).isUnderwater == true) {
 				frog.die();
+			}
 			frog.follow(m);
 		}
 		

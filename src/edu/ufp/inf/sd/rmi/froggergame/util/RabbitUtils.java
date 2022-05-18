@@ -9,6 +9,7 @@ import edu.ufp.inf.sd.rmi.froggergame.server.states.TrafficMoveEvent;
 import javafx.geometry.Pos;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -109,7 +110,7 @@ public class RabbitUtils {
                 int levelTimer = Integer.parseInt(token[2]);
                 int GameLevel = Integer.parseInt(token[3]);
 
-                return new GameState(GameState, levelTimer, GameLevel);
+                return new GameState(new ArrayList<>(), GameState, levelTimer, GameLevel);
             }
             case "FrogMoveEvent": {
                 int GameState = Integer.parseInt(token[1]);
@@ -118,7 +119,7 @@ public class RabbitUtils {
                 Integer frogID = Integer.parseInt(token[4]);
                 String direction = token[5];
 
-                return new FrogMoveEvent(GameState, levelTimer, GameLevel, frogID, direction);
+                return new FrogMoveEvent(new ArrayList<>(), GameState, levelTimer, GameLevel, frogID, direction);
             }
             case "TrafficMoveEvent": {
                 int GameState = Integer.parseInt(token[1]);
@@ -130,7 +131,7 @@ public class RabbitUtils {
                 String spriteName = token[9];
                 long deltaMs = Long.parseLong(token[10]);
 
-                return new TrafficMoveEvent(GameState, levelTimer, GameLevel, trafficType, pos, vel, spriteName, deltaMs);
+                return new TrafficMoveEvent(new ArrayList<>(), GameState, levelTimer, GameLevel, trafficType, pos, vel, spriteName, deltaMs);
             }
             default: {
                 return null;

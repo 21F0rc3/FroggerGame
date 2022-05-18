@@ -96,7 +96,8 @@ public class Main extends StaticScreenGame {
 	protected int GameState = GAME_INTRO;
 	protected int GameLevel = STARTING_LEVEL;
 
-	public int GameLives = FROGGER_LIVES;
+	private ArrayList<Integer> FrogsLives;
+
 	public int GameScore = 0;
 
 	public int levelTimer = DEFAULT_LEVEL_TIME;
@@ -154,6 +155,11 @@ public class Main extends StaticScreenGame {
 		particleLayer = new AbstractBodyLayer.IterativeUpdate<MovingEntity>();
 
 		playerIndex = index;
+
+		FrogsLives = new ArrayList<>();
+		for(int i=0; i<4; i++) {
+			FrogsLives.add(FROGGER_LIVES);
+		}
 
 		initializeLevel(1);
 	}
@@ -296,7 +302,7 @@ public class Main extends StaticScreenGame {
 		Posititon pos = new Posititon(m.getPosition().getX(), m.getPosition().getY());
 		Posititon vel = new Posititon(m.getVelocity().getX(), m.getVelocity().getY());
 
-		GameState gameState = new TrafficMoveEvent(GameScore, levelTimer, GameLevel, m.getClass().getSimpleName(), pos, vel, m.getName(), deltaMs);
+		GameState gameState = new TrafficMoveEvent(FrogsLives, GameScore, levelTimer, GameLevel, m.getClass().getSimpleName(), pos, vel, m.getName(), deltaMs);
 
 		// Envia o novo evento
 		sendGameState(gameState);
@@ -312,9 +318,16 @@ public class Main extends StaticScreenGame {
 	 * @author Gabriel Fernandes 12/05/2022
 	 */
 	private void createFrogMoveEvent(Integer playerIndex, String direction) {
-		GameState gameState = new FrogMoveEvent(GameScore, levelTimer, GameLevel, playerIndex, direction);
+		GameState gameState = new FrogMoveEvent(FrogsLives, GameScore, levelTimer, GameLevel, playerIndex, direction);
 
 		// Envia o novo evento
+		sendGameState(gameState);
+	}
+
+	private void createGameState(int gameScore, int levelTimer, int gameLevel) {
+		GameState gameState = new GameState(FrogsLives, gameScore, levelTimer, gameLevel);
+
+		// Envia o novo envento
 		sendGameState(gameState);
 	}
 
@@ -410,7 +423,7 @@ public class Main extends StaticScreenGame {
 					break;
 				default:
 					try {
-						GameLives = FROGGER_LIVES;
+						FrogsLives = ClientMediator.getInstance().getFroggerGameRI().getGameState().getFrogsLives();
 						GameScore = ClientMediator.getInstance().getFroggerGameRI().getGameState().getGameScore();
 						GameLevel = ClientMediator.getInstance().getFroggerGameRI().getGameState().getGameLevel();
 						levelTimer = ClientMediator.getInstance().getFroggerGameRI().getGameState().getLevelTimer();
@@ -447,6 +460,8 @@ public class Main extends StaticScreenGame {
 	}
 
 	/**
+	 * @deprecated
+	 *
 	 * Importante para a sincronização das instancias
 	 *
 	 * Atualiza os timers das diferentes instancias
@@ -512,7 +527,15 @@ public class Main extends StaticScreenGame {
 					particleLayer.clear();
 				}
 
-				if (GameLives < 1) {
+				// O jogo só acaba quando todos os jogadores morrerem
+				boolean anyAlive = true;
+				for(int i=0; i<4; i++) {
+					if (FrogsLives.get(i) < 1) {
+						anyAlive = false;
+						break;
+					}
+				}
+				if(!anyAlive) {
 					GameState = GAME_OVER;
 				}
 
@@ -635,7 +658,14 @@ public class Main extends StaticScreenGame {
 			}
         }
 	}
-	
+
+	public void updateGameState(ArrayList<Integer> frogsLives, int gameScore, int levelTimer, int gameLevel) {
+		this.GameScore = gameScore;
+		this.levelTimer = levelTimer;
+		this.GameLevel = gameLevel;
+		this.FrogsLives = frogsLives;
+	}
+
 	/**
 	 * Rendering game objects
 	 */
@@ -691,6 +721,18 @@ public class Main extends StaticScreenGame {
 			ui.render(rc);
 			break;		
 		}
+	}
+
+	public Integer getPlayerLive(int playerID) {
+		return FrogsLives.get(playerID);
+	}
+
+	public void addPlayerLive(int playerID) {
+		FrogsLives.set(playerID, getPlayerLive(playerID) + 1);
+	}
+
+	public void removePlayerLive(int playerID) {
+		FrogsLives.set(playerID, getPlayerLive(playerID) - 1);
 	}
 	
 	public static void main (String[] args) {

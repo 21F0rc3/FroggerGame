@@ -27,6 +27,8 @@ package edu.ufp.inf.sd.rmi.froggergame.client.game.frogger;
 
 import jig.engine.util.Vector2D;
 
+import javax.swing.*;
+
 /**
  * Main sprite in the game that a player can control
  * 
@@ -63,7 +65,9 @@ public class Frogger extends MovingEntity {
     public boolean cheating = false;
     
     public boolean hw_hasMoved = false;
-    
+
+	public int playerID;
+
     private Main game;
     
     /**
@@ -73,6 +77,7 @@ public class Frogger extends MovingEntity {
 		super(Main.RSC_PATH + "frogger_sprites"+playerID+".png" + "#frog");
 		game = g;
 		resetFrog();
+		this.playerID = Integer.parseInt(playerID)-1;
 		collisionObjects.add(new CollisionObject(position));
 	}
 	
@@ -263,8 +268,8 @@ public class Frogger extends MovingEntity {
 		    AudioEfx.frogDie.play(0.2);
 		    followObject = null;
 		    isAlive = false;
-		    currentFrame = 4;	// dead sprite   
-		    game.GameLives--;
+		    currentFrame = 4;	// dead sprite
+			game.removePlayerLive(playerID);
 		    hw_hasMoved = true;
 		}
 		
@@ -282,7 +287,7 @@ public class Frogger extends MovingEntity {
 			game.GameScore += game.levelTimer;
 			if (g.isBonus) {
 				AudioEfx.bonus.play(0.2);
-				game.GameLives++;
+				game.addPlayerLive(playerID);
 			}
 			g.reached();
 			resetFrog();
@@ -293,7 +298,7 @@ public class Frogger extends MovingEntity {
 	}
 	
 	public void update(final long deltaMs) {
-		if (game.GameLives <= 0)
+		if (game.getPlayerLive(playerID) <= 0)
 			return;
 		
 		// if dead, stay dead for 2 seconds.
@@ -304,7 +309,8 @@ public class Frogger extends MovingEntity {
 		updateFollow(deltaMs);
 		setFrame(currentFrame);
 		
-		if (game.levelTimer <= 0)
+		if (game.levelTimer <= 0) {
 			die();
+		}
 	}
 }

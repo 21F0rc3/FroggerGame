@@ -21,7 +21,13 @@ public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameR
         this.serverName = serverName;
         this.difficulty = difficulty;
         this.players = new ArrayList<ObserverRI>();
-        this.gameState = new GameState(0, 60, difficulty);
+
+        ArrayList<Integer> frogLives = new ArrayList<>();
+        for(int i=0; i<4; i++) {
+            frogLives.add(5);
+        }
+
+        this.gameState = new GameState(frogLives,0, 3200, difficulty);
     }
 
     public FroggerGameImpl(FroggerGameImpl game) throws RemoteException {
@@ -29,7 +35,13 @@ public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameR
         this.serverName = game.getServerInfo()[0];
         this.difficulty = Integer.parseInt(game.getServerInfo()[1]);
         this.players = game.getPlayers();
-        this.gameState = new GameState(0, 60, difficulty);
+
+        ArrayList<Integer> frogLives = new ArrayList<>();
+        for(int i=0; i<4; i++) {
+            frogLives.add(5);
+        }
+
+        this.gameState = new GameState(frogLives,0, 3200, difficulty);
     }
 
     /**

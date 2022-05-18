@@ -4,6 +4,7 @@ import edu.ufp.inf.sd.rmi.froggergame.client.ClientMediator;
 import edu.ufp.inf.sd.rmi.froggergame.util.Posititon;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class TrafficMoveEvent extends GameState implements Serializable {
     private String trafficType;
@@ -12,8 +13,8 @@ public class TrafficMoveEvent extends GameState implements Serializable {
     private String spriteName;
     private long deltaMs;
 
-    public TrafficMoveEvent(int GameScore, int levelTimer, int GameLevel, String trafficType, Posititon pos, Posititon vel, String spriteName, long deltaMs) {
-        super(GameScore, levelTimer, GameLevel);
+    public TrafficMoveEvent(ArrayList<Integer> frogsLives, int GameScore, int levelTimer, int GameLevel, String trafficType, Posititon pos, Posititon vel, String spriteName, long deltaMs) {
+        super(frogsLives, GameScore, levelTimer, GameLevel);
         this.trafficType = trafficType;
         this.pos = pos;
         this.vel = vel;

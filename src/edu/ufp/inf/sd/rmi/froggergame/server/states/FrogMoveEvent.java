@@ -3,13 +3,14 @@ package edu.ufp.inf.sd.rmi.froggergame.server.states;
 import edu.ufp.inf.sd.rmi.froggergame.client.ClientMediator;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class FrogMoveEvent extends GameState implements Serializable {
     private Integer frogID;
     private String direction;
 
-    public FrogMoveEvent(int GameScore, int levelTimer, int GameLevel, Integer frogID, String direction) {
-        super(GameScore, levelTimer, GameLevel);
+    public FrogMoveEvent(ArrayList<Integer> frogsLives, int GameScore, int levelTimer, int GameLevel, Integer frogID, String direction) {
+        super(frogsLives, GameScore, levelTimer, GameLevel);
         this.frogID = frogID;
         this.direction = direction;
     }

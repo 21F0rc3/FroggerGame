@@ -64,7 +64,10 @@ public class GameStateHandler implements Component {
     public void move(FrogMoveEvent event) {
         // If muito importante !! Acredito que ele comeca a fazer updates antes do jogo comecar então
         // a instancia ainda não esta definida no inicio
-        if(gameInstance != null) gameInstance.move(event.getFrogID(), event.getDirection());
+        if(gameInstance != null) {
+            gameInstance.updateGameState(event.getFrogsLives(), event.getGameScore(), event.getLevelTimer(), event.getGameLevel());
+            gameInstance.move(event.getFrogID(), event.getDirection());
+        }
     }
 
     /**
@@ -79,8 +82,10 @@ public class GameStateHandler implements Component {
     public void movingTraffic(TrafficMoveEvent event) {
         // If muito importante !! Acredito que ele comeca a fazer updates antes do jogo comecar então
         // a instancia ainda não esta definida no inicio
-        if (gameInstance != null)
+        if (gameInstance != null) {
+            gameInstance.updateGameState(event.getFrogsLives(), event.getGameScore(), event.getLevelTimer(), event.getGameLevel());
             gameInstance.movingTraffic(event.getTrafficType(), event.getPos(), event.getVel(), event.getSpriteName(), event.getDeltaMs());
+        }
     }
 
     public void sendGameState(GameState state) {
