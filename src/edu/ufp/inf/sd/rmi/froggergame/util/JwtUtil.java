@@ -5,7 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import edu.ufp.inf.sd.rmi.froggergame.server.models.User;
+import edu.ufp.inf.sd.rmi.froggergame.server.data.models.User;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -47,7 +47,7 @@ public class JwtUtil {
                     .withIssuer("auth0")
                     .withSubject(subject)
                     .withIssuedAt(new Date(System.currentTimeMillis()))
-                    .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 minutos
+                    .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000)) // 10 minutos
                     .sign(algorithm);
 
         } catch (UnsupportedEncodingException e) {

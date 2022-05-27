@@ -1,8 +1,6 @@
 package edu.ufp.inf.sd.rmi.froggergame.server.states;
 
-import edu.ufp.inf.sd.rmi.froggergame.client.ObserverImpl;
-import edu.ufp.inf.sd.rmi.froggergame.client.ObserverRI;
-import edu.ufp.inf.sd.rmi.froggergame.util.Posititon;
+import edu.ufp.inf.sd.rmi.froggergame.client.ClientMediator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,14 +9,16 @@ public class GameState implements Serializable {
     private int GameScore;
     private int levelTimer;
     private int GameLevel;
+    private ArrayList<Integer> FrogsLives;
 
-    public GameState(int GameScore, int levelTimer, int GameLevel) {
+    public GameState(ArrayList<Integer> frogsLives, int GameScore, int levelTimer, int GameLevel) {
+        this.FrogsLives = frogsLives;
         this.GameScore = GameScore;
         this.levelTimer = levelTimer;
         this.GameLevel = GameLevel;
     }
 
-    public void execute(ObserverRI observerRI) {
+    public void execute() {
 
     }
 
@@ -33,6 +33,8 @@ public class GameState implements Serializable {
     public int getGameLevel() {
         return GameLevel;
     }
+
+    public ArrayList<Integer> getFrogsLives() { return FrogsLives; }
 
     public String toString() {
         return "GameState,"+

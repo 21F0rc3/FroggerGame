@@ -1,14 +1,10 @@
 package edu.ufp.inf.sd.rmi.froggergame.server.states;
 
-import com.fasterxml.jackson.core.JsonEncoding;
-import com.fasterxml.jackson.core.io.JsonStringEncoder;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import edu.ufp.inf.sd.rmi.froggergame.client.ObserverRI;
+import edu.ufp.inf.sd.rmi.froggergame.client.ClientMediator;
 import edu.ufp.inf.sd.rmi.froggergame.util.Posititon;
-import jdk.nashorn.internal.parser.JSONParser;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class TrafficMoveEvent extends GameState implements Serializable {
     private String trafficType;
@@ -17,8 +13,8 @@ public class TrafficMoveEvent extends GameState implements Serializable {
     private String spriteName;
     private long deltaMs;
 
-    public TrafficMoveEvent(int GameScore, int levelTimer, int GameLevel, String trafficType, Posititon pos, Posititon vel, String spriteName, long deltaMs) {
-        super(GameScore, levelTimer, GameLevel);
+    public TrafficMoveEvent(ArrayList<Integer> frogsLives, int GameScore, int levelTimer, int GameLevel, String trafficType, Posititon pos, Posititon vel, String spriteName, long deltaMs) {
+        super(frogsLives, GameScore, levelTimer, GameLevel);
         this.trafficType = trafficType;
         this.pos = pos;
         this.vel = vel;
@@ -26,12 +22,8 @@ public class TrafficMoveEvent extends GameState implements Serializable {
         this.deltaMs = deltaMs;
     }
 
-    public void execute(ObserverRI observerRI) {
-        try {
-            observerRI.movingTraffic(this);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+    public void execute() {
+        ClientMediator.getInstance().getGameStateHandler().movingTraffic(this);
     }
 
     public String getTrafficType() {
