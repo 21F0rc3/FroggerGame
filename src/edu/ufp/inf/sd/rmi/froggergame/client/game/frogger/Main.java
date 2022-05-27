@@ -303,10 +303,17 @@ public class Main extends StaticScreenGame {
 		Posititon pos = new Posititon(m.getPosition().getX(), m.getPosition().getY());
 		Posititon vel = new Posititon(m.getVelocity().getX(), m.getVelocity().getY());
 
-		GameState gameState = new TrafficMoveEvent(FrogsLives, GameScore, levelTimer, GameLevel, m.getClass().getSimpleName(), pos, vel, m.getName(), deltaMs);
+		try {
+			String serverName = ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[0];
+			Integer playersNumber = Integer.parseInt(ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[2]);
 
-		// Envia o novo evento
-		sendGameState(gameState);
+			GameState gameState = new TrafficMoveEvent(FrogsLives, GameScore, levelTimer, GameLevel, playersNumber, serverName, m.getClass().getSimpleName(), pos, vel, m.getName(), deltaMs);
+
+			// Envia o novo evento
+			sendGameState(gameState);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -319,17 +326,31 @@ public class Main extends StaticScreenGame {
 	 * @author Gabriel Fernandes 12/05/2022
 	 */
 	private void createFrogMoveEvent(Integer playerIndex, String direction) {
-		GameState gameState = new FrogMoveEvent(FrogsLives, GameScore, levelTimer, GameLevel, playerIndex, direction);
+		try {
+			String serverName = ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[0];
+			Integer playersNumber = Integer.parseInt(ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[2]);
 
-		// Envia o novo evento
-		sendGameState(gameState);
+			GameState gameState = new FrogMoveEvent(FrogsLives, GameScore, levelTimer, GameLevel, playersNumber, serverName, playerIndex, direction);
+
+			// Envia o novo evento
+			sendGameState(gameState);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void createGameState(int gameScore, int levelTimer, int gameLevel) {
-		GameState gameState = new GameState(FrogsLives, gameScore, levelTimer, gameLevel);
+		try {
+			String serverName = ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[0];
+			Integer playersNumber = Integer.parseInt(ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[2]);
 
-		// Envia o novo envento
-		sendGameState(gameState);
+			GameState gameState = new GameState(FrogsLives, GameScore, levelTimer, GameLevel, playersNumber, serverName);
+
+			// Envia o novo evento
+			sendGameState(gameState);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

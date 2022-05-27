@@ -27,6 +27,7 @@ public class GameStateHandler implements Component {
     private Thread thread;
     private Main gameInstance;
     private Integer playerIndex;
+    private boolean gameStarted;
 
     public GameStateHandler() {
         try {
@@ -39,8 +40,9 @@ public class GameStateHandler implements Component {
 
                 gameInstance.run();
             };
-
             thread = new Thread(runnable);
+
+            gameStarted = false;
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -131,5 +133,13 @@ public class GameStateHandler implements Component {
     @Override
     public String getName() throws RemoteException {
         return "GameStateHandler";
+    }
+
+    public boolean isGameStarted() {
+        return gameStarted;
+    }
+
+    public void setGameStarted(boolean gameStarted) {
+        this.gameStarted = gameStarted;
     }
 }

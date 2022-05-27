@@ -22,7 +22,7 @@ public class FroggerClient implements Component {
      * RabbitMQ - Utiliza o Publish/Subscribe do RabbitMQ
      * RMI - Utiliza o Observer do RMI
      */
-    public static String SYNC_METHOD = "RabbitMQ";
+    public static String SYNC_METHOD = "RMI";
     static String HOST = "localhost";
     static int PORT = 5672;
 

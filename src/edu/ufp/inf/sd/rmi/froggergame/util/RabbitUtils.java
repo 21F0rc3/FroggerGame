@@ -111,25 +111,27 @@ public class RabbitUtils {
         int GameState = Integer.parseInt(token[5]);
         int levelTimer = Integer.parseInt(token[6]);
         int GameLevel = Integer.parseInt(token[7]);
+        int playersNumber = Integer.parseInt(token[8]);
+        String serverName = token[9];
 
         switch (token[0]) {
             case "GameState": {
-                return new GameState(frogsLives, GameState, levelTimer, GameLevel);
+                return new GameState(frogsLives, GameState, levelTimer, GameLevel, playersNumber, serverName);
             }
             case "FrogMoveEvent": {
-                Integer frogID = Integer.parseInt(token[8]);
-                String direction = token[9];
+                Integer frogID = Integer.parseInt(token[10]);
+                String direction = token[11];
 
-                return new FrogMoveEvent(frogsLives, GameState, levelTimer, GameLevel, frogID, direction);
+                return new FrogMoveEvent(frogsLives, GameState, levelTimer, GameLevel, playersNumber, serverName, frogID, direction);
             }
             case "TrafficMoveEvent": {
-                String trafficType = token[8];
-                Posititon pos = new Posititon(Double.parseDouble(token[9]), Double.parseDouble(token[10]));
-                Posititon vel = new Posititon(Double.parseDouble(token[11]), Double.parseDouble(token[12]));
-                String spriteName = token[13];
-                long deltaMs = Long.parseLong(token[14]);
+                String trafficType = token[10];
+                Posititon pos = new Posititon(Double.parseDouble(token[11]), Double.parseDouble(token[12]));
+                Posititon vel = new Posititon(Double.parseDouble(token[13]), Double.parseDouble(token[14]));
+                String spriteName = token[15];
+                long deltaMs = Long.parseLong(token[16]);
 
-                return new TrafficMoveEvent(frogsLives, GameState, levelTimer, GameLevel, trafficType, pos, vel, spriteName, deltaMs);
+                return new TrafficMoveEvent(frogsLives, GameState, levelTimer, GameLevel, playersNumber, serverName, trafficType, pos, vel, spriteName, deltaMs);
             }
             default: {
                 return null;

@@ -10,11 +10,9 @@ import java.rmi.server.UnicastRemoteObject;
 public class ObserverImpl extends UnicastRemoteObject implements ObserverRI, Component {
     private FroggerGameRI game;
     private GameState state;
-    private boolean gameStarted;
 
     protected ObserverImpl() throws RemoteException {
         super();
-        gameStarted = false;
     }
 
     /**
@@ -40,15 +38,6 @@ public class ObserverImpl extends UnicastRemoteObject implements ObserverRI, Com
      */
     @Override
     public void update(GameState state) throws RemoteException {
-        if(!gameStarted) {
-            /* Se o servidor tiver mais de dois jogadores "READY"
-             *  enão o jogo começa */
-             if (Integer.parseInt(this.game.getServerInfo()[2]) >= 2) {
-                 ClientMediator.getInstance().getGameStateHandler().start();
-                 gameStarted = true;
-             }
-        }
-
         // Executa a ação do evento
         // Por exemplo um FrogMoveEvent faz uma frog mover, um TrafficMoveEvent faz o trafico mover
         state.execute();

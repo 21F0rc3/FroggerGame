@@ -9,8 +9,8 @@ public class FrogMoveEvent extends GameState implements Serializable {
     private Integer frogID;
     private String direction;
 
-    public FrogMoveEvent(ArrayList<Integer> frogsLives, int GameScore, int levelTimer, int GameLevel, Integer frogID, String direction) {
-        super(frogsLives, GameScore, levelTimer, GameLevel);
+    public FrogMoveEvent(ArrayList<Integer> frogsLives, int GameScore, int levelTimer, int GameLevel, int playersNumber, String serverName, Integer frogID, String direction) {
+        super(frogsLives, GameScore, levelTimer, GameLevel, playersNumber, serverName);
         this.frogID = frogID;
         this.direction = direction;
     }
@@ -44,7 +44,9 @@ public class FrogMoveEvent extends GameState implements Serializable {
                 getGameScore() +","+
                 getLevelTimer()+"," +
                 getGameLevel()+","+
+                getPlayersNumber()+","+
+                getServerName()+","+
                 frogID+","+
-                direction+",";
+                direction;
     }
 }

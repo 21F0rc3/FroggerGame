@@ -9,17 +9,12 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameRI, Component {
-    private String serverName;
-    private Integer difficulty;
-
     private ArrayList<ObserverRI> players;
 
     private GameState gameState;
 
     public FroggerGameImpl(String serverName, Integer difficulty) throws RemoteException {
         super();
-        this.serverName = serverName;
-        this.difficulty = difficulty;
         this.players = new ArrayList<ObserverRI>();
 
         ArrayList<Integer> frogLives = new ArrayList<>();
@@ -27,13 +22,12 @@ public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameR
             frogLives.add(5);
         }
 
-        this.gameState = new GameState(frogLives,0, 3200, difficulty);
+        this.gameState = new GameState(frogLives,0, 3200, difficulty, 0, serverName);
     }
 
     public FroggerGameImpl(FroggerGameImpl game) throws RemoteException {
         super();
-        this.serverName = game.getServerInfo()[0];
-        this.difficulty = Integer.parseInt(game.getServerInfo()[1]);
+
         this.players = game.getPlayers();
 
         ArrayList<Integer> frogLives = new ArrayList<>();
@@ -41,7 +35,7 @@ public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameR
             frogLives.add(5);
         }
 
-        this.gameState = new GameState(frogLives,0, 3200, difficulty);
+        this.gameState = new GameState(frogLives,0, 3200, game.gameState.getGameLevel(), game.gameState.getPlayersNumber(), game.gameState.getServerName());
     }
 
     /**
@@ -124,9 +118,9 @@ public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameR
     public String[] getServerInfo() throws RemoteException {
         String[] info = new String[3];
 
-        info[0] = serverName;
-        info[1] = String.valueOf(difficulty);
-        info[2] = String.valueOf(players.size());
+        info[0] = gameState.getServerName();
+        info[1] = String.valueOf(gameState.getGameLevel());
+        info[2] = String.valueOf(gameState.getPlayersNumber());
 
         return info;
     }
@@ -154,6 +148,15 @@ public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameR
     }
 
     public String toString() {
-        return "FroggerGame{" + "ServerName=" + serverName + ", Difficulty=" + difficulty + "}";
+        return "FroggerGame{" + "ServerName=" + gameState.getServerName() + ", Difficulty=" + gameState.getGameLevel() + "}";
+    }
+
+    /**
+     * Atualiza o estado do jogo com o numero de jogadores
+     *
+     * @author Gabriel Fernandes 27/05/2022
+     */
+    public void setPlayersNumber(int number) {
+        this.gameState.setPlayersNumber(number);
     }
 }

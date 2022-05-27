@@ -13,8 +13,8 @@ public class TrafficMoveEvent extends GameState implements Serializable {
     private String spriteName;
     private long deltaMs;
 
-    public TrafficMoveEvent(ArrayList<Integer> frogsLives, int GameScore, int levelTimer, int GameLevel, String trafficType, Posititon pos, Posititon vel, String spriteName, long deltaMs) {
-        super(frogsLives, GameScore, levelTimer, GameLevel);
+    public TrafficMoveEvent(ArrayList<Integer> frogsLives, int GameScore, int levelTimer, int GameLevel, int playersNumber, String serverName, String trafficType, Posititon pos, Posititon vel, String spriteName, long deltaMs) {
+        super(frogsLives, GameScore, levelTimer, GameLevel, playersNumber, serverName);
         this.trafficType = trafficType;
         this.pos = pos;
         this.vel = vel;
@@ -55,6 +55,8 @@ public class TrafficMoveEvent extends GameState implements Serializable {
                 getGameScore()+","+
                 getLevelTimer()+"," +
                 getGameLevel()+","+
+                getPlayersNumber()+","+
+                getServerName()+","+
                 trafficType+","+
                 pos.toString()+","+
                 vel.toString()+","+
