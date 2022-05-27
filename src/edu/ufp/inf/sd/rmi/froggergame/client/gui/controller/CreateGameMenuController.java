@@ -26,6 +26,18 @@ public class CreateGameMenuController {
     public void createNewGameHandler() throws IOException {
         FroggerGameRI froggerGameRI = ClientMediator.getInstance().getGameSessionRI().createGame(nameField.getText(), Integer.parseInt(difficultyField.getText()));
 
+        if(froggerGameRI == null) { // Provavelmente porque a token expirou
+            // Redireciona para o menu de autenticação
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Auth.fxml"));
+            Parent parent = loader.load();
+
+            Scene scene = new Scene(parent);
+
+            GUI.context.setScene(scene);
+            GUI.context.show();
+        }
+
         ClientMediator.getInstance().registerComponent((Component) froggerGameRI);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/GameLobby.fxml"));

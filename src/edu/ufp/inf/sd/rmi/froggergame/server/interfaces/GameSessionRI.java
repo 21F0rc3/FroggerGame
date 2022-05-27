@@ -1,7 +1,5 @@
 package edu.ufp.inf.sd.rmi.froggergame.server.interfaces;
 
-import edu.ufp.inf.sd.rmi.froggergame.server.interfaces.FroggerGameRI;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
