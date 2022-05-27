@@ -93,8 +93,8 @@ public class Main extends StaticScreenGame {
 	static final int GAME_INSTRUCTIONS = 3;
 	static final int GAME_OVER = 4;
 
-	protected int GameState = GAME_INTRO;
-	protected int GameLevel = STARTING_LEVEL;
+	public int GameState = GAME_INTRO;
+	public int GameLevel;
 
 	private ArrayList<Integer> FrogsLives;
 
@@ -113,7 +113,7 @@ public class Main extends StaticScreenGame {
 	/**
 	 * Initialize game objects
 	 */
-	public Main(Integer index) {
+	public Main(Integer index, Integer difficulty) {
 		super(WORLD_WIDTH, WORLD_HEIGHT, false);
 
 		gameframe.setTitle("Frogger");
@@ -161,7 +161,8 @@ public class Main extends StaticScreenGame {
 			FrogsLives.add(FROGGER_LIVES);
 		}
 
-		initializeLevel(1);
+		GameLevel = difficulty;
+		initializeLevel(GameLevel);
 	}
 
 	public void initializeLevel(int level) {
@@ -736,7 +737,7 @@ public class Main extends StaticScreenGame {
 	}
 	
 	public static void main (String[] args) {
-		Main f = new Main(0);
+		Main f = new Main(0,1);
 		f.run();
 	}
 }

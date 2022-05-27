@@ -43,6 +43,8 @@ public class GameSessionImpl extends UnicastRemoteObject implements GameSessionR
         ((GameFactoryImpl) ServerMediator.getInstance().getGameFactoryRI()).froggerGames.add(froggerGame);
         //ServerMediator.getInstance().getServerSystemRI().create(froggerGame);
 
+        System.out.println(TerminalColors.ANSI_GREEN+"[CREATE]"+TerminalColors.ANSI_RESET+"New FroggerGame serverName: "+froggerGame.getServerInfo()[0]+"   Difficulty: "+froggerGame.getServerInfo()[1]);
+
         return froggerGame;
     }
 

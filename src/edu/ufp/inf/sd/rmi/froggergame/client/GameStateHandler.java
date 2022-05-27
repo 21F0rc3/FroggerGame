@@ -31,9 +31,12 @@ public class GameStateHandler implements Component {
     public GameStateHandler() {
         try {
             playerIndex = Integer.parseInt(ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[2]);
+            // Dificuldade do jogo
+            Integer difficulty = Integer.parseInt(ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[1]);
 
             Runnable runnable = () -> {
-                gameInstance = new Main(playerIndex);
+                gameInstance = new Main(playerIndex, difficulty);
+
                 gameInstance.run();
             };
 
