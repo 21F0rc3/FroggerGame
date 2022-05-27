@@ -158,7 +158,7 @@ public class Main extends StaticScreenGame {
 
 		FrogsLives = new ArrayList<>();
 		for(int i=0; i<4; i++) {
-			FrogsLives.add(FROGGER_LIVES);
+			FrogsLives.add(i, FROGGER_LIVES);
 		}
 
 		GameLevel = difficulty;
@@ -713,13 +713,15 @@ public class Main extends StaticScreenGame {
 		case GAME_OVER:
 		case GAME_INSTRUCTIONS:
 		case GAME_INTRO:
-			backgroundLayer.render(rc);
 			try {
+				backgroundLayer.render(rc);
+
 				movingObjectsLayer.render(rc);
+
+				ui.render(rc);
 			}catch (ConcurrentModificationException e) {
 				System.out.println(e.toString());;
 			}
-			ui.render(rc);
 			break;		
 		}
 	}

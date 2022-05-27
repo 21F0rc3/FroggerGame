@@ -114,7 +114,7 @@ public class GameStateHandler implements Component {
 
             String routingKey = "";
             channel.basicPublish(exchangeName, routingKey, null, state.toString().getBytes("UTF-8"));
-            System.out.println(" [x] Sent:");
+            System.out.println(" [x] Sent: "+ state.toString());
         } catch (IOException | TimeoutException e) {
             Logger.getLogger(Main.class.getName()).log(Level.INFO, e.toString());
         }

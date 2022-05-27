@@ -104,34 +104,32 @@ public class RabbitUtils {
     public static GameState recreateObject(String message) {
         String[] token = message.split(",");
 
+        ArrayList<Integer> frogsLives = new ArrayList<>();
+        for(int i=1; i<=4; i++) {
+            frogsLives.add(i-1, Integer.parseInt(token[i]));
+        }
+        int GameState = Integer.parseInt(token[5]);
+        int levelTimer = Integer.parseInt(token[6]);
+        int GameLevel = Integer.parseInt(token[7]);
+
         switch (token[0]) {
             case "GameState": {
-                int GameState = Integer.parseInt(token[1]);
-                int levelTimer = Integer.parseInt(token[2]);
-                int GameLevel = Integer.parseInt(token[3]);
-
-                return new GameState(new ArrayList<>(), GameState, levelTimer, GameLevel);
+                return new GameState(frogsLives, GameState, levelTimer, GameLevel);
             }
             case "FrogMoveEvent": {
-                int GameState = Integer.parseInt(token[1]);
-                int levelTimer = Integer.parseInt(token[2]);
-                int GameLevel = Integer.parseInt(token[3]);
-                Integer frogID = Integer.parseInt(token[4]);
-                String direction = token[5];
+                Integer frogID = Integer.parseInt(token[8]);
+                String direction = token[9];
 
-                return new FrogMoveEvent(new ArrayList<>(), GameState, levelTimer, GameLevel, frogID, direction);
+                return new FrogMoveEvent(frogsLives, GameState, levelTimer, GameLevel, frogID, direction);
             }
             case "TrafficMoveEvent": {
-                int GameState = Integer.parseInt(token[1]);
-                int levelTimer = Integer.parseInt(token[2]);
-                int GameLevel = Integer.parseInt(token[3]);
-                String trafficType = token[4];
-                Posititon pos = new Posititon(Double.parseDouble(token[5]), Double.parseDouble(token[6]));
-                Posititon vel = new Posititon(Double.parseDouble(token[7]), Double.parseDouble(token[8]));
-                String spriteName = token[9];
-                long deltaMs = Long.parseLong(token[10]);
+                String trafficType = token[8];
+                Posititon pos = new Posititon(Double.parseDouble(token[9]), Double.parseDouble(token[10]));
+                Posititon vel = new Posititon(Double.parseDouble(token[11]), Double.parseDouble(token[12]));
+                String spriteName = token[13];
+                long deltaMs = Long.parseLong(token[14]);
 
-                return new TrafficMoveEvent(new ArrayList<>(), GameState, levelTimer, GameLevel, trafficType, pos, vel, spriteName, deltaMs);
+                return new TrafficMoveEvent(frogsLives, GameState, levelTimer, GameLevel, trafficType, pos, vel, spriteName, deltaMs);
             }
             default: {
                 return null;

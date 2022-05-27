@@ -38,6 +38,10 @@ public class GameState implements Serializable {
 
     public String toString() {
         return "GameState,"+
+                FrogsLives.get(0)+","+
+                FrogsLives.get(1)+","+
+                FrogsLives.get(2)+","+
+                FrogsLives.get(3)+","+
                 GameScore +","+
                 levelTimer+","+
                 GameLevel;

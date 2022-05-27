@@ -48,6 +48,10 @@ public class TrafficMoveEvent extends GameState implements Serializable {
 
     public String toString() {
         return "TrafficMoveEvent,"+
+                getFrogsLives().get(0)+","+
+                getFrogsLives().get(1)+","+
+                getFrogsLives().get(2)+","+
+                getFrogsLives().get(3)+","+
                 getGameScore()+","+
                 getLevelTimer()+"," +
                 getGameLevel()+","+

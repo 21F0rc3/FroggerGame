@@ -37,6 +37,10 @@ public class FrogMoveEvent extends GameState implements Serializable {
 
     public String toString() {
         return "FrogMoveEvent,"+
+                getFrogsLives().get(0)+","+
+                getFrogsLives().get(1)+","+
+                getFrogsLives().get(2)+","+
+                getFrogsLives().get(3)+","+
                 getGameScore() +","+
                 getLevelTimer()+"," +
                 getGameLevel()+","+
