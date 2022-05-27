@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class ActiveGamesPanelController {
     public VBox vBox;
@@ -20,10 +21,23 @@ public class ActiveGamesPanelController {
      *
      * @author Gabriel Fernandes 18/04/2022
      */
-    public void populate() throws RemoteException {
-        System.out.println(ClientMediator.getInstance().getGameSessionRI().getActiveGames().size());
+    public void populate() throws IOException {
+       // System.out.println(ClientMediator.getInstance().getGameSessionRI().getActiveGames().size());
 
-        for(FroggerGameRI froggerGameRI : ClientMediator.getInstance().getGameSessionRI().getActiveGames()) {
+        ArrayList<FroggerGameRI> activeGames = ClientMediator.getInstance().getGameSessionRI().getActiveGames();
+
+        if(activeGames == null) { // Provavelmente porque a token expirou
+            // Vai para o menu de autenticação inicial
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Auth.fxml"));
+            Parent parent = loader.load();
+
+            Scene scene = new Scene(parent);
+
+            GUI.context.setScene(scene);
+            GUI.context.show();
+        }
+
+        for(FroggerGameRI froggerGameRI : activeGames) {
             try {
                 addGameItemToList(froggerGameRI);
             } catch (IOException e) {

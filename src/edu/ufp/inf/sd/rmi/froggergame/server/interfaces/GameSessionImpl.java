@@ -76,4 +76,9 @@ public class GameSessionImpl extends UnicastRemoteObject implements GameSessionR
     public String getName() throws RemoteException {
         return "GameSession";
     }
+
+    @Override
+    public String getJwt_token() throws RemoteException {
+        return jwt_token;
+    }
 }

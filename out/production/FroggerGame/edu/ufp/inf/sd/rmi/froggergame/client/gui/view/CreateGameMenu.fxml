@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="primary-color" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ufp.inf.sd.rmi.froggergame.client.gui.controller.CreateGameMenuController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="200.0" layoutY="94.0" stroke="#273b3900" strokeType="INSIDE" styleClass="ractangle" width="200.0" />
+      <TextField fx:id="nameField" layoutX="226.0" layoutY="136.0" styleClass="textField" />
+      <TextField fx:id="difficultyField" layoutX="226.0" layoutY="201.0" styleClass="textField" />
+      <Label layoutX="232.0" layoutY="119.0" styleClass="textPrimary" text="Name" textFill="#f7fff7" />
+      <Label layoutX="232.0" layoutY="192.0" styleClass="textPrimary" text="Difficulty" textFill="#f7fff7" />
+      <Button layoutX="259.0" layoutY="257.0" mnemonicParsing="false" onMouseClicked="#createNewGameHandler" styleClass="button-primary" text="Create Game" />
+      <Button layoutX="24.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#backHandler" styleClass="button-secondary" text="&lt; Back" textFill="#f7fff7" />
+   </children>
+</AnchorPane>
