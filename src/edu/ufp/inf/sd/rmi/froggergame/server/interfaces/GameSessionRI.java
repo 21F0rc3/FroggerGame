@@ -10,6 +10,4 @@ public interface GameSessionRI extends Remote {
     public FroggerGameRI createGame(String serverName, Integer difficulty) throws RemoteException;
 
     public ArrayList<FroggerGameRI> getActiveGames() throws RemoteException;
-
-    public String getJwt_token() throws RemoteException;
 }
