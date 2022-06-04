@@ -6,6 +6,8 @@ import edu.ufp.inf.sd.rmi.froggergame.client.ClientMediator;
 import edu.ufp.inf.sd.rmi.froggergame.client.gui.GUI;
 import edu.ufp.inf.sd.rmi.froggergame.server.interfaces.Component;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.GameState;
+import edu.ufp.inf.sd.rmi.froggergame.util.RabbitUtils;
+import edu.ufp.inf.sd.rmi.froggergame.util.Sync;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,20 +32,19 @@ public class GameLobbyController {
         GameStateHandler game = new GameStateHandler();
         ClientMediator.getInstance().registerComponent(game);
 
-        // Atualiza o numero de jogadores do servidor
-        ClientMediator.getInstance().getFroggerGameRI().setPlayersNumber(Integer.parseInt(ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[2]) + 1);
+        if (Sync.SYNC_METHOD == Sync.RABBITMQ) {
+            // Começa um ouvinte no cliente
+            RabbitUtils.initRabbitMQClientListener();
 
-        if(FroggerClient.SYNC_METHOD == "RabbitMQ") { // Começa um ouvinte no servidor
-            FroggerClient.initRabbitMQListener();
+            // Atualiza o numero de jogadores do servidor
+            ClientMediator.getInstance().getFroggerGameRI().setPlayersNumber(ClientMediator.getInstance().getFroggerGameRI().getGameState().getPlayersNumber() + 1);
+            GameState state = ClientMediator.getInstance().getFroggerGameRI().getGameState();
 
-            // Anuncia a todos que um novo jogador chegou
-            ClientMediator.getInstance().getGameStateHandler().sendGameState(ClientMediator.getInstance().getFroggerGameRI().getGameState());
-
-            // Executa o game state do servidor(para o caso de o proprio jogador ser 0 2º a entrar na partida tbm comecar)
-            ClientMediator.getInstance().getFroggerGameRI().getGameState().execute();
-        }else {
+            // Notifica o servidor que fez o attach
+            RabbitUtils.sendGameStateToServer(state);
+        } else {
             // Efetua o attach
-            System.out.println(ClientMediator.getInstance().getObserverRI() == null ? "OBSERVER NULL" : "OBSERVER NOT NULL");
+            //System.out.println(ClientMediator.getInstance().getObserverRI() == null ? "OBSERVER NULL" : "OBSERVER NOT NULL");
             ClientMediator.getInstance().getFroggerGameRI().attachGame(ClientMediator.getInstance().getObserverRI());
         }
     }

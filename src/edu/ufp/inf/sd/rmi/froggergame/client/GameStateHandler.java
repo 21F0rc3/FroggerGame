@@ -9,6 +9,7 @@ import edu.ufp.inf.sd.rmi.froggergame.server.states.FrogMoveEvent;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.GameState;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.TrafficMoveEvent;
 import edu.ufp.inf.sd.rmi.froggergame.util.RabbitUtils;
+import edu.ufp.inf.sd.rmi.froggergame.util.Sync;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -94,32 +95,16 @@ public class GameStateHandler implements Component {
     }
 
     public void sendGameState(GameState state) {
-        if(FroggerClient.SYNC_METHOD == "RMI") {
+        if(Sync.SYNC_METHOD == Sync.RMI) {
             sendGameStateRMI(state);
         }
-        if(FroggerClient.SYNC_METHOD == "RabbitMQ") {
+        if(Sync.SYNC_METHOD == Sync.RABBITMQ) {
             sendGameStateMQ(state);
         }
     }
 
     private void sendGameStateMQ(GameState state) {
-        try {
-            // O exchange sera o nome do proprio servidor
-            String exchangeName = ClientMediator.getInstance().getFroggerGameRI().getServerInfo()[0];
-
-            Connection connection= RabbitUtils.newConnection2Server(FroggerClient.HOST, FroggerClient.PORT, "guest", "guest");
-            Channel channel=RabbitUtils.createChannel2Server(connection);
-
-            System.out.println(" [x] Declare exchange: '" + exchangeName + "' of type " + BuiltinExchangeType.FANOUT.toString());
-
-            channel.exchangeDeclare(exchangeName, BuiltinExchangeType.FANOUT);
-
-            String routingKey = "";
-            channel.basicPublish(exchangeName, routingKey, null, state.toString().getBytes("UTF-8"));
-            System.out.println(" [x] Sent: "+ state.toString());
-        } catch (IOException | TimeoutException e) {
-            Logger.getLogger(Main.class.getName()).log(Level.INFO, e.toString());
-        }
+        RabbitUtils.sendGameStateToServer(state);
     }
 
     private void sendGameStateRMI(GameState state) {

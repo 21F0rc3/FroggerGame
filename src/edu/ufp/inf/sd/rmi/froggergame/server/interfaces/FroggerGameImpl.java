@@ -1,12 +1,17 @@
 package edu.ufp.inf.sd.rmi.froggergame.server.interfaces;
 
+import com.rabbitmq.client.*;
 import edu.ufp.inf.sd.rmi.froggergame.client.ClientMediator;
 import edu.ufp.inf.sd.rmi.froggergame.client.ObserverRI;
 import edu.ufp.inf.sd.rmi.froggergame.server.states.GameState;
+import edu.ufp.inf.sd.rmi.froggergame.util.RabbitUtils;
+import edu.ufp.inf.sd.rmi.froggergame.util.Sync;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameRI, Component {
     private ArrayList<ObserverRI> players;
@@ -23,6 +28,10 @@ public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameR
         }
 
         this.gameState = new GameState(frogLives,0, 3200, difficulty, 0, serverName);
+
+        if(Sync.SYNC_METHOD == Sync.RABBITMQ) { // Começa um listener do jogo
+            RabbitUtils.initRabbitMQServerListener(gameState.getServerName());
+        }
     }
 
     public FroggerGameImpl(FroggerGameImpl game) throws RemoteException {
@@ -31,11 +40,11 @@ public class FroggerGameImpl extends UnicastRemoteObject implements FroggerGameR
         this.players = game.getPlayers();
 
         ArrayList<Integer> frogLives = new ArrayList<>();
-        for(int i=0; i<4; i++) {
+        for (int i = 0; i < 4; i++) {
             frogLives.add(5);
         }
 
-        this.gameState = new GameState(frogLives,0, 3200, game.gameState.getGameLevel(), game.gameState.getPlayersNumber(), game.gameState.getServerName());
+        this.gameState = new GameState(frogLives, 0, 3200, game.gameState.getGameLevel(), game.gameState.getPlayersNumber(), game.gameState.getServerName());
     }
 
     /**
